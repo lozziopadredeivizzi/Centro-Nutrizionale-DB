@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrati - Cliente</title>
+</head>
+
+<body>
+    <header>
+        <h1>Completa i campi per creare un nuovo account di tipo Cliente</h1>
+    </header>
+    <main>
+        <form action="#" method="post">
+            <fieldset>
+                <legend>Informazioni di base:</legend>
+                <ul>
+                    <li>
+                        <label for="nomeCliente">Nome:</label>
+                    </li>
+                    <li>
+                        <input type="text" name="nomeCliente" id="nomeCliente" required>
+                    </li>
+                    <li>
+                        <label for="cognomeClinete">Cognome:</label>
+                    </li>
+                    <li>
+                        <input type="text" name="cognomeClinete" id="cognomeClinete" required>
+                    </li>
+                    <li>
+                        <label for="emailCliente">E-mail:</label>
+                    </li>
+                    <li>
+                        <input type="text" name="emailCliente" id="emailCliente" required>
+                    </li>
+                    <li>
+                        <label for="passwordCliente">Password:</label>
+                    </li>
+                    <li>
+                        <input type="password" name="passwordCliente" id="passwordCliente" required>
+                    </li>
+                </ul>
+            </fieldset>
+            <fieldset>
+                <legend>Indirizzo (obbligatorio):</legend>
+                <ul>
+                    <li>
+                        <label for="cittàCliente">Città:</label>
+                    </li>
+                    <li>
+                        <input type="text" name="cittàCliente" id="cittàCliente" required>
+                    </li>
+                    <li>
+                        <label for="capCliente">CAP:</label>
+                    </li>
+                    <li>
+                        <input type="text" name="capCliente" id="capCliente" required>
+                    </li>
+                    <li>
+                        <label for="viaCliente">Via:</label>
+                    </li>
+                    <li>
+                        <input type="text" name="viaCliente" id="viaCliente" required>
+                    </li>
+                    <li>
+                        <label for="civicoCliente">Civico:</label>
+                    </li>
+                    <li>
+                        <input type="text" name="civicoCliente" id="civicoCliente" required>
+                    </li>
+                </ul>
+            </fieldset>
+            <input type="submit" name="Registrati" id="Registrati" value="Registrati">
+        </form>
+        <button onclick="window.location.href='signUp.html'">Torna Indietro</button>
+    </main>
+</body>
+
+</html>
