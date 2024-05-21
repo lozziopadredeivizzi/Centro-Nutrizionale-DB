@@ -1,0 +1,30 @@
+
+body {
+  margin: 0;
+}
+header h1 {
+  margin: 0;
+}
+header {
+  display: flex;
+  height: 60px;
+  background-color: lightgray;
+  justify-content: space-between;
+  align-content:end;
+  position: fixed; 
+  left: 0;
+  right: 0;
+}
+.logout, .logo {
+  display: flex;
+  align-items: center;
+}
+.logo {
+  margin-left: 15px;
+}
+.logout {
+  margin-right: 15px;
+}
+.logout img{
+  height: 40px;
+}
