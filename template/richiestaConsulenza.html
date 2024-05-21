@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Richiesta Consulenza</title>
+</head>
+
+<body>
+    <header>
+        <h1>Centro Nutrizionale</h1>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+            <path fill-rule="evenodd"
+                d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+        </svg>
+    </header>
+    <main>
+        <section>
+            <h1>Richiesta Consulenza</h1>
+            <h2>Compila la richiesta</h2>
+            <form action="#" method="post">
+                <ul>
+                    <li>
+                        <label for="svolgimento">Svolgimento:</label>
+                        <select id="svolgimento" name="svolgimento">
+                            <option value="presenza">Presenza</option>
+                            <option value="online">Online</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="tipoConsulenza">Tipologia:</label>
+                        <select id="tipoConsulenza" name="tipoConsulenza">
+                            <option value="alimentare">Alimentare</option>
+                            <option value="fisica">Fisica</option>
+                            <option value="completa">Completa</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="data">Data:</label>
+                        <input type="date" name="data" id="data" required>
+                    </li>
+                    <li>
+                        <label for="orario">Orario:</label>
+                        <input type="time" name="orario" id="orario" required>
+                    </li>
+                    <li>
+                        <button type="submit" id="controllaDisp" name="controllaDisp">Controlla Disponibilità</button>
+                    </li>
+                    <li>
+                        <button type="submit" id="prenota" name="prenota">Prenota</button>
+                    </li>
+                </ul>
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>

@@ -12,7 +12,7 @@ Lori
 - Consulenza
 - Richiesta Consulenza
 - Prenotazione Consulenza
-- Esito Richiesta Consulenza
+- Esito Richiesta Consulenza -> torno a Richiesta Consulenza
 - Prescrizioni
 - Ultima Prescrizione
 - Storico Prescrizioni
