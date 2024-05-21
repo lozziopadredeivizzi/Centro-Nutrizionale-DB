@@ -15,18 +15,17 @@
     <div class="left-side-container">
       <div class="info-container">
         <img src="../assets/icons/person.svg" alt="person-logo">
-        <p>ID CLIENTE</p>
-        <p>Nome e Cognome</p>
-        <p>Email</p>
+        <p>ID NUTRIZIONISTA</p>
+        <p class="nome">Nome e Cognome</p>
+        <p class="email">Email</p>
+        <label for="valutazione">Valutazione</label>
+        <img class="star" src="../assets/icons/star.svg" id="valutazione" alt="star">
+        <button>Vedi Recensioni</button>
       </div>
     </div>
     <div class="right-side-container">
       <div class="btn-container">
-        <button>Cerca Nutrizionista</button>
-        <button>Il tuo Nutrizionista</button>
-        <button>Storico Nutrizionisti</button>
-        <button>Prescrizioni</button>
-        <button>Diario</button>
+        <button>Clienti</button>
       </div>
     </div>
   </main>
