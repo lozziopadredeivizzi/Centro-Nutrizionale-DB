@@ -11,7 +11,7 @@ form {
   flex-direction: column;
   width: 30%;
   border: 1px solid black;
-  padding: 10px 200px;
+  padding: 10px 20%;
 }
 
 form h1 {
@@ -23,6 +23,7 @@ form div {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 form button {
@@ -40,8 +41,15 @@ form button {
   display: flex;
   list-style-type: none;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .result ul li {
   margin: 0 10px;
+}
+
+@media (max-width: 1374px) {
+  form button {
+    align-self: center;
+  }
 }
