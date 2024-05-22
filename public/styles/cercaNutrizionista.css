@@ -1,0 +1,46 @@
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  border: 1px solid black;
+  padding: 10px 200px;
+}
+
+form h1 {
+  text-align: center;
+}
+
+form div {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+form button {
+  margin-top: 20px;
+  align-self: flex-end;
+}
+
+.result {
+  margin-top: 40px;
+  border: 1px solid black;
+  width: 70%;
+}
+
+.result ul {
+  display: flex;
+  list-style-type: none;
+  justify-content: space-between;
+}
+
+.result ul li {
+  margin: 0 10px;
+}
