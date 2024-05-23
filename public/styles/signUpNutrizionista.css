@@ -1,0 +1,39 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+ul{
+    list-style: none;
+}
+
+legend{
+    text-align: center;
+    font-weight: bold;
+}
+
+fieldset{
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 400px;
+    margin-bottom: 20px;
+}
+
+fieldset:nth-child(1) ul{
+    margin-left: 85px;
+}
+
+fieldset:nth-child(2) ul{
+    margin-left: 85px;
+}
+
+li{
+    margin-bottom: 5px;
+}
+
+button{
+    margin-left: 80px;
+    margin-bottom: 20px;
+}
