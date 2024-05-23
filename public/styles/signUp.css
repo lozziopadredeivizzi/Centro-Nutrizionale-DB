@@ -1,0 +1,28 @@
+main {
+    margin-top: 80px;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+ul{
+    list-style: none;
+}
+
+section {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    width: 45%;
+    text-align: center;
+}
+
+section h1{
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 170%;
+}
+
+button{
+    margin-bottom: 20px;
+}
