@@ -1,0 +1,48 @@
+main {
+    margin-top: 80px;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+ul{
+    list-style: none;
+}
+
+section {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    width: 45%;
+    text-align: center;
+}
+
+section h1{
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 170%;
+}
+
+form{
+    margin-right: 35px;
+}
+
+ul li:nth-child(1){
+    margin-right: 125px;
+}
+
+ul li:nth-child(3){
+    margin-right: 80px;
+}
+
+li{
+    margin-bottom: 5px;
+}
+
+ul li:nth-child(4){
+    margin-bottom: 30px;
+}
+
+button{
+    margin-bottom: 10px;
+}

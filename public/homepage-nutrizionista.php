@@ -25,7 +25,7 @@
     </div>
     <div class="right-side-container">
       <div class="btn-container">
-        <button>Clienti</button>
+        <button onclick="window.location.href='cercaCliente.html'">Clienti</button>
       </div>
     </div>
   </main>
