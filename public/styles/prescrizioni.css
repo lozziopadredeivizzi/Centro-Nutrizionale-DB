@@ -1,0 +1,19 @@
+main {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+ul{
+    list-style: none;
+}
+
+button{
+    margin-bottom: 60px
+}
+
+section {
+    margin-top: 150px;
+    text-align: center;
+  }
