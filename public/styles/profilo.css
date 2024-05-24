@@ -1,0 +1,51 @@
+main {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+}
+
+.reviews {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.reviews > * {
+  margin-right: 10px;
+}
+.reviews img {
+  height: 30px;
+}
+
+.name,
+.action {
+  display: flex;
+  justify-content: center;
+}
+
+.info-details,
+.shift-details,
+.rate-details {
+  border: 1px solid black;
+  width: 100%;
+}
+.infos,
+.shifts,
+.rates {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: start; 
+  margin-top: 20px; 
+  min-width: 80%;
+}
+
+.infos-outer,
+.shifts-outer,
+.rates-outer {
+  display: flex;
+  justify-content: center;
+}
+
+* ul li {
+  margin-bottom: 10px;
+}
