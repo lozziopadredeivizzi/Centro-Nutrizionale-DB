@@ -48,6 +48,10 @@ form button {
   margin: 0 10px;
 }
 
+.result:hover{
+  cursor: pointer;
+}
+
 @media (max-width: 1374px) {
   form button {
     align-self: center;

@@ -28,21 +28,22 @@ article p {
     font-weight: bold;
 }
 
-table {
+.result {
+    border: 1px solid black;
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-th,
-td {
-    border: 1px solid #000;
-    /* colore nero */
-    padding: 10px;
-    text-align: left;
-    font-weight: normal;
-}
-
-table:hover {
+  }
+  
+  .result ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .result ul li {
+    margin: 0 10px;
+  }
+  
+  .result:hover{
     cursor: pointer;
-}
+  }

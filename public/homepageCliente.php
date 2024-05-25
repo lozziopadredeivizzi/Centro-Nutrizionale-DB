@@ -23,7 +23,7 @@
     <div class="right-side-container">
       <div class="btn-container">
         <button onclick="window.location.href='cercaNutrizionista.html'">Cerca Nutrizionista</button>
-        <button>Il tuo Nutrizionista</button>
+        <button onclick="window.location.href='profiloNutrizionistaScelto.html'" >Il tuo Nutrizionista</button>
         <button onclick="window.location.href='storicoNutrizionisti.html'">Storico Nutrizionisti</button>
         <button onclick="window.location.href='prescrizioni.html'">Prescrizioni</button>
         <button>Diario</button>
