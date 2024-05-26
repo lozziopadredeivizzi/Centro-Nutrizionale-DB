@@ -1,192 +1,151 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.querySelectorAll('.add-optional').forEach(button => {
-        button.addEventListener('click', function() {
-            const optionalGroup = this.parentNode;
-            const groupId = optionalGroup.parentNode.getAttribute('data-group-id');
-            const optionalCount = optionalGroup.querySelectorAll('select').length + 1;
+// Funzione per aggiungere un nuovo gruppo di input per un alimento
+function addFoodGroup() {
+    var lastGroup = document.querySelector('.input-group:last-of-type');
+    var lastGroupId = lastGroup.getAttribute('data-group-id');
+    var newGroupId = parseInt(lastGroupId) + 1;
 
-            const newLabel = document.createElement('label');
-            newLabel.setAttribute('for', `optional${groupId}-${optionalCount}`);
-            newLabel.textContent = `Alimento opzionale ${optionalCount}:`;
+    var newGroup = document.createElement('div');
+    newGroup.classList.add('input-group');
+    newGroup.setAttribute('data-group-id', newGroupId);
 
-            const newSelect = document.createElement('select');
-            newSelect.setAttribute('id', `optional${groupId}-${optionalCount}`);
-            newSelect.setAttribute('name', `optional[${groupId}][]`);
+    newGroup.innerHTML = `
+        <label for="meal${newGroupId}">Pasto:</label>
+        <select id="meal${newGroupId}" name="meal[]" required>
+            <option value="colazione">Colazione</option>
+            <option value="pranzo">Pranzo</option>
+            <option value="cena">Cena</option>
+            <option value="spuntino">Spuntino</option>
+        </select>
 
-            const option1 = document.createElement('option');
-            option1.value = 'alimento1';
-            option1.text = 'Alimento 1';
-            newSelect.appendChild(option1);
+        <label for="prescribed${newGroupId}">Alimento:</label>
+        <select id="prescribed${newGroupId}" name="prescribed[]" required>
+            <option value="alimento_prescritto1">Alimento Prescritto 1</option>
+            <option value="alimento_prescritto2">Alimento Prescritto 2</option>
+            <option value="alimento_prescritto3">Alimento Prescritto 3</option>
+        </select>
 
-            const option2 = document.createElement('option');
-            option2.value = 'alimento2';
-            option2.text = 'Alimento 2';
-            newSelect.appendChild(option2);
+        <label for="grams${newGroupId}">Quantità:</label>
+        <input type="number" id="grams${newGroupId}" name="grams[]" required>
 
-            const option3 = document.createElement('option');
-            option3.value = 'alimento3';
-            option3.text = 'Alimento 3';
-            newSelect.appendChild(option3);
+        <div class="optional-group">
+            <label for="optional${newGroupId}-1">Alimento Opzionale 1:</label>
+            <select id="optional${newGroupId}-1" name="optional[${newGroupId}][]" required>
+                <option value="alimento1">Alimento 1</option>
+                <option value="alimento2">Alimento 2</option>
+                <option value="alimento3">Alimento 3</option>
+            </select>
+            <button type="button" class="add-optional">Aggiungi Alimento Opzionale</button>
+        </div>
+    `;
 
-            optionalGroup.insertBefore(newLabel, this);
-            optionalGroup.insertBefore(newSelect, this);
-        });
-    });
+    // Inserisci il nuovo gruppo sotto l'ultimo gruppo esistente
+    lastGroup.parentNode.insertBefore(newGroup, lastGroup.nextSibling);
+}
 
-    document.querySelectorAll('.add-group').forEach(button => {
-        button.addEventListener('click', function() {
-            const form = document.getElementById('dynamic-form');
-            const groupCount = form.querySelectorAll('.input-group').length + 1;
+// Funzione per aggiungere un nuovo gruppo di input per un alimento opzionale
+function addOptionalGroup(button) {
+    var groupId = button.closest('.input-group').getAttribute('data-group-id');
+    var lastOptionalId = button.closest('.input-group').querySelectorAll('.optional-group select').length;
+    var newOptionalId = lastOptionalId + 1;
 
-            const inputGroup = document.createElement('div');
-            inputGroup.classList.add('input-group');
-            inputGroup.setAttribute('data-group-id', groupCount);
+    var newOptional = document.createElement('div');
+    newOptional.innerHTML = `
+        <label for="optional${groupId}-${newOptionalId}">Alimento Opzionale ${newOptionalId}:</label>
+        <select id="optional${groupId}-${newOptionalId}" name="optional[${groupId}][]" required>
+            <option value="alimento1">Alimento 1</option>
+            <option value="alimento2">Alimento 2</option>
+            <option value="alimento3">Alimento 3</option>
+        </select>
+    `;
 
-            const newPrescribedLabel = document.createElement('label');
-            newPrescribedLabel.setAttribute('for', `prescribed${groupCount}`);
-            newPrescribedLabel.textContent = 'Alimento:';
-            
-            const newPrescribedSelect = document.createElement('select');
-            newPrescribedSelect.setAttribute('id', `prescribed${groupCount}`);
-            newPrescribedSelect.setAttribute('name', 'prescribed[]');
-            
-            const prescribedOption1 = document.createElement('option');
-            prescribedOption1.value = 'alimento_prescritto1';
-            prescribedOption1.text = 'Alimento Prescritto 1';
-            newPrescribedSelect.appendChild(prescribedOption1);
-            
-            const prescribedOption2 = document.createElement('option');
-            prescribedOption2.value = 'alimento_prescritto2';
-            prescribedOption2.text = 'Alimento Prescritto 2';
-            newPrescribedSelect.appendChild(prescribedOption2);
-            
-            const prescribedOption3 = document.createElement('option');
-            prescribedOption3.value = 'alimento_prescritto3';
-            prescribedOption3.text = 'Alimento Prescritto 3';
-            newPrescribedSelect.appendChild(prescribedOption3);
+    var optionalGroup = button.closest('.optional-group');
+    optionalGroup.insertBefore(newOptional, button);
+}
 
-            const newMealLabel = document.createElement('label');
-            newMealLabel.setAttribute('for', `meal${groupCount}`);
-            newMealLabel.textContent = 'Pasto:';
-            
-            const newMealSelect = document.createElement('select');
-            newMealSelect.setAttribute('id', `meal${groupCount}`);
-            newMealSelect.setAttribute('name', 'meal[]');
-            
-            const mealOption1 = document.createElement('option');
-            mealOption1.value = 'colazione';
-            mealOption1.text = 'Colazione';
-            newMealSelect.appendChild(mealOption1);
-            
-            const mealOption2 = document.createElement('option');
-            mealOption2.value = 'pranzo';
-            mealOption2.text = 'Pranzo';
-            newMealSelect.appendChild(mealOption2);
-            
-            const mealOption3 = document.createElement('option');
-            mealOption3.value = 'cena';
-            mealOption3.text = 'Cena';
-            newMealSelect.appendChild(mealOption3);
-            
-            const mealOption4 = document.createElement('option');
-            mealOption4.value = 'spuntino';
-            mealOption4.text = 'Spuntino';
-            newMealSelect.appendChild(mealOption4);
+// Funzione per aggiungere un nuovo gruppo di input per un esercizio
+function addExerciseGroup() {
+    var lastGroup = document.querySelector('.exercise-group:last-of-type');
+    var lastGroupId = lastGroup ? lastGroup.getAttribute('data-group-id') : 0;
+    var newGroupId = parseInt(lastGroupId) + 1;
 
-            const newGramsLabel = document.createElement('label');
-            newGramsLabel.setAttribute('for', `grams${groupCount}`);
-            newGramsLabel.textContent = 'Grammi:';
-            
-            const newGramsInput = document.createElement('input');
-            newGramsInput.setAttribute('type', 'number');
-            newGramsInput.setAttribute('id', `grams${groupCount}`);
-            newGramsInput.setAttribute('name', 'grams[]');
+    var newGroup = document.createElement('div');
+    newGroup.classList.add('exercise-group');
+    newGroup.setAttribute('data-group-id', newGroupId);
 
-            const optionalGroup = document.createElement('div');
-            optionalGroup.classList.add('optional-group');
-            
-            const newOptionalLabel = document.createElement('label');
-            newOptionalLabel.setAttribute('for', `optional${groupCount}-1`);
-            newOptionalLabel.textContent = 'Alimento opzionale 1:';
-            
-            const newOptionalSelect = document.createElement('select');
-            newOptionalSelect.setAttribute('id', `optional${groupCount}-1`);
-            newOptionalSelect.setAttribute('name', `optional[${groupCount}][]`);
-            
-            const optionalOption1 = document.createElement('option');
-            optionalOption1.value = 'alimento1';
-            optionalOption1.text = 'Alimento 1';
-            newOptionalSelect.appendChild(optionalOption1);
-            
-            const optionalOption2 = document.createElement('option');
-            optionalOption2.value = 'alimento2';
-            optionalOption2.text = 'Alimento 2';
-            newOptionalSelect.appendChild(optionalOption2);
-            
-            const optionalOption3 = document.createElement('option');
-            optionalOption3.value = 'alimento3';
-            optionalOption3.text = 'Alimento 3';
-            newOptionalSelect.appendChild(optionalOption3);
+    newGroup.innerHTML = `
+        <label for="exercise${newGroupId}">Nome Esercizio:</label>
+        <select id="exercise${newGroupId}" name="exercise[]" required>
+            <option value="esercizio1">Esercizio 1</option>
+            <option value="esercizio2">Esercizio 2</option>
+            <option value="esercizio3">Esercizio 3</option>
+        </select>
 
-            const newOptionalButton = document.createElement('button');
-            newOptionalButton.type = 'button';
-            newOptionalButton.classList.add('add-optional');
-            newOptionalButton.textContent = 'Aggiungi Alimento Opzionale';
+        <label for="frequency${newGroupId}">Frequenza Settimanale:</label>
+        <input type="text" id="frequency${newGroupId}" name="frequency[]" required>
 
-            optionalGroup.appendChild(newOptionalLabel);
-            optionalGroup.appendChild(newOptionalSelect);
-            optionalGroup.appendChild(newOptionalButton);
+        <label for="duration${newGroupId}">Durata:</label>
+        <input type="text" id="duration${newGroupId}" name="duration[]" required>
+    `;
 
-            inputGroup.appendChild(newPrescribedLabel);
-            inputGroup.appendChild(newPrescribedSelect);
-            inputGroup.appendChild(newMealLabel);
-            inputGroup.appendChild(newMealSelect);
-            inputGroup.appendChild(newGramsLabel);
-            inputGroup.appendChild(newGramsInput);
-            inputGroup.appendChild(optionalGroup);
+    // Trova l'elemento .advice-group e inserisci il nuovo gruppo di input prima di essa
+    var adviceSection = document.querySelector('.advice-group');
+    if (adviceSection) {
+        adviceSection.parentNode.insertBefore(newGroup, adviceSection);
+    }
 
-            const addButton = document.createElement('button');
-            addButton.type = 'button';
-            addButton.classList.add('add-group');
-            addButton.textContent = 'Aggiungi Gruppo';
+}
+// Funzione per aggiungere un nuovo gruppo di input per un consiglio
+function addAdviceGroup() {
+    var lastGroup = document.querySelector('.advice-group:last-of-type');
+    var lastGroupId = lastGroup ? lastGroup.getAttribute('data-group-id') : 0;
+    var newGroupId = parseInt(lastGroupId) + 1;
 
-            inputGroup.appendChild(addButton);
+    var newGroup = document.createElement('div');
+    newGroup.classList.add('advice-group');
+    newGroup.setAttribute('data-group-id', newGroupId);
 
-            form.insertBefore(inputGroup, document.querySelector('input[type="submit"]'));
+    newGroup.innerHTML = `
+        <label for="advice${newGroupId}">Consiglio ${newGroupId}:</label>
+        <textarea id="advice${newGroupId}" name="advice[]" required></textarea>
+        <button type="button" class="add-advice">Aggiungi Consiglio</button>
+    `;
 
-            newOptionalButton.addEventListener('click', function() {
-                const optionalGroup = this.parentNode;
-                const groupId = optionalGroup.parentNode.getAttribute('data-group-id');
-                const optionalCount = optionalGroup.querySelectorAll('select').length + 1;
+    // Inserisci il nuovo gruppo sotto l'ultimo gruppo esistente
+    lastGroup.parentNode.insertBefore(newGroup, lastGroup.nextSibling);
+}
 
-                const newLabel = document.createElement('label');
-                newLabel.setAttribute('for', `optional${groupId}-${optionalCount}`);
-                newLabel.textContent = `Alimento opzionale ${optionalCount}:`;
+// Funzione per aggiungere un nuovo consiglio ad un gruppo esistente
+function addAdditionalAdvice(button) {
+    var groupId = button.closest('.advice-group').getAttribute('data-group-id');
+    var lastAdviceId = button.closest('.advice-group').querySelectorAll('textarea').length;
+    var newAdviceId = lastAdviceId + 1;
 
-                const newSelect = document.createElement('select');
-                newSelect.setAttribute('id', `optional${groupId}-${optionalCount}`);
-                newSelect.setAttribute('name', `optional[${groupId}][]`);
+    var newAdvice = document.createElement('div');
+    newAdvice.innerHTML = `
+        <label for="advice${groupId}-${newAdviceId}">Consiglio ${newAdviceId}:</label>
+        <textarea id="advice${groupId}-${newAdviceId}" name="advice[${groupId}][]" required></textarea>
+    `;
 
-                const option1 = document.createElement('option');
-                option1.value = 'alimento1';
-                option1.text = 'Alimento 1';
-                newSelect.appendChild(option1);
+    button.parentNode.insertBefore(newAdvice, button);
+}
 
-                const option2 = document.createElement('option');
-                option2.value = 'alimento2';
-                option2.text = 'Alimento 2';
-                newSelect.appendChild(option2);
+// Aggiungi event listener per il pulsante "Aggiungi Consiglio"
+document.addEventListener('click', function (event) {
+    if (event.target && event.target.classList.contains('add-advice')) {
+        addAdditionalAdvice(event.target);
+    }
+});
 
-                const option3 = document.createElement('option');
-                option3.value = 'alimento3';
-                option3.text = 'Alimento 3';
-                newSelect.appendChild(option3);
 
-                optionalGroup.insertBefore(newLabel, this);
-                optionalGroup.insertBefore(newSelect, this);
-            });
+// Aggiungi event listener per i pulsanti
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector('.add-group').addEventListener('click', addFoodGroup);
+    document.querySelector('.add-exercise').addEventListener('click', addExerciseGroup);
 
-            addButton.addEventListener('click', arguments.callee);
-        });
+    // Delega l'evento per gestire i pulsanti "Aggiungi Alimento Opzionale"
+    document.addEventListener('click', function (event) {
+        if (event.target && event.target.classList.contains('add-optional')) {
+            addOptionalGroup(event.target);
+        }
     });
 });
