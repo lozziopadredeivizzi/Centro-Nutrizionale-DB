@@ -63,7 +63,7 @@ function addOptionalGroup(button) {
 }
 
 // Funzione per aggiungere un nuovo gruppo di input per un consiglio
-function addAdviceGroup() {
+function addAdviceGroup(button) {
     var lastGroup = document.querySelector('.advice-group:last-of-type');
     var lastGroupId = lastGroup ? lastGroup.getAttribute('data-group-id') : 0;
     var newGroupId = parseInt(lastGroupId) + 1;
@@ -75,7 +75,7 @@ function addAdviceGroup() {
     newGroup.innerHTML = `
         <label for="advice${newGroupId}">Consiglio ${newGroupId}:</label>
         <textarea id="advice${newGroupId}" name="advice[]" required></textarea>
-        <button type="button" class="add-advice">Aggiungi Consiglio</button>
+        <button type="button" class="add-advice-group">Aggiungi Consiglio</button>
     `;
 
     // Inserisci il nuovo gruppo sotto l'ultimo gruppo esistente
@@ -97,24 +97,32 @@ function addAdditionalAdvice(button) {
     button.parentNode.insertBefore(newAdvice, button);
 }
 
+
+
+// Aggiungi event listener per il pulsante "Aggiungi Alimento"
+document.addEventListener('click', function(event) {
+    if (event.target && event.target.classList.contains('add-group')) {
+        addFoodGroup();
+    }
+});
+
+// Delega l'evento per gestire i pulsanti "Aggiungi Alimento Opzionale"
+document.addEventListener('click', function(event) {
+    if (event.target && event.target.classList.contains('add-optional')) {
+        addOptionalGroup(event.target);
+    }
+});
+
 // Aggiungi event listener per il pulsante "Aggiungi Consiglio"
+document.addEventListener('click', function(event) {
+    if (event.target && event.target.classList.contains('add-advice-group')) {
+        addAdviceGroup(event.target);
+    }
+});
+
+// Delega l'evento per gestire i pulsanti "Aggiungi Consiglio" nei gruppi esistenti
 document.addEventListener('click', function(event) {
     if (event.target && event.target.classList.contains('add-advice')) {
         addAdditionalAdvice(event.target);
     }
-});
-
-// Aggiungi event listener per i pulsanti
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('.add-group').addEventListener('click', addFoodGroup);
-
-    // Delega l'evento per gestire i pulsanti "Aggiungi Alimento Opzionale"
-    document.addEventListener('click', function(event) {
-        if (event.target && event.target.classList.contains('add-optional')) {
-            addOptionalGroup(event.target);
-        }
-    });
-
-    // Aggiungi event listener per il pulsante "Aggiungi Consiglio"
-    document.querySelector('.add-advice').addEventListener('click', addAdviceGroup);
 });
