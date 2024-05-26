@@ -1,0 +1,35 @@
+main {
+  margin-top: 90px;
+  display: flex;
+  flex-direction: column;
+}
+.reviews-summary,
+.review-info {
+  display: flex;
+  align-items: center;
+}
+.review-info {
+  justify-content: space-between;
+}
+.reviews-summary {
+  margin-bottom: 30px;
+}
+.reviews-outer {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+  align-self: center;
+}
+.name {
+  text-align: center;
+}
+.review {
+  border: 1px solid black;
+  margin-bottom: 25px;
+}
+
+.review > * {
+  padding: 0 20px;
+}

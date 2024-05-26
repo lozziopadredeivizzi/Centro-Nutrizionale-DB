@@ -12,9 +12,6 @@ main {
 .reviews > * {
   margin-right: 10px;
 }
-.reviews img {
-  height: 30px;
-}
 
 .name,
 .action {
