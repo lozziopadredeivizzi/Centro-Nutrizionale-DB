@@ -11,14 +11,7 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-          <h1>CentroNurizioniale</h1>
-        </div>
-        <div class="logout">
-          <img src="../assets/icons/logout.svg" alt="logout">
-        </div>
-      </header>
+    <?php include ("../template/header/header.html") ?>
     <main>
         <section>
             <h1>Consulenza prenotata:</h1>
@@ -47,7 +40,7 @@
                     <p>Non hai ancora nessuna consulenza in programma.</p>
                 </li>
                 <li>
-                    <button class="btn" onclick="window.location.href='richiestaConsulenza.html'">Prenota</button>
+                    <button class="btn" onclick="window.location.href='richiestaConsulenza.php'">Prenota</button>
                 </li>
             </ul>
         </section>

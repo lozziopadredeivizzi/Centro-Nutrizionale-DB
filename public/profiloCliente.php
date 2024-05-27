@@ -11,20 +11,13 @@
 </head>
 
 <body>
-  <header>
-    <div class="logo">
-      <h1>CentroNurizioniale</h1>
-    </div>
-    <div class="logout">
-      <img src="../assets/icons/logout.svg" alt="logout">
-    </div>
-  </header>
+  <?php include ("../template/header/header.html") ?>
   <main>
     <div class="name">
       <h1>Nome Cognome</h1>
     </div>
     <div class="action">
-      <button class="btn">Visualizza Diario</button>
+      <button class="btn" onclick="window.location.href='diario.php'">Visualizza Diario</button>
     </div>
     <div class="infos-outer">
       <div class="infos">

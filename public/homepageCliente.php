@@ -22,11 +22,11 @@
     </div>
     <div class="right-side-container">
       <div class="btn-container">
-        <button onclick="window.location.href='cercaNutrizionista.html'">Cerca Nutrizionista</button>
-        <button onclick="window.location.href='profiloNutrizionistaScelto.html'" >Il tuo Nutrizionista</button>
-        <button onclick="window.location.href='storicoNutrizionisti.html'">Storico Nutrizionisti</button>
-        <button onclick="window.location.href='prescrizioni.html'">Prescrizioni</button>
-        <button>Diario</button>
+        <button onclick="window.location.href='cercaNutrizionista.php'">Cerca Nutrizionista</button>
+        <button onclick="window.location.href='profiloNutrizionistaScelto.php'" >Il tuo Nutrizionista</button>
+        <button onclick="window.location.href='storicoNutrizionisti.php'">Storico Nutrizionisti</button>
+        <button onclick="window.location.href='prescrizioni.php'">Prescrizioni</button>
+        <button onclick="window.location.href='diario.php'">Diario</button>
       </div>
     </div>
   </main>

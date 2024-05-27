@@ -17,13 +17,13 @@ lists.forEach(function(list) {
         // Determina quale pagina aprire in base al testo del quinto elemento <li>
         switch(text) {
             case 'Completa':
-                window.location.href = 'compilaCompleta.html';
+                window.location.href = 'compilaCompleta.php';
                 break;
             case 'Alimentare':
-                window.location.href = 'compilaAlimentare.html';
+                window.location.href = 'compilaAlimentare.php';
                 break;
             case 'Fisica':
-                window.location.href = 'compilaFisica.html';
+                window.location.href = 'compilaFisica.php';
                 break;
             default:
                 // Se il testo non corrisponde a nessuna delle opzioni, non fare nulla

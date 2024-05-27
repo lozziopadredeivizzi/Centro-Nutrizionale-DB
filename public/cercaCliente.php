@@ -8,19 +8,12 @@
   <link rel="stylesheet" href="../template/header/header.css">
   <link rel="stylesheet" href="styles/cercaNutrizionista.css">
   <link rel="stylesheet" href="styles/cercaCliente.css">
-  
+
   <title>Cerca Cliente</title>
 </head>
 
 <body>
-  <header>
-    <div class="logo">
-      <h1>CentroNurizioniale</h1>
-    </div>
-    <div class="logout">
-      <img src="../assets/icons/logout.svg" alt="logout">
-    </div>
-  </header>
+  <?php include ("../template/header/header.html") ?>
   <main>
     <form action="">
       <h1>Filtra Risultati</h1>
@@ -38,14 +31,14 @@
       </div>
       <button class="btn">Applica Filtri</button>
     </form>
-    <div onclick="window.location.href='profiloCliente.html'" class="result">
+    <div onclick="window.location.href='profiloCliente.php'" class="result">
       <ul>
         <li>ID</li>
         <li>Nome Cognome</li>
         <li>Città</li>
       </ul>
     </div>
-    <div onclick="window.location.href='profiloCliente.html'" class="result">
+    <div onclick="window.location.href='profiloCliente.php'" class="result">
       <ul>
         <li>ID</li>
         <li>Nome Cognome</li>

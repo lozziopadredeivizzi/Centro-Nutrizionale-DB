@@ -20,13 +20,13 @@
         <p class="email">Email</p>
         <label for="valutazione">Valutazione</label>
         <img class="star" src="../assets/icons/star.svg" id="valutazione" alt="star">
-        <button>Vedi Recensioni</button>
+        <button onclick="window.location.href='recensioni.php'">Vedi Recensioni</button>
       </div>
     </div>
     <div class="right-side-container">
       <div class="btn-container">
-        <button onclick="window.location.href='cercaCliente.html'">Clienti</button>
-        <button onclick="window.location.href='consulenzeDaFare.html'">Consulenze</button>
+        <button onclick="window.location.href='cercaCliente.php'">Clienti</button>
+        <button onclick="window.location.href='consulenzeDaFare.php'">Consulenze</button>
       </div>
     </div>
   </main>

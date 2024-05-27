@@ -11,14 +11,7 @@
 </head>
 
 <body>
-  <header>
-    <div class="logo">
-      <h1>CentroNurizioniale</h1>
-    </div>
-    <div class="logout">
-      <img src="../assets/icons/logout.svg" alt="logout">
-    </div>
-  </header>
+  <?php include ("../template/header/header.html") ?>
   <main>
     <h1>Diario</h1>
     <div class="outer">
@@ -40,7 +33,7 @@
           </tr>
         </tbody>
       </table>
-      <button class="btn">Aggiungi elemento</button>
+      <button class="btn" onclick="window.location.href='aggiungiAlDiario.php'">Aggiungi elemento</button>
     </div>
   </main>
   <script>

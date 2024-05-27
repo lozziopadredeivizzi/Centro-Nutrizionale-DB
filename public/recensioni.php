@@ -11,14 +11,7 @@
 </head>
 
 <body>
-  <header>
-    <div class="logo">
-      <h1>CentroNurizioniale</h1>
-    </div>
-    <div class="logout">
-      <img src="../assets/icons/logout.svg" alt="logout">
-    </div>
-  </header>
+  <?php include ("../template/header/header.html") ?>
   <main>
     <div class="name">
       <h1>Nome Cognome</h1>

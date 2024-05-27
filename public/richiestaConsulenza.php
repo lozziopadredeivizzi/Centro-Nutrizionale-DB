@@ -11,14 +11,7 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-          <h1>CentroNurizioniale</h1>
-        </div>
-        <div class="logout">
-          <img src="../assets/icons/logout.svg" alt="logout">
-        </div>
-    </header>
+    <?php include ("../template/header/header.html") ?>
     <main>
         <section>
             <h1>Richiesta Consulenza</h1>
@@ -49,10 +42,12 @@
                         <input type="time" name="orario" id="orario" required>
                     </li>
                     <li>
-                        <button class="btn" type="button" id="controllaDisp" name="controllaDisp">Controlla Disponibilità</button>
+                        <button class="btn" type="button" id="controllaDisp" name="controllaDisp">Controlla
+                            Disponibilità</button>
                     </li>
                     <li class="hidden" id="availabilityMessage">
-                        La data e l'ora scelta sono disponibili<button class="btn" type="submit" id="prenota" name="prenota">Prenota</button>
+                        La data e l'ora scelta sono disponibili<button class="btn" type="submit" id="prenota"
+                            name="prenota">Prenota</button>
                     </li>
                 </ul>
             </form>

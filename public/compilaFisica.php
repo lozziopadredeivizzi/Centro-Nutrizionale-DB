@@ -10,14 +10,7 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <h1>CentroNutrizionisti</h1>
-        </div>
-        <div onclick="window.location.href='login.html'" class="logout">
-            <img src="../assets/icons/logout.svg" alt="logout">
-        </div>
-    </header>
+    <?php include ("../template/header/header.html") ?>
     <main>
         <section>
             <form id="dynamic-form" action="#" method="post">
@@ -53,4 +46,5 @@
     </main>
     <script src="../js/aggiungiEsercizio.js" type="text/javascript"></script>
 </body>
+
 </html>

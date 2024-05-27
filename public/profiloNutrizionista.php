@@ -11,17 +11,10 @@
 </head>
 
 <body>
-  <header>
-    <div class="logo">
-      <h1>CentroNurizioniale</h1>
-    </div>
-    <div class="logout">
-      <img src="../assets/icons/logout.svg" alt="logout">
-    </div>
-  </header>
+  <?php include ("../template/header/header.html") ?>
   <main>
-    <div class="reviews">
-      <img src="../assets/icons/star.svg" alt="star-review">
+    <div class="reviews" onclick="window.location.href='recensioni.php'">
+      <img class="star" src="../assets/icons/star.svg" alt="star-review">
       <p>Media</p>
       <p>(Numero recensioni)</p>
     </div>
@@ -29,11 +22,7 @@
       <h1>Nome Cognome</h1>
     </div>
     <div class="action">
-      <button onclick="window.location.href='consulenza.html'" class="btn">Richiedi Consulenza</button>
-    </div>
-    <br>
-    <div class="action">
-      <button class="btn" onclick="window.location.href='scriviRecensione.html'">Scrivi una recensione</button>
+      <button class="btn">Seleziona come tuo Nutrizionista</button>
     </div>
     <div class="infos-outer">
       <div class="infos">

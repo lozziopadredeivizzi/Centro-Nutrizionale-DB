@@ -10,14 +10,7 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <h1>CentroNurizioniale</h1>
-        </div>
-        <div class="logout">
-            <img src="../assets/icons/logout.svg" alt="logout">
-        </div>
-    </header>
+    <?php include ("../template/header/header.html") ?>
     <div>
         <h2>Obiettivo</h2>
         <p>Dimagrire/Mettere su massa muscolare/ecc</p>

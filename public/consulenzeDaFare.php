@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,29 +10,23 @@
     <link rel="stylesheet" href="../template/components/components.css">
     <title>Consulenze</title>
 </head>
+
 <body>
-    <header>
-        <div class="logo">
-            <h1>CentroNurizioniale</h1>
-        </div>
-        <div class="logout">
-            <img src="../assets/icons/logout.svg" alt="logout">
-        </div>
-    </header>
+    <?php include ("../template/header/header.html") ?>
     <main>
         <section>
             <h1>Consulenze da svolgere</h1>
             <article>
                 <div class="result">
                     <ul>
-                      <li>ID</li>
-                      <li>Nome Cognome cliente</li>
-                      <li>Data</li>
-                      <li>Ora</li>
-                      <li>Completa</li>
-                      <li><button class="btn">Compila Scheda</button></li>
+                        <li>ID</li>
+                        <li>Nome Cognome cliente</li>
+                        <li>Data</li>
+                        <li>Ora</li>
+                        <li>Completa</li>
+                        <li><button class="btn">Compila Scheda</button></li>
                     </ul>
-                  </div>
+                </div>
             </article>
             <article>
                 <div class="result">
@@ -42,8 +37,8 @@
                         <li>Ora</li>
                         <li>Alimentare</li>
                         <li><button class="btn">Compila Scheda</button></li>
-                      </ul>
-                  </div>
+                    </ul>
+                </div>
             </article>
             <article>
                 <div class="result">
@@ -54,11 +49,12 @@
                         <li>Ora</li>
                         <li>Fisica</li>
                         <li><button class="btn">Compila Scheda</button></li>
-                      </ul>
-                  </div>
+                    </ul>
+                </div>
             </article>
         </section>
     </main>
     <script src="../js/goToCompila.js" type="text/javascript"></script>
 </body>
+
 </html>

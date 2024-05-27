@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +9,9 @@
   <link rel="stylesheet" href="styles/cercaNutrizionista.css">
   <title>Cerca Nutrizionista</title>
 </head>
+
 <body>
-  <header>
-    <div class="logo">
-      <h1>CentroNurizioniale</h1>
-    </div>
-    <div class="logout">
-      <img src="../assets/icons/logout.svg" alt="logout">
-    </div>
-  </header>
+  <?php include ("../template/header/header.html") ?>
   <main>
     <form action="">
       <h1>Filtra Risultati</h1>
@@ -34,7 +29,7 @@
       </div>
       <button class="btn">Applica Filtri</button>
     </form>
-    <div onclick="window.location.href='profiloNutrizionista.html'" class="result">
+    <div onclick="window.location.href='profiloNutrizionista.php'" class="result">
       <ul>
         <li>ID</li>
         <li>Nome Cognome</li>
@@ -43,7 +38,7 @@
         <li>Specializzazione</li>
       </ul>
     </div>
-    <div onclick="window.location.href='profiloNutrizionista.html'" class="result">
+    <div onclick="window.location.href='profiloNutrizionista.php'" class="result">
       <ul>
         <li>ID</li>
         <li>Nome Cognome</li>
@@ -54,4 +49,5 @@
     </div>
   </main>
 </body>
+
 </html>
