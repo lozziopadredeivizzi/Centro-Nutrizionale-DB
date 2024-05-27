@@ -34,6 +34,8 @@ function addFoodGroup() {
                 <option value="alimento2">Alimento 2</option>
                 <option value="alimento3">Alimento 3</option>
             </select>
+            <label for="optional-grams${newGroupId}-1">Quantità Alimento Opzionale 1:</label>
+            <input type="text" id="optional-grams${newGroupId}-1" name="optional-grams[${newGroupId}][]" required>
             <button type="button" class="add-optional">Aggiungi Alimento Opzionale</button>
         </div>
     `;
@@ -56,6 +58,8 @@ function addOptionalGroup(button) {
             <option value="alimento2">Alimento 2</option>
             <option value="alimento3">Alimento 3</option>
         </select>
+        <label for="optional-grams${groupId}-${newOptionalId}">Quantità Alimento Opzionale ${newOptionalId}:</label>
+        <input type="text" id="optional-grams${groupId}-${newOptionalId}" name="optional-grams[${groupId}][]" required>
     `;
 
     var optionalGroup = button.closest('.optional-group');
@@ -135,7 +139,6 @@ document.addEventListener('click', function (event) {
         addAdditionalAdvice(event.target);
     }
 });
-
 
 // Aggiungi event listener per i pulsanti
 document.addEventListener('DOMContentLoaded', function () {
