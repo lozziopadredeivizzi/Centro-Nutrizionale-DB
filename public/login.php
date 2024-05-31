@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../template/components/components.css">
     <title>Login - Centro Nutrizionale</title>
 </head>
-
+<?php require("../login.php") ?>
 <body>
     <main>
         <section>

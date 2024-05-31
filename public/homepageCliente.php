@@ -10,12 +10,13 @@
 </head>
 
 <body>
-  <?php include "../template/header/header.html";?>
+  <?php include "../template/header/header.html";
+  require ("../bootstrap.php"); ?>
   <main>
     <div class="left-side-container">
       <div class="info-container">
         <img src="../assets/icons/person.svg" alt="person-logo">
-        <p>ID CLIENTE</p>
+        <p>ID CLIENTE: <?php echo $_SESSION["id"]; ?></p>
         <p>Nome e Cognome</p>
         <p>Email</p>
       </div>
@@ -23,7 +24,7 @@
     <div class="right-side-container">
       <div class="btn-container">
         <button onclick="window.location.href='cercaNutrizionista.php'">Cerca Nutrizionista</button>
-        <button onclick="window.location.href='profiloNutrizionistaScelto.php'" >Il tuo Nutrizionista</button>
+        <button onclick="window.location.href='profiloNutrizionistaScelto.php'">Il tuo Nutrizionista</button>
         <button onclick="window.location.href='storicoNutrizionisti.php'">Storico Nutrizionisti</button>
         <button onclick="window.location.href='prescrizioni.php'">Prescrizioni</button>
         <button onclick="window.location.href='diario.php'">Diario</button>
