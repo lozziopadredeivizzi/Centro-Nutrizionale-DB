@@ -11,7 +11,9 @@
 </head>
 
 <body>
-  <?php include ("../template/header/header.html") ?>
+  <?php include ("../template/header/header.html");
+  require ("../bootstrap.php");
+  require ("../nutrizionista.php"); ?>
   <main>
     <form action="">
       <h1>Filtra Risultati</h1>
@@ -29,24 +31,17 @@
       </div>
       <button class="btn">Applica Filtri</button>
     </form>
+    <?php foreach($templateparams["allNutrizionisti"] as $nutrizionista): ?>
     <div onclick="window.location.href='profiloNutrizionista.php'" class="result">
       <ul>
-        <li>ID</li>
-        <li>Nome Cognome</li>
-        <li>Città</li>
-        <li>Cap</li>
-        <li>Specializzazione</li>
+        <li>ID: <?php echo $nutrizionista["IDNutrizionista"]; ?></li>
+        <li><?php echo $nutrizionista["Nome"], " ", $nutrizionista["Cognome"]; ?></li>
+        <li>Città: <?php echo $nutrizionista["Citta"];?></li>
+        <li>CAP: <?php echo $nutrizionista["CAP"]; ?></li>
+        <li>Qualifica: <?php echo $nutrizionista["Titolo"]; ?></li>
       </ul>
     </div>
-    <div onclick="window.location.href='profiloNutrizionista.php'" class="result">
-      <ul>
-        <li>ID</li>
-        <li>Nome Cognome</li>
-        <li>Città</li>
-        <li>Cap</li>
-        <li>Specializzazione</li>
-      </ul>
-    </div>
+    <?php endforeach; ?>
   </main>
 </body>
 
