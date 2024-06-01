@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,15 @@
     <link rel="stylesheet" href="../template/components/components.css">
     <title>Registrati - Nutrizionista</title>
 </head>
+
 <body>
+    <?php require ("../bootstrap.php");
+    $qualifiche = $dbh->getQualifiche(); ?>
     <header>
         <h1>Completa i campi per creare un nuovo account di tipo Nutrizionista</h1>
     </header>
     <main>
-        <form action="#" method="post">
+        <form action="../signUpNutrizionista.php" method="post">
             <fieldset id="infoBase">
                 <legend>Informazioni di base:</legend>
                 <ul>
@@ -79,29 +83,37 @@
                     </li>
                     <li>
                         <select id="qualificaNutrizionista" name="qualificaNutrizionista">
-                            <option value="opzione1">Opzione 1</option>
-                            <option value="opzione2">Opzione 2</option>
-                            <option value="opzione3">Opzione 3</option>
-                            <option value="opzione4">Opzione 4</option>
+                            <?php foreach($qualifiche as $qualifica): ?>
+                            <option value="<?php echo $qualifica["Titolo"]; ?>"><?php echo $qualifica["Titolo"]; ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </li>
                     <li>
                         <label for="specializzazioneNutrizionista">Specializzazione:</label>
                     </li>
                     <li>
-                        <textarea id="specializzazioneNutrizionista" name="specializzazioneNutrizionista" rows="4" cols="50" placeholder="Scrivi qui..."></textarea>
+                        <textarea id="specializzazioneNutrizionista" name="specializzazioneNutrizionista" rows="4"
+                            cols="50" placeholder="Scrivi qui..."></textarea>
                     </li>
                     <li>
                         <label for="expNutrizionista">Esperienza:</label>
                     </li>
                     <li>
-                        <textarea id="expNutrizionista" name="expNutrizionista" rows="4" cols="50" placeholder="Scrivi qui..."></textarea>
+                        <textarea id="expNutrizionista" name="expNutrizionista" rows="4" cols="50"
+                            placeholder="Scrivi qui..."></textarea>
                     </li>
                     <li>
                         <label for="orariNutrizionista">Orari:</label>
                     </li>
                     <li>
-                        <textarea id="orariNutrizionista" name="orariNutrizionista" rows="4" cols="50" placeholder="Scrivi qui i tuoi orari di ricevimento (quello scritto verrà visulizzato direttamente al cliente)"></textarea>
+                        <textarea id="orariNutrizionista" name="orariNutrizionista" rows="4" cols="50"
+                            placeholder="Scrivi qui i tuoi orari di ricevimento (quello scritto verrà visulizzato direttamente al cliente)"></textarea>
+                    </li>
+                    <li>
+                        <label for="telNutrizionista">Telefono:</label>
+                    </li>
+                    <li>
+                        <input type="text" name="telNutrizionista" id="telNutrizionista" placeholder="telefono">
                     </li>
                 </ul>
             </fieldset>
@@ -110,4 +122,5 @@
         <button class="btn" onclick="window.location.href='signUp.html'">Torna indietro</button>
     </main>
 </body>
+
 </html>

@@ -3,7 +3,7 @@
 -- *--------------------------------------------
 -- * DB-MAIN version: 11.0.2              
 -- * Generator date: Sep 14 2021              
--- * Generation date: Wed May 29 13:24:29 2024 
+-- * Generation date: Sat Jun  1 10:13:58 2024 
 -- * LUN file: C:\Users\Utente\Desktop\Uni\2 Anno\Data Base\elaborato\Centro Nutirzionale.lun 
 -- * Schema: centronutrizionale/1 
 -- ********************************************* 
@@ -55,8 +55,8 @@ create table CLIENTE (
      Cognome varchar(50) not null,
      Email varchar(50) not null,
      Password varchar(255) not null,
-     IDClinete int not null AUTO_INCREMENT,
-     constraint ID_CLIENTE_ID primary key (IDClinete));
+     IDCliente int not null AUTO_INCREMENT,
+     constraint ID_CLIENTE_ID primary key (IDCliente));
 
 create table CONSIGLIO (
      CodiceScheda int not null,
@@ -66,7 +66,7 @@ create table CONSIGLIO (
 
 create table CONSULENZA (
      IDNutrizionista int not null,
-     IDClinete int not null,
+     IDCliente int not null,
      OraInizio time not null,
      Giorno date not null,
      CodiceScheda int not null,
@@ -75,17 +75,17 @@ create table CONSULENZA (
      Presenza char,
      Online char,
      Tipo varchar(20) not null,
-     constraint ID_CONSULENZA_ID primary key (IDClinete, IDNutrizionista, OraInizio, Giorno),
+     constraint ID_CONSULENZA_ID primary key (IDCliente, IDNutrizionista, OraInizio, Giorno),
      constraint FKproduce_ID unique (CodiceScheda));
 
 create table DIARIO (
-     IDClinete int not null,
+     IDCliente int not null,
      Data date not null,
      Ora varchar(10) not null,
      CodDiario int not null,
      IDNutrizionista int not null,
-     constraint ID_DIARIO_ID primary key (IDClinete, Data, Ora, CodDiario),
-     constraint FKcomporta_ID unique (IDClinete, Data, Ora));
+     constraint ID_DIARIO_ID primary key (IDCliente, Data, Ora, CodDiario),
+     constraint FKcomporta_ID unique (IDCliente, Data, Ora));
 
 create table ESERCIZIO (
      NomeEsercizio varchar(50) not null,
@@ -118,7 +118,7 @@ create table INFORMAZIONE (
      constraint FKpossiede_inf_ID primary key (IDNutrizionista));
 
 create table NOTE (
-     IDClinete int not null,
+     IDCliente int not null,
      Data date not null,
      Ora varchar(10) not null,
      CodDiario int not null,
@@ -126,7 +126,7 @@ create table NOTE (
      OrarioNota varchar(10) not null,
      OggettoNota varchar(100) not null,
      IdNota int not null,
-     constraint ID_NOTE_ID primary key (IDClinete, Data, Ora, CodDiario, IdNota));
+     constraint ID_NOTE_ID primary key (IDCliente, Data, Ora, CodDiario, IdNota));
 
 create table NUTRIZIONISTA (
      Nome varchar(50) not null,
@@ -146,34 +146,34 @@ create table PASTO (
      NomePasto varchar(50) not null,
      constraint ID_PASTO_ID primary key (NomePasto));
 
-create table QUALIFICA (
-     Titolo varchar(100) not null,
-     constraint ID_QUALIFICA_ID primary key (Titolo));
-
 create table possiede_q (
      IDNutrizionista int not null,
      Titolo varchar(100) not null,
      constraint ID_possiede_q_ID primary key (IDNutrizionista, Titolo));
 
+create table QUALIFICA (
+     Titolo varchar(100) not null,
+     constraint ID_QUALIFICA_ID primary key (Titolo));
+
 create table recensione (
-     IDClinete int not null,
+     IDCliente int not null,
      IDNutrizionista int not null,
      Voto int not null,
      Commento varchar(255),
-     constraint ID_recensione_ID primary key (IDNutrizionista, IDClinete));
+     constraint ID_recensione_ID primary key (IDNutrizionista, IDCliente));
 
 create table SCELTA (
-     IDClinete int not null,
+     IDCliente int not null,
      Data date not null,
-     Ora varchar(100) not null,
+     Ora varchar(10) not null,
      IDNutrizionista int not null,
-     constraint ID_SCELTA_ID primary key (IDClinete, Data, Ora));
+     constraint ID_SCELTA_ID primary key (IDCliente, Data, Ora));
 
 create table SCHEDA (
      CodiceScheda int not null AUTO_INCREMENT,
      dataInizioValidita date not null,
      Durata int not null,
-     IDClinete int not null,
+     IDCliente int not null,
      CodiceObiettivo int not null,
      constraint ID_SCHEDA_ID primary key (CodiceScheda));
 
@@ -242,8 +242,8 @@ alter table CONSULENZA add constraint FKtipologia_cons_FK
      references TIPO_CONSULENZA (Tipo);
 
 alter table CONSULENZA add constraint FKrichiesta
-     foreign key (IDClinete)
-     references CLIENTE (IDClinete);
+     foreign key (IDCliente)
+     references CLIENTE (IDCliente);
 
 alter table CONSULENZA add constraint FKproduce_FK
      foreign key (CodiceScheda)
@@ -258,8 +258,8 @@ alter table DIARIO add constraint FKpartecipa_FK
      references NUTRIZIONISTA (IDNutrizionista);
 
 alter table DIARIO add constraint FKcomporta_FK
-     foreign key (IDClinete, Data, Ora)
-     references SCELTA (IDClinete, Data, Ora);
+     foreign key (IDCliente, Data, Ora)
+     references SCELTA (IDCliente, Data, Ora);
 
 alter table ESERCIZIO_IN_TABELLA add constraint FKtipologia_FK
      foreign key (NomeEsercizio)
@@ -278,8 +278,8 @@ alter table INFORMAZIONE add constraint FKpossiede_inf_FK
      references NUTRIZIONISTA (IDNutrizionista);
 
 alter table NOTE add constraint FKpossiede_n
-     foreign key (IDClinete, Data, Ora, CodDiario)
-     references DIARIO (IDClinete, Data, Ora, CodDiario);
+     foreign key (IDCliente, Data, Ora, CodDiario)
+     references DIARIO (IDCliente, Data, Ora, CodDiario);
 
 -- Not implemented
 -- alter table NUTRIZIONISTA add constraint ID_NUTRIZIONISTA_CHK
@@ -299,21 +299,21 @@ alter table recensione add constraint FKrec_NUT
      references NUTRIZIONISTA (IDNutrizionista);
 
 alter table recensione add constraint FKrec_CLI_FK
-     foreign key (IDClinete)
-     references CLIENTE (IDClinete);
+     foreign key (IDCliente)
+     references CLIENTE (IDCliente);
 
 -- Not implemented
 -- alter table SCELTA add constraint ID_SCELTA_CHK
 --     check(exists(select * from DIARIO
---                  where DIARIO.IDClinete = IDClinete and DIARIO.Data = Data and DIARIO.Ora = Ora)); 
+--                  where DIARIO.IDCliente = IDCliente and DIARIO.Data = Data and DIARIO.Ora = Ora)); 
 
 alter table SCELTA add constraint FKsubisce_FK
      foreign key (IDNutrizionista)
      references NUTRIZIONISTA (IDNutrizionista);
 
 alter table SCELTA add constraint FKesegue
-     foreign key (IDClinete)
-     references CLIENTE (IDClinete);
+     foreign key (IDCliente)
+     references CLIENTE (IDCliente);
 
 -- Not implemented
 -- alter table SCHEDA add constraint ID_SCHEDA_CHK
@@ -321,8 +321,8 @@ alter table SCELTA add constraint FKesegue
 --                  where CONSULENZA.CodiceScheda = CodiceScheda)); 
 
 alter table SCHEDA add constraint FKpossiede_FK
-     foreign key (IDClinete)
-     references CLIENTE (IDClinete);
+     foreign key (IDCliente)
+     references CLIENTE (IDCliente);
 
 alter table SCHEDA add constraint FKobiettivo_scheda_FK
      foreign key (CodiceObiettivo)
@@ -381,13 +381,13 @@ create index FKapp_ALI_IND
      on appartiene (CodiceScheda, CodTabPasti, NomeAlimento, QuantitaPrescr);
 
 create unique index ID_CLIENTE_IND
-     on CLIENTE (IDClinete);
+     on CLIENTE (IDCliente);
 
 create unique index ID_CONSIGLIO_IND
      on CONSIGLIO (CodiceScheda, CodTabCons, Descrizione);
 
 create unique index ID_CONSULENZA_IND
-     on CONSULENZA (IDClinete, IDNutrizionista, OraInizio, Giorno);
+     on CONSULENZA (IDCliente, IDNutrizionista, OraInizio, Giorno);
 
 create index FKtipologia_cons_IND
      on CONSULENZA (Tipo);
@@ -399,7 +399,7 @@ create index FKpreseide_IND
      on CONSULENZA (IDNutrizionista);
 
 create unique index ID_DIARIO_IND
-     on DIARIO (IDClinete, Data, Ora, CodDiario);
+     on DIARIO (IDCliente, Data, Ora, CodDiario);
 
 create index FKpartecipa_IND
      on DIARIO (IDNutrizionista);
@@ -420,7 +420,7 @@ create unique index FKpossiede_inf_IND
      on INFORMAZIONE (IDNutrizionista);
 
 create unique index ID_NOTE_IND
-     on NOTE (IDClinete, Data, Ora, CodDiario, IdNota);
+     on NOTE (IDCliente, Data, Ora, CodDiario, IdNota);
 
 create unique index ID_NUTRIZIONISTA_IND
      on NUTRIZIONISTA (IDNutrizionista);
@@ -431,23 +431,23 @@ create unique index ID_OBIETTIVO_IND
 create unique index ID_PASTO_IND
      on PASTO (NomePasto);
 
-create unique index ID_QUALIFICA_IND
-     on QUALIFICA (Titolo);
-
 create unique index ID_possiede_q_IND
      on possiede_q (IDNutrizionista, Titolo);
 
 create index FKpos_QUA_IND
      on possiede_q (Titolo);
 
+create unique index ID_QUALIFICA_IND
+     on QUALIFICA (Titolo);
+
 create unique index ID_recensione_IND
-     on recensione (IDNutrizionista, IDClinete);
+     on recensione (IDNutrizionista, IDCliente);
 
 create index FKrec_CLI_IND
-     on recensione (IDClinete);
+     on recensione (IDCliente);
 
 create unique index ID_SCELTA_IND
-     on SCELTA (IDClinete, Data, Ora);
+     on SCELTA (IDCliente, Data, Ora);
 
 create index FKsubisce_IND
      on SCELTA (IDNutrizionista);
@@ -456,7 +456,7 @@ create unique index ID_SCHEDA_IND
      on SCHEDA (CodiceScheda);
 
 create index FKpossiede_IND
-     on SCHEDA (IDClinete);
+     on SCHEDA (IDCliente);
 
 create index FKobiettivo_scheda_IND
      on SCHEDA (CodiceObiettivo);

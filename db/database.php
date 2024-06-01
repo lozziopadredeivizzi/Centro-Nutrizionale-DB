@@ -1,9 +1,12 @@
 <?php
 
+require_once("nutrizionistaTable.php");
+
 class DatabaseConnection
 {
 
     private $db;
+    private $nutrizionistaTable;
 
     //Connection db
     public function __construct($servername, $username, $password, $dbname, $port)
@@ -13,6 +16,8 @@ class DatabaseConnection
         if ($this->db->connect_error) {
             die("Connection Failed: " . $this->db->connect_error);
         }
+
+        $this->nutrizionistaTable = new NutrizionistaTable($this->db);
     }
 
     public function addClient($nome, $cognome, $citta, $cap, $email, $password)
@@ -62,10 +67,31 @@ class DatabaseConnection
     }
 
     public function checkLoginCliente($id, $password){
-        $stmt = $this->db->prepare("SELECT COUNT(*) AS isPresent FROM cliente WHERE IDClinete=? AND Password=?");
+        $stmt = $this->db->prepare("SELECT COUNT(*) AS isPresent FROM cliente WHERE IDCliente=? AND Password=?");
         $stmt->bind_param('is', $id, $password);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function checkLoginNutrizionista($id, $password){
+        $stmt = $this->db->prepare("SELECT COUNT(*) AS isPresent FROM nutrizionista WHERE IDNutrizionista=? AND Password=?");
+        $stmt->bind_param('is', $id, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getQualifiche(){
+        $stmt = $this->db->prepare("SELECT * FROM qualifica");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getNutrizionistaTable(){
+        return $this->nutrizionistaTable;
+    }
+
+
 }

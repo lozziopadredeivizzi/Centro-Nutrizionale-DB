@@ -10,16 +10,38 @@
 </head>
 
 <body>
-  <?php include "../template/header/header.html";?>
+  <?php include "../template/header/header.html";
+  require ("../bootstrap.php");
+  require ("../nutrizionista.php"); ?>
   <main>
     <div class="left-side-container">
       <div class="info-container">
         <img src="../assets/icons/person.svg" alt="person-logo">
-        <p>ID NUTRIZIONISTA</p>
-        <p class="nome">Nome e Cognome</p>
-        <p class="email">Email</p>
+        <p>ID NUTRIZIONISTA: <?php echo $_SESSION["id"]; ?></p>
+        <p class="nome">
+          <?php echo $templateparams["nutrizionista"][0]["Nome"], " ", $templateparams["nutrizionista"][0]["Cognome"]; ?>
+        </p>
+        <p class="email"><?php echo $templateparams["nutrizionista"][0]["Email"]; ?></p>
         <label for="valutazione">Valutazione</label>
-        <img class="star" src="../assets/icons/star.svg" id="valutazione" alt="star">
+        <?php
+        $mediaInt = $templateparams["nutrizionista"][0]["MediaVoti"];
+        if ($mediaInt == 0) {
+          echo "Questo nutrizionista non ha ancora ricevuto recensioni.";
+      } else {
+        for ($i = 0; $i < 5; $i++):
+          if ($i < $mediaInt):
+            ?>
+            <img src="../assets/icons/star.svg" alt="star">
+            <?php
+          endif;
+          if ($i >= $valutazioneInt):
+            ?>
+            <img src="../assets/icons/star.svg" alt="">
+            <?php
+          endif;
+        endfor;
+      }
+        ?>
         <button onclick="window.location.href='recensioni.php'">Vedi Recensioni</button>
       </div>
     </div>
