@@ -1,17 +1,19 @@
 main {
   display: flex;
   justify-content: center;
-  margin-top: 200px;
+  margin-top: 150px;
   flex-wrap: wrap;
+  margin-bottom: 50px;
 }
 .left-side-container {
   flex: 2;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 .right-side-container {
-  flex: 3;
+  flex: 2.5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,7 +33,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: start;
-  margin-left: 120px;
+  /* margin-left: 120px; */
 }
 
 .star {
@@ -49,4 +51,35 @@ main {
 
 .info-container label {
   margin-top: 20px;
+}
+
+.rating {
+  display: flex;
+}
+
+.indirizzo, 
+.info {
+  width: 100%;
+  margin-top: 20px;
+}
+.indirizzo p,
+.info p {
+  margin: 0;
+}
+
+.indirizzo-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.indirizzo-info p {
+  margin-right: 5px;
+}
+.bold {
+  font-weight: bold;
+}
+
+.nome {
+  font-size: large;
+  margin: 0;
 }
