@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <?php include ("../template/header/header.html") ?>
+    <?php include ("../template/header/headerCliente.html") ?>
     <div>
         <h2>Obiettivo</h2>
         <p>Dimagrire/Mettere su massa muscolare/ecc</p>

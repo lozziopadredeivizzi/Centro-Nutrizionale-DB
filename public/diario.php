@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <?php include ("../template/header/header.html") ?>
+  <?php include ("../template/header/headerCliente.html") ?>
   <main>
     <h1>Diario</h1>
     <div class="outer">

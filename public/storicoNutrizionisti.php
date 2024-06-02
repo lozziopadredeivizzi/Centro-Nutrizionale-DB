@@ -11,7 +11,7 @@
 
 <body>
   <?php 
-  include ("../template/header/header.html");
+  include ("../template/header/headerCliente.html");
   require ("../nutrizionista.php");
 
   $idsStampati = array(); 

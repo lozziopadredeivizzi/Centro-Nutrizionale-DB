@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <?php include "../template/header/header.html";
+  <?php include "../template/header/headerNutrizionista.html";
   require("../bootstrap.php");
   $id = $_SESSION["id"];
   require("../nutrizionista.php"); ?>

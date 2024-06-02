@@ -11,9 +11,9 @@
 </head>
 
 <body>
-  <?php include "../template/header/header.html";
+  <?php include "../template/header/headerCliente.html";
   require ("../bootstrap.php");
-  require ("../nutrizionista.php");
+  
   $id = $_SESSION["idNutrizionista"];
   require ("../nutrizionista.php"); ?>
   <main>
