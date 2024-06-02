@@ -12,15 +12,15 @@
 
 <body>
   <?php include ("../template/header/header.html");
-  require("../bootstrap.php");
+  require ("../bootstrap.php");
   $id = $_SESSION["idNutrizionista"];
-  require("../nutrizionista.php"); ?>
+  require ("../nutrizionista.php"); ?>
   <main>
     <div class="reviews" onclick="window.location.href='recensioni.php'">
-    <?php
-        $mediaInt = $templateparams["nutrizionista"][0]["MediaVoti"];
-        if ($mediaInt == 0) {
-          echo "Questo nutrizionista non ha ancora ricevuto recensioni.";
+      <?php
+      $mediaInt = $templateparams["nutrizionista"][0]["MediaVoti"];
+      if ($mediaInt == 0) {
+        echo "Questo nutrizionista non ha ancora ricevuto recensioni.";
       } else {
         for ($i = 0; $i < 5; $i++):
           if ($i < $mediaInt):
@@ -28,17 +28,21 @@
             <img src="../assets/icons/star.svg" alt="star">
             <?php
           endif;
-        endfor;
+        endfor; ?>
+        <p>Media</p>
+        <p>(Numero recensioni)</p>
+        <?php
       }
-        ?>
-      <p>Media</p>
-      <p>(Numero recensioni)</p>
+      ?>
     </div>
     <div class="name">
-      <h1><?php echo $templateparams["nutrizionista"][0]["Nome"], " ", $templateparams["nutrizionista"][0]["Cognome"]; ?></h1>
+      <h1>
+        <?php echo $templateparams["nutrizionista"][0]["Nome"], " ", $templateparams["nutrizionista"][0]["Cognome"]; ?>
+      </h1>
     </div>
     <div class="action">
-      <button class="btn" id="selectNutrizionistaBtn" data-id="<?php echo $id ?>">Seleziona come tuo Nutrizionista</button>
+      <button class="btn" id="selectNutrizionistaBtn" data-id="<?php echo $id ?>">Seleziona come tuo
+        Nutrizionista</button>
     </div>
     <div class="infos-outer">
       <div class="infos">

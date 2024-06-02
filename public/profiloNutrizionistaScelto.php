@@ -13,6 +13,7 @@
 <body>
   <?php include ("../template/header/header.html");
   require("../cliente.php");
+  require("../nutrizionista.php");
   if($templateparams["checkScelta"][0]["isPresent"] == 0): ?>
   <br>
   <br>
@@ -20,13 +21,27 @@
   <h1>Non hai acora effettuato la scelta del nutrizionista.</h1>
   <?php else: ?>
   <main>
-    <div class="reviews" onclick="window.location.href='recensioni.php'">
-      <img src="../assets/icons/star.svg" alt="star-review">
-      <p>Media</p>
-      <p>(Numero recensioni)</p>
+  <div class="reviews" onclick="window.location.href='recensioni.php'">
+      <?php
+      $mediaInt = $templateparams["nutrizionistaAttuale"][0]["MediaVoti"];
+      if ($mediaInt == 0) {
+        echo "Questo nutrizionista non ha ancora ricevuto recensioni.";
+      } else {
+        for ($i = 0; $i < 5; $i++):
+          if ($i < $mediaInt):
+            ?>
+            <img src="../assets/icons/star.svg" alt="star">
+            <?php
+          endif;
+        endfor; ?>
+        <p>Media</p>
+        <p>(Numero recensioni)</p>
+        <?php
+      }
+      ?>
     </div>
     <div class="name">
-      <h1>Nome Cognome</h1>
+      <h1><?php echo $templateparams["nutrizionistaAttuale"][0]["Nome"], " ", $templateparams["nutrizionistaAttuale"][0]["Cognome"] ?></h1>
     </div>
     <div class="action">
       <button onclick="window.location.href='consulenza.php'" class="btn">Richiedi Consulenza</button>
@@ -40,10 +55,11 @@
         <h3>Informazioni</h3>
         <div class="info-details">
           <ul>
-            <li>Città</li>
-            <li>Cap:</li>
-            <li>Qualifica:</li>
-            <li>Specializzazione:</li>
+            <li>E-mail: <?php echo $templateparams["nutrizionistaAttuale"][0]["Email"] ?></li>
+            <li>Qualifica: <?php echo $templateparams["nutrizionistaAttuale"][0]["Qualifica"] ?></li>
+            <li>Specializzazione: <?php echo $templateparams["nutrizionistaAttuale"][0]["Specializzazione"] ?></li>
+            <li>Esperienza: <?php echo $templateparams["nutrizionistaAttuale"][0]["Esperienza"] ?></li>
+            <li>Telefono: <?php echo $templateparams["nutrizionistaAttuale"][0]["Telefono"] ?></li>
           </ul>
         </div>
       </div>
@@ -53,18 +69,20 @@
         <h3>Orari</h3>
         <div class="shift-details">
           <ul>
-            <li>Orario:</li>
+            <li>Orario: <?php echo $templateparams["nutrizionistaAttuale"][0]["Orari"] ?></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="rates-outer">
       <div class="rates">
-        <h3>Tariffa</h3>
+        <h3>Indirizzo Professionale</h3>
         <div class="rate-details">
           <ul>
-            <li>Tariffa 1:</li>
-            <li>Tariffa 2:</li>
+            <li>Città: <?php echo $templateparams["nutrizionistaAttuale"][0]["Citta"] ?></li>
+            <li>Via: <?php echo $templateparams["nutrizionistaAttuale"][0]["Via"] ?></li>
+            <li>N. Civico: <?php echo $templateparams["nutrizionistaAttuale"][0]["NCivico"] ?></li>
+            <li>CAP: <?php echo $templateparams["nutrizionistaAttuale"][0]["CAP"] ?></li>
           </ul>
         </div>
       </div>
