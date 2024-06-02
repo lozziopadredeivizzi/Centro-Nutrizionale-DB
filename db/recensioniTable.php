@@ -35,13 +35,20 @@ class RecensioniTable
   }
 
   public function getMediaVotiByNutrizionistaId($idNutrizionista)
-  {
+{
     $stmt = $this->db->prepare("SELECT AVG(Voto) as MediaVoti FROM recensione WHERE IDNutrizionista = ?");
     $stmt->bind_param('i', $idNutrizionista);
     $stmt->execute();
     $result = $stmt->get_result();
-    return $result->fetch_assoc();
-  }
+    $row = $result->fetch_assoc();
+    $mediaVoti = $row['MediaVoti'] ?? null;
+
+    if ($mediaVoti !== null) {
+        return (int) floor($mediaVoti);
+    }
+
+    return null;
+}
 
   public function getNumeroTotaleRecensioniByNutrizionistaId($idNutrizionista)
     {

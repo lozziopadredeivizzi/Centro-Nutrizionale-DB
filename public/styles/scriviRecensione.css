@@ -38,8 +38,18 @@ textarea {
   margin-top: 20px;
   align-self: center;
 }
-.star {
+img:hover {
   cursor: pointer;
+}
+
+img{
+  width: 40px;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
 label {

@@ -14,6 +14,8 @@
   <?php include ("../template/header/headerCliente.html");
   require("../cliente.php");
   require("../nutrizionista.php");
+  $id = $templateparams["nutrizionistaAttuale"][0]["IDNutrizionista"];
+  require("../nutrizionista.php");
   if($templateparams["checkScelta"][0]["isPresent"] == 0): ?>
   <br>
   <br>
@@ -34,8 +36,8 @@
             <?php
           endif;
         endfor; ?>
-        <p>Media</p>
-        <p>(Numero recensioni)</p>
+        <p><?php echo $mediaInt; ?></p>
+        <p>(<?php echo $templateparams["recensioniNutrizionista"]["numeroTotaleRecensioni"];?> recensioni)</p>
         <?php
       }
       ?>
@@ -88,7 +90,8 @@
       </div>
     </div>
   </main>
-  <?php endif; ?>
+  <?php endif;
+  $_SESSION["idNutrizionista"] = $id; ?>
 </body>
 
 </html>

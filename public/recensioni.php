@@ -11,15 +11,21 @@
 </head>
 
 <body>
-  <?php include ("../template/header/headerCliente.html") ?>
+  <?php include ("../template/header/headerCliente.html");
+  require("../bootstrap.php");
+  $id = $_SESSION["idNutrizionista"];
+  require ("../nutrizionista.php"); ?>
   <main>
     <div class="name">
-      <h1>Nome Cognome</h1>
+      <h1><?php echo $templateparams["nutrizionista"][0]["Nome"], " ", $templateparams["nutrizionista"][0]["Cognome"] ?></h1>
     </div>
+    <?php if($templateparams["recensioniNutrizionista"]["numeroTotaleRecensioni"]==0): ?>
+      <p>Questo nutrizionista non ha ancora ricevuto recensioni.</p>
+      <?php else: ?>
     <div class="reviews-outer">
       <div class="reviews-summary">
         <img class="star" src="../assets/icons/star.svg" alt="star-review">
-        <p>Media</p>
+        Media</p>
         <p>(Numero recensioni)</p>
       </div>
       <div class="review">
@@ -32,6 +38,7 @@
           cupiditate sequi dicta, porro fugit nemo aliquid quibusdam!</p>
       </div>
     </div>
+    <?php endif; ?>
   </main>
 </body>
 

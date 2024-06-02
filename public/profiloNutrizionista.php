@@ -13,7 +13,6 @@
 <body>
   <?php include "../template/header/headerCliente.html";
   require ("../bootstrap.php");
-  
   $id = $_SESSION["idNutrizionista"];
   require ("../nutrizionista.php"); ?>
   <main>

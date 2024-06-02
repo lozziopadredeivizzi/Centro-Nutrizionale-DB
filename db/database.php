@@ -109,6 +109,12 @@ class DatabaseConnection
         $stmt->execute();
     }
 
+    public function setMediaVotiToNutrizionista($idNutrizionista, $media){
+        $stmt = $this->db->prepare("UPDATE nutrizionista SET MediaVoti=? WHERE IDNutrizionista=?");
+        $stmt->bind_param('ii', $media, $idNutrizionista);
+        $stmt->execute();
+    }
+
     public function getNutrizionistaTable()
     {
         return $this->nutrizionistaTable;
