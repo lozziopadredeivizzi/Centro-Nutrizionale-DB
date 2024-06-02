@@ -11,17 +11,24 @@
 
 <body>
   <?php include "../template/header/header.html";
-  require ("../bootstrap.php");
+  require("../bootstrap.php");
   require("../cliente.php"); ?>
   <main>
     <div class="left-side-container">
       <div class="info-container">
         <img src="../assets/icons/person.svg" alt="person-logo">
         <p>ID CLIENTE: <?php echo $_SESSION["id"]; ?></p>
-        <p><?php echo $templateparams["cliente"][0]["Nome"], " ", $templateparams["cliente"][0]["Cognome"]; ?></p>
-        <p><?php echo $templateparams["cliente"][0]["Email"]; ?></p>
-        <p>Città: <?php echo $templateparams["cliente"][0]["Citta"]; ?></p>
-        <p>CAP: <?php echo $templateparams["cliente"][0]["CAP"]; ?></p>
+        <p class="nome bold">
+          <?php echo $templateparams["cliente"][0]["Nome"], " ", $templateparams["cliente"][0]["Cognome"]; ?>
+        </p>
+        <div class="info">
+          <p class="bold">Informazioni</p>
+          <div class="info-dettagli">
+            <p>Email: <?php echo $templateparams["cliente"][0]["Email"]; ?></p>
+            <p>Città: <?php echo $templateparams["cliente"][0]["Citta"]; ?></p>
+            <p>CAP: <?php echo $templateparams["cliente"][0]["CAP"]; ?></p>
+          </div>
+        </div>
       </div>
     </div>
     <div class="right-side-container">
