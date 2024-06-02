@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <?php include ("../template/header/header.html");
+    <?php include ("../template/header/headerCliente.html");
     require ("../consulenza.php"); ?>
     <main>
         <?php if (!empty($templateparams["consulenza"])): ?>

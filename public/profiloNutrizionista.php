@@ -11,8 +11,9 @@
 </head>
 
 <body>
-  <?php include ("../template/header/header.html");
+  <?php include "../template/header/headerCliente.html";
   require ("../bootstrap.php");
+  
   $id = $_SESSION["idNutrizionista"];
   require ("../nutrizionista.php"); ?>
   <main>
@@ -29,8 +30,8 @@
             <?php
           endif;
         endfor; ?>
-        <p>Media</p>
-        <p>(Numero recensioni)</p>
+        <p><?php echo $mediaInt; ?></p>
+        <p>(<?php echo $templateparams["recensioniNutrizionista"]["numeroTotaleRecensioni"];?> recensioni)</p>
         <?php
       }
       ?>

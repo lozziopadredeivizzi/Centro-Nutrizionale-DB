@@ -2,6 +2,7 @@
 
 require_once("nutrizionistaTable.php");
 require_once("clienteTable.php");
+require_once("recensioniTable.php");
 require_once("consulenzaTable.php");
 
 class DatabaseConnection
@@ -10,7 +11,6 @@ class DatabaseConnection
     private $db;
     private $nutrizionistaTable;
     private $clienteTable;
-    private $consulenzaTable;
 
     //Connection db
     public function __construct($servername, $username, $password, $dbname, $port)
@@ -23,7 +23,6 @@ class DatabaseConnection
 
         $this->nutrizionistaTable = new NutrizionistaTable($this->db);
         $this->clienteTable = new ClienteTable($this->db);
-        $this->consulenzaTable = new ConsulenzaTable($this->db);
     }
 
     public function addClient($nome, $cognome, $citta, $cap, $email, $password)
@@ -107,10 +106,6 @@ class DatabaseConnection
 
     public function getClienteTable(){
         return $this->clienteTable;
-    }
-
-    public function getConsulenzaTable(){
-        return $this->consulenzaTable;
     }
 
 
