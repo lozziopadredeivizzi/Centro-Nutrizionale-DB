@@ -12,6 +12,7 @@
 <body>
   <?php include "../template/header/header.html";
   require ("../bootstrap.php");
+  $id = $_SESSION["id"];
   require ("../nutrizionista.php"); ?>
   <main>
     <div class="left-side-container">

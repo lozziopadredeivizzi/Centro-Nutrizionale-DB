@@ -11,15 +11,31 @@
 </head>
 
 <body>
-  <?php include ("../template/header/header.html") ?>
+  <?php include ("../template/header/header.html");
+  require("../bootstrap.php");
+  $id = $_SESSION["idNutrizionista"];
+  require("../nutrizionista.php"); ?>
   <main>
     <div class="reviews" onclick="window.location.href='recensioni.php'">
-      <img class="star" src="../assets/icons/star.svg" alt="star-review">
+    <?php
+        $mediaInt = $templateparams["nutrizionista"][0]["MediaVoti"];
+        if ($mediaInt == 0) {
+          echo "Questo nutrizionista non ha ancora ricevuto recensioni.";
+      } else {
+        for ($i = 0; $i < 5; $i++):
+          if ($i < $mediaInt):
+            ?>
+            <img src="../assets/icons/star.svg" alt="star">
+            <?php
+          endif;
+        endfor;
+      }
+        ?>
       <p>Media</p>
       <p>(Numero recensioni)</p>
     </div>
     <div class="name">
-      <h1>Nome Cognome</h1>
+      <h1><?php echo $templateparams["nutrizionista"][0]["Nome"], " ", $templateparams["nutrizionista"][0]["Cognome"]; ?></h1>
     </div>
     <div class="action">
       <button class="btn">Seleziona come tuo Nutrizionista</button>
@@ -29,31 +45,34 @@
         <h3>Informazioni</h3>
         <div class="info-details">
           <ul>
-            <li>Città</li>
-            <li>Cap:</li>
-            <li>Qualifica:</li>
-            <li>Specializzazione:</li>
+            <li>E-mail: <?php echo $templateparams["nutrizionista"][0]["Email"] ?></li>
+            <li>Qualifica: <?php echo $templateparams["nutrizionista"][0]["Titolo"] ?></li>
+            <li>Specializzazione: <?php echo $templateparams["nutrizionista"][0]["Specializzazione"] ?></li>
+            <li>Espereinza: <?php echo $templateparams["nutrizionista"][0]["Esperienza"] ?></li>
+            <li>Telefono: <?php echo $templateparams["nutrizionista"][0]["Telefono"] ?></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="shifts-outer">
       <div class="shifts">
-        <h3>Orari</h3>
+        <h3>Orari:</h3>
         <div class="shift-details">
           <ul>
-            <li>Orario:</li>
+            <li>Orario: <?php echo $templateparams["nutrizionista"][0]["Orari"] ?></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="rates-outer">
       <div class="rates">
-        <h3>Tariffa</h3>
+        <h3>Indirizzo Professionale</h3>
         <div class="rate-details">
           <ul>
-            <li>Tariffa 1:</li>
-            <li>Tariffa 2:</li>
+            <li>Città: <?php echo $templateparams["nutrizionista"][0]["Citta"] ?></li>
+            <li>Via: <?php echo $templateparams["nutrizionista"][0]["Via"] ?></li>
+            <li>N. Civico: <?php echo $templateparams["nutrizionista"][0]["NCivico"] ?></li>
+            <li>CAP: <?php echo $templateparams["nutrizionista"][0]["CAP"] ?></li>
           </ul>
         </div>
       </div>

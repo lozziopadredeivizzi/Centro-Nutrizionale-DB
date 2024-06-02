@@ -13,9 +13,10 @@
 <body>
   <?php include ("../template/header/header.html");
   require ("../bootstrap.php");
+  $id=$_SESSION["id"];
   require ("../nutrizionista.php"); ?>
   <main>
-    <form action="">
+    <form action="" method="post">
       <h1>Filtra Risultati</h1>
       <div class="city">
         <label for="city">Città</label>
@@ -32,7 +33,7 @@
       <button class="btn">Applica Filtri</button>
     </form>
     <?php foreach($templateparams["allNutrizionisti"] as $nutrizionista): ?>
-    <div onclick="window.location.href='profiloNutrizionista.php'" class="result">
+    <div data-id="<?php echo $nutrizionista["IDNutrizionista"]; ?>" class="result">
       <ul>
         <li>ID: <?php echo $nutrizionista["IDNutrizionista"]; ?></li>
         <li><?php echo $nutrizionista["Nome"], " ", $nutrizionista["Cognome"]; ?></li>
@@ -43,6 +44,7 @@
     </div>
     <?php endforeach; ?>
   </main>
+  <script src="../js/viewProfileNutrizionista.js" type="text/javascript"></script>
 </body>
 
 </html>
