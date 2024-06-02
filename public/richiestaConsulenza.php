@@ -11,7 +11,9 @@
 </head>
 
 <body>
-    <?php include ("../template/header/header.html") ?>
+    <?php include ("../template/header/header.html");
+    require ("../consulenza.php");
+    require ("../aggiungiConsulenza.php"); ?>
     <main>
         <section>
             <h1>Richiesta Consulenza</h1>
@@ -28,9 +30,10 @@
                     <li>
                         <label for="tipoConsulenza">Tipologia:</label>
                         <select id="tipoConsulenza" name="tipoConsulenza">
-                            <option value="alimentare">Alimentare</option>
-                            <option value="fisica">Fisica</option>
-                            <option value="completa">Completa</option>
+                            <?php foreach ($templateparams["tipoConsulenza"] as $tipo): ?>
+                                <option value="<?php echo $tipo["Tipo"] ?>">
+                                    <?php echo $tipo["Tipo"], " ", $tipo["Tariffa"], "$" ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </li>
                     <li>

@@ -11,39 +11,53 @@
 </head>
 
 <body>
-    <?php include ("../template/header/header.html") ?>
+    <?php include ("../template/header/header.html");
+    require ("../consulenza.php"); ?>
     <main>
-        <section>
-            <h1>Consulenza prenotata:</h1>
-            <ul>
-                <li>
-                    <p>Data: dd/mm/yyyy</p>
-                </li>
-                <li>
-                    <p>Orario: hh:mm</p>
-                </li>
-                <li>
-                    <p>Tipo consulenza: aliamentare/completa/fisica</p>
-                </li>
-                <li>
-                    <p>Tariffa: $$</p>
-                </li>
-                <li>
-                    <button class="btn">Cancella consulenza</button>
-                </li>
-            </ul>
-        </section>
-        <section>
-            <h1>Prenota Consulenza:</h1>
-            <ul>
-                <li>
-                    <p>Non hai ancora nessuna consulenza in programma.</p>
-                </li>
-                <li>
-                    <button class="btn" onclick="window.location.href='richiestaConsulenza.php'">Prenota</button>
-                </li>
-            </ul>
-        </section>
+        <?php if (!empty($templateparams["consulenza"])): ?>
+            <section>
+                <h1>Consulenza prenotata:</h1>
+                <ul>
+                    <li>
+                        <p>Data: <?php echo $templateparams["consulenza"][0]["Giorno"] ?></p>
+                    </li>
+                    <li>
+                        <p>Orario:
+                            <?php echo $templateparams["consulenza"][0]["OraInizio"], " - ", $templateparams["consulenza"][0]["OraFine"] ?>
+                        </p>
+                    </li>
+                    <li>
+                        <p>Tipo consulenza: <?php echo $templateparams["consulenza"][0]["Tipo"] ?></p>
+                    </li>
+                    <li>
+                        <p>Tariffa: <?php echo $templateparams["consulenza"][0]["Tariffa"] ?></p>
+                    </li>
+                    <li>
+                        Svolgimento:
+                        <?php if (empty($templateparams["consulenza"][0]["Presenza"])) {
+                            echo "Online";
+                        } else {
+                            echo "Presenza";
+                        } ?>
+                    </li>
+                    <li>
+                        <button class="btn">Cancella consulenza</button>
+                    </li>
+                </ul>
+            </section>
+        <?php else: ?>
+            <section>
+                <h1>Prenota Consulenza:</h1>
+                <ul>
+                    <li>
+                        <p>Non hai ancora nessuna consulenza in programma.</p>
+                    </li>
+                    <li>
+                        <button class="btn" onclick="window.location.href='richiestaConsulenza.php'">Prenota</button>
+                    </li>
+                </ul>
+            </section>
+        <?php endif; ?>
     </main>
 
 </body>
