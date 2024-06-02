@@ -33,3 +33,17 @@ main {
 .review > * {
   padding: 0 20px;
 }
+
+.review-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.review-info .stars {
+  display: flex;
+}
+
+.review-info .cliente {
+  margin-left: auto;
+}

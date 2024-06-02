@@ -8,6 +8,7 @@ if(isUserLoggedIn()){
     $templateparams["nutrizionistaAttuale"] = $dbh->getNutrizionistaTable()->getAttualNutrizionista($_SESSION["id"]);
     $templateparams["storicoNutrizionisti"] = $dbh->getNutrizionistaTable()->getStoricoNutrizionistiScelti($_SESSION["id"]);
     $templateparams["recensioniNutrizionista"] = $dbh->getRecensioniTable()->getRecensioniECountByNutrizionistaId($id);
+    $templateparams["recensioni"] = $dbh->getRecensioniTable()->getRecensioniByNutrizionistaId($id);
 }
 
 ?>

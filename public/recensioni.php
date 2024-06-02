@@ -12,32 +12,59 @@
 
 <body>
   <?php include ("../template/header/headerCliente.html");
-  require("../bootstrap.php");
+  require ("../bootstrap.php");
   $id = $_SESSION["idNutrizionista"];
   require ("../nutrizionista.php"); ?>
   <main>
     <div class="name">
-      <h1><?php echo $templateparams["nutrizionista"][0]["Nome"], " ", $templateparams["nutrizionista"][0]["Cognome"] ?></h1>
+      <h1><?php echo $templateparams["nutrizionista"][0]["Nome"], " ", $templateparams["nutrizionista"][0]["Cognome"] ?>
+      </h1>
     </div>
-    <?php if($templateparams["recensioniNutrizionista"]["numeroTotaleRecensioni"]==0): ?>
+    <?php if ($templateparams["recensioniNutrizionista"]["numeroTotaleRecensioni"] == 0): ?>
       <p>Questo nutrizionista non ha ancora ricevuto recensioni.</p>
-      <?php else: ?>
-    <div class="reviews-outer">
-      <div class="reviews-summary">
-        <img class="star" src="../assets/icons/star.svg" alt="star-review">
-        Media</p>
-        <p>(Numero recensioni)</p>
-      </div>
-      <div class="review">
-        <div class="review-info">
-          <img class="star" src="../assets/icons/star.svg" alt="star-review">
-          <p>Nome Cognome</p>
+    <?php else: ?>
+      <div class="reviews-outer">
+        <div class="reviews-summary">
+          <?php
+          $mediaInt = $templateparams["nutrizionistaAttuale"][0]["MediaVoti"];
+          if ($mediaInt == 0) {
+            echo "Questo nutrizionista non ha ancora ricevuto recensioni.";
+          } else {
+            for ($i = 0; $i < 5; $i++):
+              if ($i < $mediaInt):
+                ?>
+                <img src="../assets/icons/star.svg" alt="star">
+                <?php
+              endif;
+            endfor; ?>
+            <p>
+              <?php echo $mediaInt, " (", $templateparams["recensioniNutrizionista"]["numeroTotaleRecensioni"], " recensioni)"; ?>
+            </p>
+            <?php
+          }
+          ?>
         </div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum illum blanditiis, tempore a nulla maiores
-          omnis hic. Iure culpa earum nulla vitae tenetur error, qui a aliquam veritatis, illum odit placeat optio
-          cupiditate sequi dicta, porro fugit nemo aliquid quibusdam!</p>
+        <?php foreach ($templateparams["recensioni"] as $recensione): ?>
+          <div class="review">
+            <div class="review-info">
+              <div class="stars">
+                <?php
+                $voto = $recensione["Voto"];
+                for ($i = 0; $i < 5; $i++):
+                  if ($i < $voto):
+                    ?>
+                    <img class="star" src="../assets/icons/star.svg" alt="star-review">
+                    <?php
+                  endif;
+                endfor; ?>
+              </div>
+              <p class="cliente"><?php $cliente = $dbh->getClienteTable()->getClienteById($recensione["IDCliente"]);
+              echo $cliente[0]["Nome"], " ", $cliente[0]["Cognome"]; ?></p>
+            </div>
+            <p><?php echo $recensione["Commento"] ?></p>
+          </div>
+        <?php endforeach; ?>
       </div>
-    </div>
     <?php endif; ?>
   </main>
 </body>
