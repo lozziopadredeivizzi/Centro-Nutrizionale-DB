@@ -122,4 +122,8 @@ class DatabaseConnection
     {
         return $this->recensioniTable;
     }
+    
+    public function getConsulenzaTable(){
+        return $this->consulenzaTable;
+    }
 }
