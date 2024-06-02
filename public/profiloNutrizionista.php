@@ -38,7 +38,7 @@
       <h1><?php echo $templateparams["nutrizionista"][0]["Nome"], " ", $templateparams["nutrizionista"][0]["Cognome"]; ?></h1>
     </div>
     <div class="action">
-      <button class="btn">Seleziona come tuo Nutrizionista</button>
+      <button class="btn" id="selectNutrizionistaBtn" data-id="<?php echo $id ?>">Seleziona come tuo Nutrizionista</button>
     </div>
     <div class="infos-outer">
       <div class="infos">
@@ -78,6 +78,7 @@
       </div>
     </div>
   </main>
+  <script src="../js/scegliComeNutriz.js" type="text/javascript"></script>
 </body>
 
 </html>

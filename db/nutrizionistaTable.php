@@ -36,6 +36,14 @@ class NutrizionistaTable
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function isSceltaPresent($idCliente){
+        $stmt = $this->db->prepare("SELECT COUNT(*) AS isPresent FROM scelta WHERE IDCliente=?");
+        $stmt->bind_param('i', $idCliente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
 
 ?>

@@ -11,7 +11,14 @@
 </head>
 
 <body>
-  <?php include ("../template/header/header.html") ?>
+  <?php include ("../template/header/header.html");
+  require("../cliente.php");
+  if($templateparams["checkScelta"][0]["isPresent"] == 0): ?>
+  <br>
+  <br>
+  <br>
+  <h1>Non hai acora effettuato la scelta del nutrizionista.</h1>
+  <?php else: ?>
   <main>
     <div class="reviews" onclick="window.location.href='recensioni.php'">
       <img src="../assets/icons/star.svg" alt="star-review">
@@ -63,6 +70,7 @@
       </div>
     </div>
   </main>
+  <?php endif; ?>
 </body>
 
 </html>

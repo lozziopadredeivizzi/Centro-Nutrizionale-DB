@@ -92,6 +92,12 @@ class DatabaseConnection
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function impostaNutrizionista($idCliente, $idNutrizionista){
+        $stmt = $this->db->prepare("INSERT INTO scelta(IDCliente, Ora, Data, IDNutrizionista) VALUES(?, CURTIME(), CURDATE(), ?)");
+        $stmt->bind_param('ii', $idCliente, $idNutrizionista);
+        $stmt->execute();
+    }
+
     public function getNutrizionistaTable(){
         return $this->nutrizionistaTable;
     }
