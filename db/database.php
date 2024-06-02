@@ -11,6 +11,8 @@ class DatabaseConnection
     private $db;
     private $nutrizionistaTable;
     private $clienteTable;
+    private $recensioniTable;
+    private $consulenzaTable;
 
     //Connection db
     public function __construct($servername, $username, $password, $dbname, $port)
@@ -23,6 +25,9 @@ class DatabaseConnection
 
         $this->nutrizionistaTable = new NutrizionistaTable($this->db);
         $this->clienteTable = new ClienteTable($this->db);
+        $this->recensioniTable = new RecensioniTable($this->db);
+        $this->consulenzaTable = new ConsulenzaTable($this->db);
+
     }
 
     public function addClient($nome, $cognome, $citta, $cap, $email, $password)
@@ -71,7 +76,8 @@ class DatabaseConnection
         }
     }
 
-    public function checkLoginCliente($id, $password){
+    public function checkLoginCliente($id, $password)
+    {
         $stmt = $this->db->prepare("SELECT COUNT(*) AS isPresent FROM cliente WHERE IDCliente=? AND Password=?");
         $stmt->bind_param('is', $id, $password);
         $stmt->execute();
@@ -79,7 +85,8 @@ class DatabaseConnection
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function checkLoginNutrizionista($id, $password){
+    public function checkLoginNutrizionista($id, $password)
+    {
         $stmt = $this->db->prepare("SELECT COUNT(*) AS isPresent FROM nutrizionista WHERE IDNutrizionista=? AND Password=?");
         $stmt->bind_param('is', $id, $password);
         $stmt->execute();
@@ -87,26 +94,32 @@ class DatabaseConnection
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getQualifiche(){
+    public function getQualifiche()
+    {
         $stmt = $this->db->prepare("SELECT * FROM qualifica");
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function impostaNutrizionista($idCliente, $idNutrizionista){
+    public function impostaNutrizionista($idCliente, $idNutrizionista)
+    {
         $stmt = $this->db->prepare("INSERT INTO scelta(IDCliente, Ora, Data, IDNutrizionista) VALUES(?, CURTIME(), CURDATE(), ?)");
         $stmt->bind_param('ii', $idCliente, $idNutrizionista);
         $stmt->execute();
     }
 
-    public function getNutrizionistaTable(){
+    public function getNutrizionistaTable()
+    {
         return $this->nutrizionistaTable;
     }
 
-    public function getClienteTable(){
+    public function getClienteTable()
+    {
         return $this->clienteTable;
     }
-
-
+    public function getRecensioniTable()
+    {
+        return $this->recensioniTable;
+    }
 }
