@@ -32,7 +32,8 @@
                         <select id="tipoConsulenza" name="tipoConsulenza">
                             <?php foreach ($templateparams["tipoConsulenza"] as $tipo): ?>
                                 <option value="<?php echo $tipo["Tipo"] ?>">
-                                    <?php echo $tipo["Tipo"], " ", $tipo["Tariffa"], "$" ?></option>
+                                    <?php echo $tipo["Tipo"], " ", $tipo["Tariffa"], "$" ?>
+                                </option>
                             <?php endforeach; ?>
                         </select>
                     </li>
@@ -63,6 +64,8 @@
             availabilityMessage.classList.remove('hidden');
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../js/exit.js" type="text/javascript"></script>
 </body>
 
 </html>
