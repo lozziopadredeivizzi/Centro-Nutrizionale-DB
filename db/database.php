@@ -1,9 +1,9 @@
 <?php
 
-require_once("nutrizionistaTable.php");
-require_once("clienteTable.php");
-require_once("recensioniTable.php");
-require_once("consulenzaTable.php");
+require_once ("nutrizionistaTable.php");
+require_once ("clienteTable.php");
+require_once ("recensioniTable.php");
+require_once ("consulenzaTable.php");
 
 class DatabaseConnection
 {
@@ -109,9 +109,42 @@ class DatabaseConnection
         $stmt->execute();
     }
 
-    public function setMediaVotiToNutrizionista($idNutrizionista, $media){
+    public function setMediaVotiToNutrizionista($idNutrizionista, $media)
+    {
         $stmt = $this->db->prepare("UPDATE nutrizionista SET MediaVoti=? WHERE IDNutrizionista=?");
         $stmt->bind_param('ii', $media, $idNutrizionista);
+        $stmt->execute();
+    }
+
+    public function addEmptyScheda($dataInzio, $idCliente)
+    {
+        $stmt = $this->db->prepare("INSERT INTO scheda(dataInizioValidita, IDCliente, CodiceObiettivo) VALUES(?,?,?) ");
+        $codiceObiettivoDefoult = 9;
+        $stmt->bind_param('sii', $dataInzio, $idCliente, $codiceObiettivoDefoult);
+        $stmt->execute();
+        $codiceScheda = $stmt->insert_id;
+        return $codiceScheda;
+    }
+
+    public function addNewConsulenza($idCliente, $oraInizio, $oraFine, $data, $codiceScheda, $completa, $presenza, $online, $tipo)
+    {
+        $stmt = $this->db->prepare("INSERT INTO consulenza (IDCliente, CodiceScheda, IDNutrizionista, OraInizio, OraFine, Giorno, Completa, Presenza, Online, Tipo) 
+        SELECT ?, 
+                ?,      
+               IDNutrizionista, 
+               ?, 
+               ?, 
+               ?, 
+               ?, 
+               ?, 
+               ?, 
+               ? 
+        FROM scelta 
+        WHERE IDCliente = ? 
+        ORDER BY Data DESC, Ora DESC 
+        LIMIT 1
+        ");
+        $stmt->bind_param('iisssssssi', $idCliente, $codiceScheda, $oraInizio, $oraFine, $data, $completa, $presenza, $online, $tipo, $idCliente);
         $stmt->execute();
     }
 
@@ -128,8 +161,9 @@ class DatabaseConnection
     {
         return $this->recensioniTable;
     }
-    
-    public function getConsulenzaTable(){
+
+    public function getConsulenzaTable()
+    {
         return $this->consulenzaTable;
     }
 }

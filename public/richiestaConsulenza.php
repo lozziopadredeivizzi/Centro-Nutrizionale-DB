@@ -12,13 +12,12 @@
 
 <body>
     <?php include ("../template/header/headerCliente.html");
-    require ("../consulenza.php");
-    require ("../aggiungiConsulenza.php"); ?>
+    require ("../consulenza.php"); ?>
     <main>
         <section>
             <h1>Richiesta Consulenza</h1>
             <h2>Compila la richiesta</h2>
-            <form action="#" method="post">
+            <form action="../aggiungiConsulenza.php" method="post">
                 <ul>
                     <li>
                         <label for="svolgimento">Svolgimento:</label>
@@ -57,13 +56,7 @@
             </form>
         </section>
     </main>
-    <script>
-        document.getElementById('controllaDisp').addEventListener('click', function () {
-            // Simula il controllo della disponibilità
-            var availabilityMessage = document.getElementById('availabilityMessage');
-            availabilityMessage.classList.remove('hidden');
-        });
-    </script>
+    <script src="../js/controllaDisp.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/exit.js" type="text/javascript"></script>
 </body>

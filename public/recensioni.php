@@ -26,7 +26,7 @@
       <div class="reviews-outer">
         <div class="reviews-summary">
           <?php
-          $mediaInt = $templateparams["nutrizionistaAttuale"][0]["MediaVoti"];
+          $mediaInt = $templateparams["nutrizionista"][0]["MediaVoti"];
           if ($mediaInt == 0) {
             echo "Questo nutrizionista non ha ancora ricevuto recensioni.";
           } else {
