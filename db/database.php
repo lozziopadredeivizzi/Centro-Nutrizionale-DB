@@ -148,6 +148,30 @@ class DatabaseConnection
         $stmt->execute();
     }
 
+    public function createNewDiary($idCliente)
+    {
+        $stmt1 = $this->db->prepare("SELECT COUNT(*) AS count FROM diario");
+        $stmt1->execute();
+        $result = $stmt1->get_result();
+        $row = $result->fetch_assoc();
+        $codDiario = $row['count'];
+        $stmt1->close();
+
+        $stmt = $this->db->prepare(" INSERT INTO diario (IDCliente, Data, Ora, IDNutrizionista, CodDiario)
+            VALUES (
+                ?, 
+                CURDATE(), 
+                (SELECT Ora FROM scelta WHERE IDCliente = ? ORDER BY Data DESC, Ora DESC LIMIT 1), 
+                (SELECT IDNutrizionista FROM scelta WHERE IDCliente = ? ORDER BY Data DESC, Ora DESC LIMIT 1), 
+                ?
+            )
+        ");
+
+        $stmt->bind_param('iiii', $idCliente, $idCliente, $idCliente, $codDiario);
+        $stmt->execute();
+    }
+
+
     public function getNutrizionistaTable()
     {
         return $this->nutrizionistaTable;

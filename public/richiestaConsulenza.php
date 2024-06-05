@@ -48,9 +48,7 @@
                         <button class="btn" type="button" id="controllaDisp" name="controllaDisp">Controlla
                             Disponibilità</button>
                     </li>
-                    <li class="hidden" id="availabilityMessage">
-                        La data e l'ora scelta sono disponibili<button class="btn" type="submit" id="prenota"
-                            name="prenota">Prenota</button>
+                    <li id="availabilityMessage">
                     </li>
                 </ul>
             </form>

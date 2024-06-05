@@ -10,11 +10,12 @@ document.getElementById('controllaDisp').addEventListener('click', function () {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var availabilityMessage = document.getElementById('availabilityMessage');
+            console.log(xhr.responseText);
             if (xhr.responseText === 'disponibile') {
-                availabilityMessage.classList.remove('hidden');
+                availabilityMessage.innerHTML = 'La data e l\'ora scelta sono disponibili <button class="btn" type="submit" id="prenota" name="prenota">Prenota</button>';
+
             } else {
                 availabilityMessage.textContent = "La data e l'ora scelta non sono disponibili";
-                availabilityMessage.classList.remove('hidden');
             }
         }
     };

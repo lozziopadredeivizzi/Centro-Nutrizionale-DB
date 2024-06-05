@@ -65,7 +65,3 @@ li:nth-child(5) button:nth-child(1){
 li:nth-child(6) button{
     margin-left: 20px;
 }
-
-.hidden {
-    display: none;
-}
