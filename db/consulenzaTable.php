@@ -43,15 +43,14 @@ class ConsulenzaTable
           AND IDNutrizionista = (
             SELECT IDNutrizionista 
             FROM scelta 
-            WHERE IDCliente = ? 
+            WHERE IDCliente = ?
             ORDER BY Data DESC, Ora DESC 
             LIMIT 1
           )
           AND (
             (OraInizio <= ? AND OraFine > ?) OR  
-            (OraInizio < DATE_ADD(?, INTERVAL 1 HOUR) AND OraFine >= DATE_ADD(?, INTERVAL 1 HOUR))
-          )
-        ");
+            (OraInizio < ADDTIME(?, '01:00:00') AND OraFine > ADDTIME(?, '01:00:00'))
+          )");
     $stmt->bind_param('sissss', $data, $idCliente, $oraInizio, $oraInizio, $oraInizio, $oraInizio);
     $stmt->execute();
     $result = $stmt->get_result();
