@@ -17,6 +17,7 @@ if (isset($_POST["submitCliente"])) {
     $check = $dbh->checkLoginNutrizionista($id, $password);
     if ($check[0]["isPresent"] == 1) {
         $_SESSION["id"] = $id;
+        $_SESSION["NSignedin"] = $id;
         header("Location: homepageNutrizionista.php");
     } else {
         echo "<script>alert('Login fallito. Controlla il tuo ID e la tua password.');</script>";

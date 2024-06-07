@@ -11,9 +11,15 @@
 </head>
 
 <body>
-  <?php include ("../template/header/headerCliente.html");
+  <?php 
   require ("../bootstrap.php");
-  $id = $_SESSION["idNutrizionista"];
+  if(empty($_SESSION["NSignedin"])){
+      $id = $_SESSION["idNutrizionista"];
+      include ("../template/header/headerCliente.html");
+  } else{
+    $id = $_SESSION["NSignedin"];
+    include("../template/header/headerNutrizionista.html");
+  }
   require ("../nutrizionista.php"); ?>
   <main>
     <div class="name">
