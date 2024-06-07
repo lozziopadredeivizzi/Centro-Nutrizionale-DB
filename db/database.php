@@ -4,6 +4,7 @@ require_once ("nutrizionistaTable.php");
 require_once ("clienteTable.php");
 require_once ("recensioniTable.php");
 require_once ("consulenzaTable.php");
+require_once ("diarioTable.php");
 
 class DatabaseConnection
 {
@@ -13,6 +14,7 @@ class DatabaseConnection
     private $clienteTable;
     private $recensioniTable;
     private $consulenzaTable;
+    private $diarioTable;
 
     //Connection db
     public function __construct($servername, $username, $password, $dbname, $port)
@@ -27,6 +29,7 @@ class DatabaseConnection
         $this->clienteTable = new ClienteTable($this->db);
         $this->recensioniTable = new RecensioniTable($this->db);
         $this->consulenzaTable = new ConsulenzaTable($this->db);
+        $this->diarioTable = new DiarioTable($this->db);
 
     }
 
@@ -171,6 +174,43 @@ class DatabaseConnection
         $stmt->execute();
     }
 
+    public function addNota($idCliente, $azione, $nota, $data, $ora)
+    {
+        $stmt1 = $this->db->prepare("SELECT COUNT(*) AS count FROM note");
+        $stmt1->execute();
+        $result = $stmt1->get_result();
+        $row = $result->fetch_assoc();
+        $idNota = $row['count'];
+        $stmt1->close();
+
+        $stmt = $this->db->prepare("INSERT INTO note (IDCliente, codDiario, Data, Ora, Nota, DataNota, OrarioNota, IdNota, OggettoNota)
+VALUES (?,( SELECT codDiario
+            FROM DIARIO
+            WHERE IDCliente = ?
+            AND Data = ( SELECT Data 
+                         FROM SCELTA 
+                         WHERE IDCliente = ? 
+                         ORDER BY Data DESC, Ora DESC 
+                         LIMIT 1)
+            AND Ora = ( SELECT Ora 
+                        FROM SCELTA 
+                        WHERE IDCliente = ? 
+                        ORDER BY Data DESC, Ora DESC 
+                        LIMIT 1)),
+          ( SELECT Data
+            FROM SCELTA
+            WHERE IDCliente = ?
+            ORDER BY Data DESC, Ora DESC
+            LIMIT 1),
+          ( SELECT Ora
+            FROM SCELTA
+            WHERE IDCliente = ?
+            ORDER BY Data DESC, Ora DESC
+            LIMIT 1), ?, ?, ?, ?, ?)");
+        $stmt->bind_param('iiiiiisssis', $idCliente, $idCliente, $idCliente, $idCliente, $idCliente, $idCliente, $nota, $data, $ora, $idNota, $azione);
+        $stmt->execute();
+    }
+
 
     public function getNutrizionistaTable()
     {
@@ -189,5 +229,10 @@ class DatabaseConnection
     public function getConsulenzaTable()
     {
         return $this->consulenzaTable;
+    }
+
+    public function getDiarioTable()
+    {
+        return $this->diarioTable;
     }
 }

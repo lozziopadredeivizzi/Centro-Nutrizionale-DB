@@ -9,32 +9,31 @@
   <title>Aggiungi al Diario</title>
 </head>
 <body>
-  <body>
-    <?php include("../template/header/headerCliente.html") ?>
-    <main>
-      <h1>Aggiungi elemento al Diario</h1>
-      <div class="outer add">
+  <?php include("../template/header/headerCliente.html") ?>
+  <main>
+    <h1>Aggiungi elemento al Diario</h1>
+    <div class="outer add">
+      <form action="../aggiungiNota.php" method="post">
         <table>
           <thead>
             <tr>
-              <td>Orario</td>
               <td>Azione</td>
               <td>Descrizione</td>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><input type="time" name="orario"></td>
-              <td><input type="text" name="azione"></td>
-              <td><input type="text" name="descrizione"></td>
+              <td><input type="text" name="azione" required></td>
+              <td><input type="text" name="descrizione" required></td>
             </tr>
           </tbody>
         </table>
-        <button class="btn">Aggiungi</button>
-        <button class="btn" onclick="window.location.href='diario.php'">Torna al Diario</button>
-      </div>
-    </main>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../js/exit.js" type="text/javascript"></script>
+        <button type="submit" class="btn">Aggiungi</button>
+        <button type="button" class="btn" onclick="window.location.href='diario.php'">Torna al Diario</button>
+      </form>
+    </div>
+  </main>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../js/exit.js" type="text/javascript"></script>
 </body>
 </html>

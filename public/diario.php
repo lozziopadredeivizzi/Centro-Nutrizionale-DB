@@ -11,30 +11,41 @@
 </head>
 
 <body>
-  <?php include ("../template/header/headerCliente.html") ?>
+  <?php include ("../template/header/headerCliente.html");
+  require ("../diario.php");
+  ?>
   <main>
     <h1>Diario</h1>
-    <div class="outer">
-      <h3>Visualizzazione giornaliera</h3>
-      <input class="date" type="date" id="date-input" name="date-input">
-      <table>
-        <thead>
-          <tr>
-            <td>Orario</td>
-            <td>Azione</td>
-            <td>Descrizione</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-      <button class="btn" onclick="window.location.href='aggiungiAlDiario.php'">Aggiungi elemento</button>
-    </div>
+    <?php if (empty($templateparams["diario"])) {
+      echo "Non hai ancora scelto il tuo nutrizionista.";
+    } else { ?>
+      <div class="outer">
+        <h2>Condiviso con: <?php $nutrizionista = $dbh->getNutrizionistaTable()->getNutrizionistaById($templateparams["diario"][0]["IDNutrizionista"]);
+        echo $nutrizionista[0]["Nome"], " ", $nutrizionista[0]["Cognome"]; ?></h2>
+        <h3>Codice Diario: <?php echo $templateparams["diario"][0]["CodDiario"]; ?></h3>
+        <table>
+          <thead>
+            <tr>
+              <td>Data</td>
+              <td>Orario</td>
+              <td>Descrizione</td>
+              <td>Azione</td>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach($templateparams["diario"] as $nota): ?>
+            <tr>
+              <td><?php echo $nota["DataNota"] ?></td>
+              <td><?php echo $nota["OrarioNota"] ?></td>
+              <td><?php echo $nota["Nota"] ?></td>
+              <td><?php echo $nota["OggettoNota"] ?></td>
+            </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+        <button class="btn" onclick="window.location.href='aggiungiAlDiario.php'">Aggiungi elemento</button>
+      </div>
+    <?php } ?>
   </main>
   <script>
     // Ottieni la data corrente

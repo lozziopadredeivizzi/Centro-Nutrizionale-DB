@@ -40,9 +40,6 @@
                             echo "Presenza";
                         } ?>
                     </li>
-                    <li>
-                        <button class="btn">Cancella consulenza</button>
-                    </li>
                 </ul>
             </section>
         <?php else: ?>
