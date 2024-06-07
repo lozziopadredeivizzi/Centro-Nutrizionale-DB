@@ -20,7 +20,16 @@ if (isUserLoggedIn()) {
         } else {
             $templateparams["allNutrizionisti"] = $result;
         }
-    } else {
+    } else if((isset($_POST["city"]) && $_POST["city"] != "") && (isset($_POST["cap"]) && $_POST["cap"] != "")) {
+        $cap = $_POST["cap"];
+        $citta = $_POST["city"];
+        $result = $dbh->getNutrizionistaTable()->getNutrizionistaByCityAndCAP($citta, $cap);
+        if (empty($result)) {
+            $_GET["text"] = "Nessun risultato trovato";
+        } else {
+            $templateparams["allNutrizionisti"] = $result;
+        }
+    } else{
 
     }
 

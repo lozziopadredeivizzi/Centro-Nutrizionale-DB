@@ -169,6 +169,19 @@ WHERE LOWER(i.Citta) LIKE LOWER(?)");
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getNutrizionistaByCityAndCAP($citta, $cap){
+        $stmt = $this->db->prepare("SELECT DISTINCT n.IDNutrizionista, n.Nome, n.Cognome, i.Citta, i.CAP, pq.Titolo
+FROM nutrizionista n
+JOIN indirizzo_prof i ON n.IDNutrizionista = i.IDNutrizionista
+JOIN possiede_q pq ON n.IDNutrizionista = pq.IDNutrizionista
+WHERE LOWER(i.Citta) LIKE LOWER(?) AND
+LOWER(i.CAP) LIKE LOWER(?)");
+        $stmt->bind_param('si', $citta, $cap);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
 
 ?>
