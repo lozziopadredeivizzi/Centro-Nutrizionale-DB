@@ -37,7 +37,8 @@ class NutrizionistaTable
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function isSceltaPresent($idCliente){
+    public function isSceltaPresent($idCliente)
+    {
         $stmt = $this->db->prepare("SELECT COUNT(*) AS isPresent FROM scelta WHERE IDCliente=?");
         $stmt->bind_param('i', $idCliente);
         $stmt->execute();
@@ -45,7 +46,8 @@ class NutrizionistaTable
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getAttualNutrizionista($idCliente){
+    public function getAttualNutrizionista($idCliente)
+    {
         $stmt = $this->db->prepare("SELECT
         s.Data, 
         s.Ora,
@@ -86,7 +88,8 @@ class NutrizionistaTable
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getStoricoNutrizionistiScelti($idCliente){
+    public function getStoricoNutrizionistiScelti($idCliente)
+    {
         $stmt = $this->db->prepare("SELECT
         s.Data,
         s.Ora,
@@ -121,10 +124,50 @@ class NutrizionistaTable
         s.Data DESC,
         s.Ora DESC;
     ");
-    $stmt->bind_param('i', $idCliente);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    return $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->bind_param('i', $idCliente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getNutrizionistiVicinoATe($idCliente)
+    {
+        $stmt = $this->db->prepare("SELECT DISTINCT n.IDNutrizionista, n.Nome, n.Cognome, i.Citta, i.CAP, pq.Titolo
+FROM nutrizionista n
+JOIN indirizzo_prof i ON n.IDNutrizionista = i.IDNutrizionista
+JOIN possiede_q pq ON n.IDNutrizionista = pq.IDNutrizionista
+JOIN cliente c ON i.Citta = c.Citta OR i.CAP = c.CAP
+WHERE c.IDCliente = ?");
+        $stmt->bind_param('i', $idCliente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getNutrizionsitaByCAP($cap)
+    {
+        $stmt = $this->db->prepare("SELECT DISTINCT n.IDNutrizionista, n.Nome, n.Cognome, i.Citta, i.CAP, pq.Titolo
+FROM nutrizionista n
+JOIN indirizzo_prof i ON n.IDNutrizionista = i.IDNutrizionista
+JOIN possiede_q pq ON n.IDNutrizionista = pq.IDNutrizionista
+WHERE LOWER(i.CAP) LIKE LOWER(?)");
+        $stmt->bind_param('i', $cap);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getNutrizionistaByCity($citta)
+    {
+        $stmt = $this->db->prepare("SELECT DISTINCT n.IDNutrizionista, n.Nome, n.Cognome, i.Citta, i.CAP, pq.Titolo
+FROM nutrizionista n
+JOIN indirizzo_prof i ON n.IDNutrizionista = i.IDNutrizionista
+JOIN possiede_q pq ON n.IDNutrizionista = pq.IDNutrizionista
+WHERE LOWER(i.Citta) LIKE LOWER(?)");
+        $stmt->bind_param('s', $citta);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 }
 

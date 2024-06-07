@@ -14,38 +14,47 @@
   <?php include ("../template/header/headerCliente.html");
   require ("../bootstrap.php");
   $id = $_SESSION["id"];
-  require ("../nutrizionista.php"); ?>
+  require ("../nutrizionista.php");
+  require ("../search.php"); ?>
   <main>
     <form action="" method="post">
       <h1>Filtra Risultati</h1>
       <div class="city">
         <label for="city">Città</label>
-        <input class="txt" type="text" id="city">
+        <input class="txt" type="text" id="city" name="city">
       </div>
       <div class="cap">
         <label for="cap">Cap</label>
-        <input class="txt" type="text" id="cap">
+        <input class="txt" type="text" id="cap" name="cap">
       </div>
       <button class="btn">Applica Filtri</button>
-      <button class="btn">Cerca nella tua zona</button>
     </form>
-    <?php foreach ($templateparams["allNutrizionisti"] as $nutrizionista): ?>
-      <div data-id="<?php echo $nutrizionista["IDNutrizionista"]; ?>"
-        data-sceltaAttuale="<?php if ($templateparams["nutrizionistaAttuale"][0]["IDNutrizionista"] == $nutrizionista["IDNutrizionista"]) {
-          echo "si";
-        } else {
-          echo "no";
-        } ?>"
-        class="result">
-        <ul>
-          <li>ID: <?php echo $nutrizionista["IDNutrizionista"]; ?></li>
-          <li><?php echo $nutrizionista["Nome"], " ", $nutrizionista["Cognome"]; ?></li>
-          <li>Città: <?php echo $nutrizionista["Citta"]; ?></li>
-          <li>CAP: <?php echo $nutrizionista["CAP"]; ?></li>
-          <li>Qualifica: <?php echo $nutrizionista["Titolo"]; ?></li>
-        </ul>
-      </div>
-    <?php endforeach; ?>
+    <form action="" method="post">
+      <button type="input" class="btn" name="searchNearYou">Cerca nella tua zona</button>
+    </form>
+
+
+    <?php if (isset($_GET["text"])) { ?>
+      <br>
+      <br>
+      <?php echo $_GET["text"];
+    } else {
+      foreach ($templateparams["allNutrizionisti"] as $nutrizionista): ?>
+        <div data-id="<?php echo $nutrizionista["IDNutrizionista"]; ?>" data-sceltaAttuale="<?php if ($templateparams["nutrizionistaAttuale"][0]["IDNutrizionista"] == $nutrizionista["IDNutrizionista"]) {
+             echo "si";
+           } else {
+             echo "no";
+           } ?>" class="result">
+          <ul>
+            <li>ID: <?php echo $nutrizionista["IDNutrizionista"]; ?></li>
+            <li><?php echo $nutrizionista["Nome"], " ", $nutrizionista["Cognome"]; ?></li>
+            <li>Città: <?php echo $nutrizionista["Citta"]; ?></li>
+            <li>CAP: <?php echo $nutrizionista["CAP"]; ?></li>
+            <li>Qualifica: <?php echo $nutrizionista["Titolo"]; ?></li>
+          </ul>
+        </div>
+      <?php endforeach;
+    } ?>
   </main>
   <script src="../js/viewProfileNutrizionista.js" type="text/javascript"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
