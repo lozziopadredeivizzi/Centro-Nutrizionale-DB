@@ -12,6 +12,7 @@
 <body>
   <?php include "../template/header/headerCliente.html";
   require("../bootstrap.php");
+  $id = $_SESSION["id"];
   require("../cliente.php"); ?>
   <main>
     <div class="left-side-container">

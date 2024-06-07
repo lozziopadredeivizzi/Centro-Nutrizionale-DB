@@ -12,6 +12,8 @@
 
 <body>
   <?php include ("../template/header/headerCliente.html");
+  require("../bootstrap.php");
+  $id = $_SESSION["id"];
   require ("../cliente.php");
   require ("../nutrizionista.php");
   if (!empty($templateparams["nutrizionistaAttuale"][0]["IDNutrizionista"])) {

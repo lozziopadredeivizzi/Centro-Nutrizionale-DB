@@ -26,6 +26,7 @@
           <ul>
             <li>Città</li>
             <li>Indirizzo:</li>
+            <li>E-mail:</li>
           </ul>
         </div>
       </div>
