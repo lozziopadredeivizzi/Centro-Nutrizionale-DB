@@ -79,6 +79,14 @@ FROM
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getNumberOfConsulenze($idCliente, $idNutrizionista){
+        $stmt = $this->db->prepare("SELECT COUNT(*) AS count FROM consulenza WHERE IDCliente=? AND IDNutrizionista=? AND Completa='s'");
+        $stmt->bind_param('ii', $idCliente, $idNutrizionista);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
 
 ?>

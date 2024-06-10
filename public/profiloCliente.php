@@ -11,10 +11,13 @@
 </head>
 
 <body>
-  <?php include ("../template/header/headerNutrizionista.html") ?>
+  <?php include ("../template/header/headerNutrizionista.html");
+  require("../bootstrap.php");
+  $id = $_SESSION["idCliente"];
+  require("../cliente.php"); ?>
   <main>
     <div class="name">
-      <h1>Nome Cognome</h1>
+      <h1><?php echo $templateparams["cliente"][0]["Nome"], " ", $templateparams["cliente"][0]["Cognome"]; ?></h1>
     </div>
     <div class="action">
       <button class="btn" onclick="window.location.href='diario.php'">Visualizza Diario</button>
@@ -24,9 +27,9 @@
         <h3>Informazioni</h3>
         <div class="info-details">
           <ul>
-            <li>Città</li>
-            <li>Indirizzo:</li>
-            <li>E-mail:</li>
+            <li>Città: <?php echo $templateparams["cliente"][0]["Citta"]; ?></li>
+            <li>CAP: <?php echo $templateparams["cliente"][0]["CAP"]; ?></li>
+            <li>E-mail: <?php echo $templateparams["cliente"][0]["Email"]; ?></li>
           </ul>
         </div>
       </div>
@@ -36,11 +39,9 @@
         <h3>Altre Informazioni</h3>
         <div class="info-details">
           <ul>
-            <li>Cliente da:</li>
-            <li>Numero consulenze effettuate:</li>
+            <li>Numero consulenze effettuate: <?php echo $templateparams["nConsulenze"][0]["count"]; ?></li>
             <li>Percentuale consulenze online:</li>
             <li>Percentuale consulenze in presenza:</li>
-            <li>Obiettivi richiesti:</li>
           </ul>
         </div>
       </div>

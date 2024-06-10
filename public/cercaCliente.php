@@ -35,7 +35,7 @@
     <?php foreach ($templateparams["ultimaScelta"] as $scelta):
       if ($scelta["E_L_ultima_scelta"] == "Sì"):
         $cliente = $dbh->getClienteTable()->getClienteById($scelta["IDCliente"]); ?>
-        <div onclick="window.location.href='profiloCliente.php'" class="result">
+        <div onclick="window.location.href='profiloCliente.php'" class="result" data-id="<?php echo $cliente[0]["IDCliente"]; ?>">
           <ul>
             <li>ID: <?php echo $cliente[0]["IDCliente"]; ?></li>
             <li><?php echo $cliente[0]["Nome"], " ", $cliente[0]["Cognome"] ; ?></li>
@@ -47,6 +47,7 @@
   </main>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../js/exit.js" type="text/javascript"></script>
+  <script src="../js/viewProfileCliente.js" type="text/javascript"></script>
 </body>
 
 </html>
