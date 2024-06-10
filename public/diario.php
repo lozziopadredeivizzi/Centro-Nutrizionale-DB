@@ -49,7 +49,7 @@
             <?php endforeach; ?>
           </tbody>
         </table>
-        <?php if (!isset($NSignedin)): ?>
+        <?php if (empty($_SESSION["NSignedin"])): ?>
           <button class="btn" onclick="window.location.href='aggiungiAlDiario.php'">Aggiungi elemento</button>
         <?php endif; ?>
       </div>
