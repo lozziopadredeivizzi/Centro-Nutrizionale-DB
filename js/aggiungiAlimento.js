@@ -11,17 +11,12 @@ function addFoodGroup() {
     newGroup.innerHTML = `
         <label for="meal${newGroupId}">Pasto:</label>
         <select id="meal${newGroupId}" name="meal[]" required>
-            <option value="colazione">Colazione</option>
-            <option value="pranzo">Pranzo</option>
-            <option value="cena">Cena</option>
-            <option value="spuntino">Spuntino</option>
+            ${mealOptions}
         </select>
 
         <label for="prescribed${newGroupId}">Alimento:</label>
         <select id="prescribed${newGroupId}" name="prescribed[]" required>
-            <option value="alimento_prescritto1">Alimento Prescritto 1</option>
-            <option value="alimento_prescritto2">Alimento Prescritto 2</option>
-            <option value="alimento_prescritto3">Alimento Prescritto 3</option>
+            ${foodOptions}
         </select>
 
         <label for="grams${newGroupId}">Quantità:</label>
@@ -30,9 +25,7 @@ function addFoodGroup() {
         <div class="optional-group">
             <label for="optional${newGroupId}-1">Alimento Opzionale 1:</label>
             <select id="optional${newGroupId}-1" name="optional[${newGroupId}][]" required>
-                <option value="alimento1">Alimento 1</option>
-                <option value="alimento2">Alimento 2</option>
-                <option value="alimento3">Alimento 3</option>
+                ${foodOptions}
             </select>
             <label for="optional-grams${newGroupId}-1">Quantità Alimento Opzionale 1:</label>
             <input type="text" id="optional-grams${newGroupId}-1" name="optional-grams[${newGroupId}][]" required>
@@ -54,9 +47,7 @@ function addOptionalGroup(button) {
     newOptional.innerHTML = `
         <label for="optional${groupId}-${newOptionalId}">Alimento Opzionale ${newOptionalId}:</label>
         <select id="optional${groupId}-${newOptionalId}" name="optional[${groupId}][]" required>
-            <option value="alimento1">Alimento 1</option>
-            <option value="alimento2">Alimento 2</option>
-            <option value="alimento3">Alimento 3</option>
+            ${foodOptions}
         </select>
         <label for="optional-grams${groupId}-${newOptionalId}">Quantità Alimento Opzionale ${newOptionalId}:</label>
         <input type="text" id="optional-grams${groupId}-${newOptionalId}" name="optional-grams[${groupId}][]" required>
@@ -102,28 +93,28 @@ function addAdditionalAdvice(button) {
 }
 
 // Aggiungi event listener per il pulsante "Aggiungi Alimento"
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
     if (event.target && event.target.classList.contains('add-group')) {
         addFoodGroup();
     }
 });
 
 // Delega l'evento per gestire i pulsanti "Aggiungi Alimento Opzionale"
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
     if (event.target && event.target.classList.contains('add-optional')) {
         addOptionalGroup(event.target);
     }
 });
 
 // Aggiungi event listener per il pulsante "Aggiungi Consiglio"
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
     if (event.target && event.target.classList.contains('add-advice-group')) {
         addAdviceGroup(event.target);
     }
 });
 
 // Delega l'evento per gestire i pulsanti "Aggiungi Consiglio" nei gruppi esistenti
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
     if (event.target && event.target.classList.contains('add-advice')) {
         addAdditionalAdvice(event.target);
     }

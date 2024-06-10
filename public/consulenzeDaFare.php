@@ -20,7 +20,7 @@
             <?php foreach ($templateparams["daFare"] as $consulenza): ?>
                 <?php $cliente = $dbh->getClienteTable()->getClienteById($consulenza["IDCliente"]); ?>
                 <article>
-                    <div class="result">
+                    <div class="result" data-idCliente="<?php echo $consulenza["IDCliente"]; ?>">
                         <ul>
                             <li>ID: <?php echo $consulenza["IDCliente"] ?></li>
                             <li><?php echo $cliente[0]["Nome"], " ", $cliente[0]["Cognome"] ?></li>

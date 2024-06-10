@@ -14,20 +14,34 @@ lists.forEach(function(list) {
         // Ottieni il testo del quinto elemento <li>
         var text = fifthLi.textContent.trim();
         
-        // Determina quale pagina aprire in base al testo del quinto elemento <li>
-        switch(text) {
-            case 'Completa':
-                window.location.href = 'compilaCompleta.php';
-                break;
-            case 'Alimentare':
-                window.location.href = 'compilaAlimentare.php';
-                break;
-            case 'Fisica':
-                window.location.href = 'compilaFisica.php';
-                break;
-            default:
-                // Se il testo non corrisponde a nessuna delle opzioni, non fare nulla
-                break;
-        }
+        // Ottieni l'attributo data-idCliente
+        var idCliente = list.getAttribute('data-idCliente');
+        
+        // Esegui la chiamata AJAX
+        $.ajax({
+            url: '../impostaCliente.php',
+            method: 'POST',
+            data: { idCliente: idCliente },
+            success: function(response) {
+                // Gestisci la risposta dal server se necessario
+                switch(text) {
+                    case 'Completa':
+                        window.location.href = 'compilaCompleta.php';
+                        break;
+                    case 'Alimentare':
+                        window.location.href = 'compilaAlimentare.php';
+                        break;
+                    case 'Fisica':
+                        window.location.href = 'compilaFisica.php';
+                        break;
+                    default:
+                        // Se il testo non corrisponde a nessuna delle opzioni, non fare nulla
+                        break;
+                }
+            },
+            error: function(xhr, status, error) {
+                // Gestisci eventuali errori
+            }
+        });
     });
 });

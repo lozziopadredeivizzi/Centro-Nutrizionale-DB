@@ -10,26 +10,38 @@
 </head>
 
 <body>
-    <?php include ("../template/header/headerNutrizionista.html") ?>
+    <?php include ("../template/header/headerNutrizionista.html");
+    require ("../alimenti.php");
+    require ("../esercizi.php");
+    require("../obiettivi.php"); ?>
     <main>
         <section>
-            <form id="dynamic-form" action="#" method="post">
+            <form id="dynamic-form" action="../compilaCompleta.php" method="post">
+                <label for="obiettivo">Obiettivo:</label>
+                <select name="obiettivo" id="obiettivo">
+                    <?php foreach($templateparams["obiettivi"] as $obiettivo): ?>
+                    <option value="<?php echo $obiettivo["Descrizione"] ?>"><?php echo $obiettivo["Descrizione"] ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <label for="durata">Durata (in settimane):</label>
+                <input type="number" name="durata" id="durata" required>
                 <section>
                     <h1>Tabella Alimenti</h1>
                     <div class="input-group" data-group-id="1">
                         <label for="meal1">Pasto:</label>
                         <select id="meal1" name="meal[]" required>
-                            <option value="colazione">Colazione</option>
-                            <option value="pranzo">Pranzo</option>
-                            <option value="cena">Cena</option>
-                            <option value="spuntino">Spuntino</option>
+                            <?php foreach ($templateparams["pasti"] as $pasto): ?>
+                                <option value="<?php echo $pasto["NomePasto"] ?>"><?php echo $pasto["NomePasto"] ?></option>
+                            <?php endforeach; ?>
                         </select>
 
                         <label for="prescribed1">Alimento:</label>
                         <select id="prescribed1" name="prescribed[]" required>
-                            <option value="alimento_prescritto1">Alimento Prescritto 1</option>
-                            <option value="alimento_prescritto2">Alimento Prescritto 2</option>
-                            <option value="alimento_prescritto3">Alimento Prescritto 3</option>
+                            <?php foreach ($templateparams["alimenti"] as $alimento): ?>
+                                <option value="<?php echo $alimento["NomeAlimento"] ?>">
+                                    <?php echo $alimento["NomeAlimento"] ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
 
                         <label for="grams1">Quantità:</label>
@@ -38,9 +50,11 @@
                         <div class="optional-group">
                             <label for="optional1-1">Alimento Opzionale 1:</label>
                             <select id="optional1-1" name="optional[1][]" required>
-                                <option value="alimento1">Alimento 1</option>
-                                <option value="alimento2">Alimento 2</option>
-                                <option value="alimento3">Alimento 3</option>
+                                <?php foreach ($templateparams["alimenti"] as $alimento): ?>
+                                    <option value="<?php echo $alimento["NomeAlimento"] ?>">
+                                        <?php echo $alimento["NomeAlimento"] ?>
+                                    </option>
+                                <?php endforeach; ?>
                             </select>
                             <label for="optional-grams1-1">Quantità Alimento Opzionale 1:</label>
                             <input type="text" id="optional-grams1-1" name="optional-grams[1][]" required>
@@ -55,9 +69,11 @@
                     <div class="exercise-group" data-group-id="1">
                         <label for="exercise1">Nome Esercizio:</label>
                         <select id="exercise1" name="exercise[]" required>
-                            <option value="esercizio1">Esercizio 1</option>
-                            <option value="esercizio2">Esercizio 2</option>
-                            <option value="esercizio3">Esercizio 3</option>
+                            <?php foreach ($templateparams["esercizi"] as $esercizio): ?>
+                                <option value="<?php echo $esercizio["NomeEsercizio"] ?>">
+                                    <?php echo $esercizio["NomeEsercizio"] ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
 
                         <label for="frequency1">Frequenza Settimanale:</label>
@@ -79,7 +95,28 @@
                 <input type="submit" value="Invia">
             </form>
         </section>
+        <?php
+        $mealOptions = '';
+        foreach ($templateparams["pasti"] as $pasto) {
+            $mealOptions .= '<option value="' . htmlspecialchars($pasto["NomePasto"]) . '">' . htmlspecialchars($pasto["NomePasto"]) . '</option>';
+        }
+
+        $foodOptions = '';
+        foreach ($templateparams["alimenti"] as $alimento) {
+            $foodOptions .= '<option value="' . htmlspecialchars($alimento["NomeAlimento"]) . '">' . htmlspecialchars($alimento["NomeAlimento"]) . '</option>';
+        }
+
+        $exerciseOptions = '';
+        foreach ($templateparams["esercizi"] as $esercizio) {
+            $exerciseOptions .= '<option value="' . htmlspecialchars($esercizio["NomeEsercizio"]) . '">' . htmlspecialchars($esercizio["NomeEsercizio"]) . '</option>';
+        }
+        ?>
     </main>
+    <script>
+        var mealOptions = `<?php echo $mealOptions; ?>`;
+        var foodOptions = `<?php echo $foodOptions; ?>`;
+        var exerciseOptions = `<?php echo $exerciseOptions; ?>`;
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/exit.js" type="text/javascript"></script>
     <script src="../js/aggiungiForm.js" type="text/javascript"></script>

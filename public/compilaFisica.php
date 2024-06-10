@@ -10,18 +10,30 @@
 </head>
 
 <body>
-    <?php include ("../template/header/headerNutrizionista.html") ?>
+    <?php include ("../template/header/headerNutrizionista.html");
+    require ("../esercizi.php");
+    require("../obiettivi.php"); ?>
     <main>
         <section>
             <form id="dynamic-form" action="#" method="post">
+            <label for="obiettivo">Obiettivo:</label>
+                <select name="obiettivo" id="obiettivo">
+                    <?php foreach($templateparams["obiettivi"] as $obiettivo): ?>
+                    <option value="<?php echo $obiettivo["Descrizione"] ?>"><?php echo $obiettivo["Descrizione"] ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <label for="durata">Durata (in settimane):</label>
+                <input type="number" name="durata" id="durata" required>
                 <section class="exercise-section">
                     <h1>Tabella Esercizi</h1>
                     <div class="exercise-group" data-group-id="1">
                         <label for="exercise1">Nome Esercizio:</label>
                         <select id="exercise1" name="exercise[]" required>
-                            <option value="esercizio1">Esercizio 1</option>
-                            <option value="esercizio2">Esercizio 2</option>
-                            <option value="esercizio3">Esercizio 3</option>
+                            <?php foreach ($templateparams["esercizi"] as $esercizio): ?>
+                                <option value="<?php echo $esercizio["NomeEsercizio"] ?>">
+                                    <?php echo $esercizio["NomeEsercizio"] ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
 
                         <label for="frequency1">Frequenza Settimanale:</label>
@@ -43,7 +55,16 @@
                 <input type="submit" value="Invia">
             </form>
         </section>
+        <?php
+        $exerciseOptions = '';
+        foreach ($templateparams["esercizi"] as $esercizio) {
+            $exerciseOptions .= '<option value="' . htmlspecialchars($esercizio["NomeEsercizio"]) . '">' . htmlspecialchars($esercizio["NomeEsercizio"]) . '</option>';
+        }
+        ?>
     </main>
+    <script>
+        var exerciseOptions = `<?php echo $exerciseOptions; ?>`;
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/exit.js" type="text/javascript"></script>
     <script src="../js/aggiungiEsercizio.js" type="text/javascript"></script>

@@ -5,6 +5,9 @@ require_once ("clienteTable.php");
 require_once ("recensioniTable.php");
 require_once ("consulenzaTable.php");
 require_once ("diarioTable.php");
+require_once ("alimentiTable.php");
+require_once ("eserciziTable.php");
+require_once("obiettiviTable.php");
 
 class DatabaseConnection
 {
@@ -15,6 +18,9 @@ class DatabaseConnection
     private $recensioniTable;
     private $consulenzaTable;
     private $diarioTable;
+    private $alimentiTable;
+    private $eserciziTable;
+    private $obiettiviTable;
 
     //Connection db
     public function __construct($servername, $username, $password, $dbname, $port)
@@ -30,6 +36,9 @@ class DatabaseConnection
         $this->recensioniTable = new RecensioniTable($this->db);
         $this->consulenzaTable = new ConsulenzaTable($this->db);
         $this->diarioTable = new DiarioTable($this->db);
+        $this->alimentiTable = new AliementiTable($this->db);
+        $this->eserciziTable = new EserciziTable($this->db);
+        $this->obiettiviTable = new ObiettiviTable($this->db);
 
     }
 
@@ -211,6 +220,90 @@ VALUES (?,( SELECT codDiario
         $stmt->execute();
     }
 
+    public function addTabellaAlimenti($idCliente, $idNutrizionista){
+        $stmt = $this->db->prepare("INSERT INTO tabella_pasto (CodiceScheda, CodTabPasti) 
+                                    SELECT c.CodiceScheda, c.CodiceScheda  
+                                    FROM consulenza c 
+                                    WHERE c.IDCliente = ? AND Completa='n' AND c.IDNutrizionista = ?;");
+        $stmt->bind_param('ii', $idCliente, $idNutrizionista);
+        $stmt->execute();
+    }
+
+    public function addTabellaAllenamento($idCliente, $idNutrizionista){
+        $stmt = $this->db->prepare("INSERT INTO tabella_allenamento (CodiceScheda, CodTabAll) 
+                                    SELECT c.CodiceScheda, c.CodiceScheda  
+                                    FROM consulenza c 
+                                    WHERE c.IDCliente = ? AND Completa='n' AND c.IDNutrizionista = ?;");
+        $stmt->bind_param('ii', $idCliente, $idNutrizionista);
+        $stmt->execute();
+    }
+
+    public function addTabellaConsigli($idCliente, $idNutrizionista){
+        $stmt = $this->db->prepare("INSERT INTO tabella_consiglio (CodiceScheda, CodTabCons) 
+                                    SELECT c.CodiceScheda, c.CodiceScheda  
+                                    FROM consulenza c 
+                                    WHERE c.IDCliente = ? AND Completa='n' AND c.IDNutrizionista = ?;");
+        $stmt->bind_param('ii', $idCliente, $idNutrizionista);
+        $stmt->execute();
+    }
+
+    public function addAlimentoPrescritto($alimento, $quantita, $idCliente, $idNutrizionista, $pasto){
+        $stmt = $this->db->prepare("INSERT INTO alimento_prescritto(CodiceScheda, CodTabPasti, NomeAlimento, QuantitaPrescr) 
+                                    SELECT c.CodiceScheda, c.CodiceScheda, ?, ? 
+                                    FROM consulenza c 
+                                    WHERE c.IDCliente = ? AND Completa='n' AND c.IDNutrizionista = ?");
+        $stmt->bind_param('siii', $alimento, $quantita, $idCliente, $idNutrizionista);
+        $stmt->execute();
+        $stmt->close();
+
+        $stmt = $this->db->prepare("INSERT INTO appartiene(CodiceScheda, CodTabPasti, NomeAlimento, QuantitaPrescr, NomePasto)
+                                    SELECT c.CodiceScheda, c.CodiceScheda, ?, ?, ? 
+                                    FROM consulenza c 
+                                    WHERE c.IDCliente = ? AND Completa='n' AND c.IDNutrizionista = ?");
+        $stmt->bind_param('sisii', $alimento, $quantita, $pasto, $idCliente, $idNutrizionista);
+        $stmt->execute();
+    }
+
+    public function addAlimentoOpzionale($alimentoPrescr, $quantitaPrescr, $alimentoOpz, $quantitaOpz, $idCliente, $idNutrizionista){
+        $stmt = $this->db->prepare("INSERT INTO alimento_alternativo(Pos_CodiceScheda, Pos_CodTabPasti, Pos_NomeAlimento, Pos_QuantitaPrescr, NomeAlimento, QuantitaAlter)
+                                    SELECT c.CodiceScheda, c.CodiceScheda, ?, ?, ?, ? 
+                                    FROM consulenza c 
+                                    WHERE c.IDCliente = ? AND Completa='n' AND c.IDNutrizionista = ? ");
+        $stmt->bind_param('sisiii', $alimentoPrescr, $quantitaPrescr, $alimentoOpz, $quantitaOpz, $idCliente, $idNutrizionista);
+        $stmt->execute();
+    }
+
+    public function addExercice($idCliente, $idNutrizionista, $frequenza, $durata, $nomeEsercizio){
+        $stmt1 = $this->db->prepare("SELECT COUNT(*) AS count FROM esercizio_in_tabella WHERE CodiceScheda=(SELECT CodiceScheda FROM consulenza WHERE IDCliente=? AND Completa='n' AND IDNutrizionista=?)");
+        $stmt1->bind_param('ii', $idCliente, $idNutrizionista);
+        $stmt1->execute();
+        $result = $stmt1->get_result();
+        $row = $result->fetch_assoc();
+        $posizione = $row['count'];
+        $stmt1->close();
+
+        $stmt = $this->db->prepare("INSERT INTO esercizio_in_tabella(CodiceScheda, CodTabAll, Posizione, FrequenzaSettimanale, Durata, NomeEsercizio)
+                                    SELECT c.CodiceScheda, c.CodiceScheda, ?, ?, ?, ? 
+                                    FROM consulenza c 
+                                    WHERE c.IDCliente = ? AND Completa='n' AND c.IDNutrizionista = ? ");
+        $stmt->bind_param('iissii', $posizione, $frequenza, $durata, $nomeEsercizio, $idCliente, $idNutrizionista);
+        $stmt->execute();
+    }
+
+    public function updateSchedaInfo($idCliente, $idNutrizionista, $durata, $obiettivo){
+        $stmt = $this->db->prepare("UPDATE scheda 
+                                    SET CodiceObiettivo = (SELECT CodiceObiettivo FROM obiettivo WHERE Descrizione = ?), 
+                                        Durata = ? 
+                                    WHERE CodiceScheda = (SELECT CodiceScheda FROM consulenza WHERE IDCliente = ? AND Completa='n' AND IDNutrizionista = ?)");
+        $stmt->bind_param('siii', $obiettivo, $durata, $idCliente, $idNutrizionista);
+        $stmt->execute();
+    }
+
+    public function updateConsulenza($idCliente, $idNutrizionista){
+        $stmt = $this->db->prepare("UPDATE consulenza SET Completa='s' WHERE Completa='n' AND IDCliente=? AND IDNutrizionista=?");
+        $stmt->bind_param('ii', $idCliente, $idNutrizionista);
+        $stmt->execute();
+    }
 
     public function getNutrizionistaTable()
     {
@@ -234,5 +327,18 @@ VALUES (?,( SELECT codDiario
     public function getDiarioTable()
     {
         return $this->diarioTable;
+    }
+
+    public function getAlimentiTable()
+    {
+        return $this->alimentiTable;
+    }
+
+    public function getEserciziTable(){
+        return $this->eserciziTable;
+    }
+
+    public function getObiettiviTable(){
+        return $this->obiettiviTable;
     }
 }

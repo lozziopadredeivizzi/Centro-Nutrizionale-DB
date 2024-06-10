@@ -11,9 +11,7 @@ function addExerciseGroup() {
     newGroup.innerHTML = `
         <label for="exercise${newGroupId}">Nome Esercizio:</label>
         <select id="exercise${newGroupId}" name="exercise[]" required>
-            <option value="esercizio1">Esercizio 1</option>
-            <option value="esercizio2">Esercizio 2</option>
-            <option value="esercizio3">Esercizio 3</option>
+            ${exerciseOptions}
         </select>
 
         <label for="frequency${newGroupId}">Frequenza Settimanale:</label>
