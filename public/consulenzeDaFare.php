@@ -12,46 +12,26 @@
 </head>
 
 <body>
-    <?php include ("../template/header/headerNutrizionista.html") ?>
+    <?php include ("../template/header/headerNutrizionista.html");
+    require ("../consulenza.php"); ?>
     <main>
         <section>
             <h1>Consulenze da svolgere</h1>
-            <article>
-                <div class="result">
-                    <ul>
-                        <li>ID</li>
-                        <li>Nome Cognome cliente</li>
-                        <li>Data</li>
-                        <li>Ora</li>
-                        <li>Completa</li>
-                        <li><button class="btn">Compila Scheda</button></li>
-                    </ul>
-                </div>
-            </article>
-            <article>
-                <div class="result">
-                    <ul>
-                        <li>ID</li>
-                        <li>Nome Cognome cliente</li>
-                        <li>Data</li>
-                        <li>Ora</li>
-                        <li>Alimentare</li>
-                        <li><button class="btn">Compila Scheda</button></li>
-                    </ul>
-                </div>
-            </article>
-            <article>
-                <div class="result">
-                    <ul>
-                        <li>ID</li>
-                        <li>Nome Cognome cliente</li>
-                        <li>Data</li>
-                        <li>Ora</li>
-                        <li>Fisica</li>
-                        <li><button class="btn">Compila Scheda</button></li>
-                    </ul>
-                </div>
-            </article>
+            <?php foreach ($templateparams["daFare"] as $consulenza): ?>
+                <?php $cliente = $dbh->getClienteTable()->getClienteById($consulenza["IDCliente"]); ?>
+                <article>
+                    <div class="result">
+                        <ul>
+                            <li>ID: <?php echo $consulenza["IDCliente"] ?></li>
+                            <li><?php echo $cliente[0]["Nome"], " ", $cliente[0]["Cognome"] ?></li>
+                            <li><?php echo $consulenza["Giorno"] ?></li>
+                            <li><?php echo $consulenza["OraInizio"] ?></li>
+                            <li><?php echo $consulenza["Tipo"] ?></li>
+                            <li><button class="btn">Compila Scheda</button></li>
+                        </ul>
+                    </div>
+                </article>
+            <?php endforeach; ?>
         </section>
     </main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

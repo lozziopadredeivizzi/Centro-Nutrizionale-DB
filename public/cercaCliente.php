@@ -14,31 +14,33 @@
 
 <body>
   <?php include ("../template/header/headerNutrizionista.html");
-  require ("../cliente.php"); ?>
+  require ("../cliente.php");
+  require ("../search.php"); ?>
   <main>
-    <form action="">
+    <form action="" method="post">
       <h1>Filtra Risultati</h1>
       <div class="name">
-        <label for="name">Nome</label>
-        <input class="txt" type="text" id="name">
+        <label for="nome">Nome</label>
+        <input class="txt" type="text" id="name" name="nome">
       </div>
       <div class="surname">
-        <label for="surname">Cognome</label>
-        <input class="txt" type="text" id="surname">
+        <label for="cognome">Cognome</label>
+        <input class="txt" type="text" id="surname" name="cognome">
       </div>
       <div class="city">
         <label for="city">Città</label>
-        <input class="txt" type="text" id="city">
+        <input class="txt" type="text" id="city" name="city">
       </div>
       <button class="btn">Applica Filtri</button>
     </form>
     <?php foreach ($templateparams["ultimaScelta"] as $scelta):
       if ($scelta["E_L_ultima_scelta"] == "Sì"):
         $cliente = $dbh->getClienteTable()->getClienteById($scelta["IDCliente"]); ?>
-        <div onclick="window.location.href='profiloCliente.php'" class="result" data-id="<?php echo $cliente[0]["IDCliente"]; ?>">
+        <div onclick="window.location.href='profiloCliente.php'" class="result"
+          data-id="<?php echo $cliente[0]["IDCliente"]; ?>">
           <ul>
             <li>ID: <?php echo $cliente[0]["IDCliente"]; ?></li>
-            <li><?php echo $cliente[0]["Nome"], " ", $cliente[0]["Cognome"] ; ?></li>
+            <li><?php echo $cliente[0]["Nome"], " ", $cliente[0]["Cognome"]; ?></li>
             <li>Città: <?php echo $cliente[0]["Citta"]; ?></li>
           </ul>
         </div>

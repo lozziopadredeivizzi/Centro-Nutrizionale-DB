@@ -56,6 +56,14 @@ class ConsulenzaTable
     $result = $stmt->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);
   }
+
+  public function getConsulenzeDaFare($idNutrizionista){
+    $stmt = $this->db->prepare("SELECT * FROM consulenza WHERE IDNutrizionista=? AND Completa='n'");
+    $stmt->bind_param('i', $idNutrizionista);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
 }
 
 ?>

@@ -1,12 +1,15 @@
-<?php 
+<?php
 
-require_once("bootstrap.php");
+require_once ("bootstrap.php");
 
-if(isUserLoggedIn()){
+if (isUserLoggedIn()) {
     $templateparams["consulenza"] = $dbh->getConsulenzaTable()->getConsulenza($_SESSION["id"]);
     $templateparams["tipoConsulenza"] = $dbh->getConsulenzaTable()->getTypeConsulenza();
-}
-else{
+
+    if(isset($_SESSION["NSignedin"])){
+        $templateparams["daFare"] = $dbh->getConsulenzaTable()->getConsulenzeDaFare($_SESSION["id"]);
+    }
+} else {
     header("Location: login.php");
 }
 
