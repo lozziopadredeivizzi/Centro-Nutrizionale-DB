@@ -12,5 +12,7 @@ if (isUserLoggedIn()) {
     if (isset($_SESSION["NSignedin"])) {
         $templateparams["ultimaScelta"] = $dbh->getClienteTable()->checkIfYouAreLastChoice($_SESSION["id"]);
     }
+} else{
+    header("Location: login.php");
 }
 ?>

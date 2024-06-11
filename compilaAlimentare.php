@@ -25,9 +25,9 @@ if (isUserLoggedIn()) {
             $dbh->addAlimentoPrescritto($prescribedFood, $gramsAmount, $idCliente, $idNutrizionista, $mealName);
 
             // Gestione degli alimenti opzionali
-            if (isset($optionals[$index +1])) {
-                $optionalFoods = $optionals[$index+1];
-                $optionalGramsAmount = $optionalGrams[$index+1];
+            if (isset($optionals[$index + 1])) {
+                $optionalFoods = $optionals[$index + 1];
+                $optionalGramsAmount = $optionalGrams[$index + 1];
                 foreach ($optionalFoods as $optionalIndex => $optionalFood) {
                     $optionalFoodName = $optionalFood;
                     $optionalGramsAmount = $optionalGramsAmount[$optionalIndex];
@@ -39,14 +39,17 @@ if (isUserLoggedIn()) {
         }
 
         // Gestione dei consigli
-        $advices = $_POST['advice'];
+        if (!empty($_POST['advice'])) {
+            $advices = $_POST['advice'];
 
-        $dbh->addTabellaConsigli($idCliente, $idNutrizionista);
-        
-        foreach ($advices as $index => $advice) {
-            $adviceText = $advice;
-            $dbh->addConsiglio($adviceText, $idCliente, $idNutrizionista);
+            $dbh->addTabellaConsigli($idCliente, $idNutrizionista);
+
+            foreach ($advices as $index => $advice) {
+                $adviceText = $advice;
+                $dbh->addConsiglio($adviceText, $idCliente, $idNutrizionista);
+            }
         }
+
 
         $dbh->updateConsulenza($idCliente, $idNutrizionista);
         header("Location: public/homepageNutrizionista.php");

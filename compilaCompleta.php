@@ -53,13 +53,15 @@ if (isUserLoggedIn()) {
         }
 
         // Gestione dei consigli
-        $advices = $_POST['advice'];
+        if (!empty($_POST['advice'])) {
+            $advices = $_POST['advice'];
 
-        $dbh->addTabellaConsigli($idCliente, $idNutrizionista);
-        
-        foreach ($advices as $index => $advice) {
-            $adviceText = $advice;
-            $dbh->addConsiglio($adviceText, $idCliente, $idNutrizionista);
+            $dbh->addTabellaConsigli($idCliente, $idNutrizionista);
+
+            foreach ($advices as $index => $advice) {
+                $adviceText = $advice;
+                $dbh->addConsiglio($adviceText, $idCliente, $idNutrizionista);
+            }
         }
 
         $dbh->updateConsulenza($idCliente, $idNutrizionista);
