@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 02, 2024 alle 11:04
--- Versione del server: 10.4.28-MariaDB
--- Versione PHP: 8.2.4
+-- Creato il: Giu 11, 2024 alle 21:23
+-- Versione del server: 10.4.32-MariaDB
+-- Versione PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,6 +33,63 @@ CREATE TABLE `alimento` (
   `TipoAlimento` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dump dei dati per la tabella `alimento`
+--
+
+INSERT INTO `alimento` (`NomeAlimento`, `TipoAlimento`) VALUES
+('/', '/'),
+('Alici', 'Pesce'),
+('Ananas', 'Frutta'),
+('Asparagi', 'Verdura'),
+('Avena', 'Cereali'),
+('Avocado', 'Frutta'),
+('Banana', 'Frutta'),
+('Bistecca di Manzo', 'Carne'),
+('Broccoli', 'Verdura'),
+('Bulgur', 'Cereali'),
+('Burro di Arachidi', 'Frutta secca'),
+('Carota', 'Verdura'),
+('Cavolfiore', 'Verdura'),
+('Ceci', 'Legumi'),
+('Fagioli Neri', 'Legumi'),
+('Farina di Mandorle', 'Frutta secca'),
+('Fetta Biscottata', 'Cereali'),
+('Formaggio di Capra', 'Latticini'),
+('Funghi Shiitake', 'Verdura'),
+('Kale', 'Verdura'),
+('Latte', 'Latticini'),
+('Latte di Soia', 'Latticini'),
+('Lenticchie', 'Legumi'),
+('Mandorle', 'Frutta secca'),
+('Mela', 'Frutta'),
+('Miele', 'Dolci'),
+('Mirtilli', 'Frutta'),
+('Mozzarella', 'Latticini'),
+('Orzo', 'Cereali'),
+('Pane', 'Cereali'),
+('Pasta', 'Cereali'),
+('Pasta Integrale', 'Cereali'),
+('Patate', 'Verdura'),
+('Pollo', 'Carne'),
+('Pomodoro', 'Verdura'),
+('Prosciutto Crudo', 'Carne'),
+('Quinoa', 'Cereali'),
+('Ricotta', 'Latticini'),
+('Riso', 'Cereali'),
+('Salmone', 'Pesce'),
+('Salmone Affumicato', 'Pesce'),
+('Sardine', 'Pesce'),
+('Seitan', 'Proteine'),
+('Semi di Chia', 'Frutta secca'),
+('Spinaci', 'Verdura'),
+('Tempeh', 'Proteine'),
+('Tofu', 'Proteine'),
+('Uova', 'Proteine'),
+('Yogurt', 'Latticini'),
+('Yogurt Greco', 'Latticini'),
+('Zucchine', 'Verdura');
+
 -- --------------------------------------------------------
 
 --
@@ -48,6 +105,25 @@ CREATE TABLE `alimento_alternativo` (
   `QuantitaAlter` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dump dei dati per la tabella `alimento_alternativo`
+--
+
+INSERT INTO `alimento_alternativo` (`Pos_CodiceScheda`, `Pos_CodTabPasti`, `Pos_NomeAlimento`, `Pos_QuantitaPrescr`, `NomeAlimento`, `QuantitaAlter`) VALUES
+(1, 1, 'Ananas', 20, 'Mela', 1),
+(1, 1, 'Bistecca di Manzo', 1, 'Pollo', 30),
+(1, 1, 'Prosciutto Crudo', 20, 'Salmone Affumicato', 20),
+(1, 1, 'Spinaci', 30, 'Asparagi', 0),
+(1, 1, 'Spinaci', 30, 'Patate', 30),
+(1, 1, 'Yogurt Greco', 1, 'Banana', 0),
+(1, 1, 'Yogurt Greco', 1, 'Mandorle', 0),
+(4, 4, 'Bistecca di Manzo', 1, 'Pollo', 40),
+(4, 4, 'Fetta Biscottata', 3, 'Mandorle', 0),
+(4, 4, 'Fetta Biscottata', 3, 'Mela', 0),
+(4, 4, 'Salmone Affumicato', 50, 'Alici', 0),
+(4, 4, 'Salmone Affumicato', 50, 'Sardine', 30),
+(4, 4, 'Uova', 2, 'Banana', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -60,6 +136,26 @@ CREATE TABLE `alimento_prescritto` (
   `NomeAlimento` varchar(255) NOT NULL,
   `QuantitaPrescr` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `alimento_prescritto`
+--
+
+INSERT INTO `alimento_prescritto` (`CodiceScheda`, `CodTabPasti`, `NomeAlimento`, `QuantitaPrescr`) VALUES
+(1, 1, 'Ananas', 20),
+(1, 1, 'Bistecca di Manzo', 1),
+(1, 1, 'Latte', 0),
+(1, 1, 'Pasta Integrale', 40),
+(1, 1, 'Prosciutto Crudo', 20),
+(1, 1, 'Spinaci', 30),
+(1, 1, 'Yogurt Greco', 1),
+(4, 4, 'Bistecca di Manzo', 1),
+(4, 4, 'Burro di Arachidi', 0),
+(4, 4, 'Fetta Biscottata', 3),
+(4, 4, 'Pasta', 100),
+(4, 4, 'Riso', 100),
+(4, 4, 'Salmone Affumicato', 50),
+(4, 4, 'Uova', 2);
 
 -- --------------------------------------------------------
 
@@ -74,6 +170,26 @@ CREATE TABLE `appartiene` (
   `QuantitaPrescr` int(11) NOT NULL,
   `NomePasto` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `appartiene`
+--
+
+INSERT INTO `appartiene` (`CodiceScheda`, `CodTabPasti`, `NomeAlimento`, `QuantitaPrescr`, `NomePasto`) VALUES
+(1, 1, 'Bistecca di Manzo', 1, 'Cena'),
+(1, 1, 'Spinaci', 30, 'Cena'),
+(4, 4, 'Riso', 100, 'Cena'),
+(4, 4, 'Salmone Affumicato', 50, 'Cena'),
+(1, 1, 'Ananas', 20, 'Colazione'),
+(1, 1, 'Latte', 0, 'Colazione'),
+(4, 4, 'Burro di Arachidi', 0, 'Colazione'),
+(4, 4, 'Uova', 2, 'Colazione'),
+(1, 1, 'Yogurt Greco', 1, 'Merenda'),
+(4, 4, 'Fetta Biscottata', 3, 'Merenda'),
+(1, 1, 'Pasta Integrale', 40, 'Pranzo'),
+(1, 1, 'Prosciutto Crudo', 20, 'Pranzo'),
+(4, 4, 'Bistecca di Manzo', 1, 'Pranzo'),
+(4, 4, 'Pasta', 100, 'Pranzo');
 
 -- --------------------------------------------------------
 
@@ -96,7 +212,9 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`CAP`, `Citta`, `Nome`, `Cognome`, `Email`, `Password`, `IDCliente`) VALUES
-(47869, 'Sassofeltrio', 'Lorenzo', 'Tordi', 'lorenzotordi9@gmail.com', 'dio', 1);
+(47869, 'Sassofeltrio', 'Lorenzo', 'Tordi', 'lorenzotordi9@gmail.com', 'dio', 1),
+(20097, 'Milano', 'Hamza', 'Manouar', 'hamzamenu@gmail.com', 'hamza1', 2),
+(80122, 'Napoli', 'Beatrice', 'di Gregorio', 'bea@gmail.com', 'beatrice1', 3);
 
 -- --------------------------------------------------------
 
@@ -109,6 +227,13 @@ CREATE TABLE `consiglio` (
   `CodTabCons` int(11) NOT NULL,
   `Descrizione` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `consiglio`
+--
+
+INSERT INTO `consiglio` (`CodiceScheda`, `CodTabCons`, `Descrizione`) VALUES
+(1, 1, 'per il nuoto vedi tu le vasche da fare, l\'importante è incrementare la resistenza e allenare la forza');
 
 -- --------------------------------------------------------
 
@@ -129,6 +254,16 @@ CREATE TABLE `consulenza` (
   `Tipo` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dump dei dati per la tabella `consulenza`
+--
+
+INSERT INTO `consulenza` (`IDNutrizionista`, `IDCliente`, `OraInizio`, `Giorno`, `CodiceScheda`, `OraFine`, `Completa`, `Presenza`, `Online`, `Tipo`) VALUES
+(2, 1, '15:00:00', '2024-06-06', 1, '16:00:00', 's', '1', '0', 'Completa'),
+(2, 1, '19:30:00', '2024-06-11', 5, '20:30:00', 's', '1', '0', 'Fisica'),
+(8, 2, '16:00:00', '2024-06-12', 3, '17:00:00', 's', '1', '0', 'Fisica'),
+(2, 3, '10:00:00', '2024-06-18', 4, '11:00:00', 's', '1', '0', 'Alimentare');
+
 -- --------------------------------------------------------
 
 --
@@ -143,6 +278,19 @@ CREATE TABLE `diario` (
   `IDNutrizionista` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dump dei dati per la tabella `diario`
+--
+
+INSERT INTO `diario` (`IDCliente`, `Data`, `Ora`, `CodDiario`, `IDNutrizionista`) VALUES
+(1, '2024-06-05', '23:01:05', 0, 2),
+(2, '2024-06-05', '23:47:09', 1, 2),
+(2, '2024-06-06', '11:37:42', 3, 2),
+(3, '2024-06-08', '00:14:53', 6, 2),
+(3, '2024-06-08', '00:14:43', 5, 7),
+(2, '2024-06-06', '11:36:14', 2, 8),
+(2, '2024-06-06', '11:38:03', 4, 8);
+
 -- --------------------------------------------------------
 
 --
@@ -153,6 +301,37 @@ CREATE TABLE `esercizio` (
   `NomeEsercizio` varchar(50) NOT NULL,
   `Descrizione` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `esercizio`
+--
+
+INSERT INTO `esercizio` (`NomeEsercizio`, `Descrizione`) VALUES
+('Bench Press', 'Un esercizio con pesi per il petto, tricipiti e spalle, eseguito su una panca.'),
+('Bicep Curl', 'Un esercizio specifico per i bicipiti, eseguito con manubri o bilanciere.'),
+('Burpee', 'Un esercizio a corpo libero che coinvolge tutto il corpo, migliorando forza e resistenza.'),
+('Camminata', 'Un esercizio a basso impatto che aiuta a migliorare la salute cardiovascolare e la forma fisica generale.'),
+('Ciclismo', 'Un esercizio aerobico che lavora su gambe e resistenza, eseguito su una bicicletta.'),
+('Corsa Leggera', 'Un esercizio cardiovascolare moderato che migliora la resistenza e la salute del cuore.'),
+('Crunch', 'Un esercizio per gli addominali che coinvolge principalmente il retto addominale.'),
+('Deadlift', 'Un esercizio di sollevamento pesi che lavora su schiena, glutei e muscoli posteriori della coscia.'),
+('Ellittica', 'Un esercizio a basso impatto che simula la camminata o la corsa, ideale per migliorare la resistenza cardiovascolare senza stressare le articolazioni.'),
+('Hiking', 'Un esercizio all’aperto che coinvolge camminare su terreni naturali, migliorando resistenza e forza delle gambe.'),
+('Leg Press', 'Un esercizio per le gambe che utilizza una macchina, lavorando su quadricipiti, glutei e muscoli posteriori della coscia.'),
+('Leg Raise', 'Un esercizio per il core che rafforza gli addominali inferiori.'),
+('Lunges', 'Un esercizio che rafforza gambe e glutei, migliorando equilibrio e stabilità.'),
+('Nuoto', 'Un esercizio completo che coinvolge tutti i principali gruppi muscolari, migliorando forza e resistenza.'),
+('Pilates', 'Un sistema di esercizi che migliora la forza del core, la flessibilità e la postura attraverso movimenti controllati e precisi.'),
+('Plank', 'Un esercizio per il core che rafforza gli addominali e la parte bassa della schiena.'),
+('Pull-Up', 'Un esercizio di trazione che rafforza la schiena, le spalle e i bicipiti.'),
+('Push-Up', 'Un esercizio di base per la parte superiore del corpo che coinvolge petto, spalle e tricipiti.'),
+('Russian Twist', 'Un esercizio per gli addominali obliqui, eseguito ruotando il busto da un lato all\'altro.'),
+('Salto con la Corda', 'Un esercizio cardiovascolare ad alta intensità che migliora la coordinazione e la resistenza.'),
+('Shoulder Press', 'Un esercizio per le spalle, eseguito con manubri o bilanciere.'),
+('Squat', 'Un esercizio fondamentale per le gambe che lavora quadricipiti, glutei e muscoli posteriori della coscia.'),
+('Step Aerobics', 'Un esercizio cardiovascolare che coinvolge salire e scendere da uno step, migliorando resistenza e forza delle gambe.'),
+('Tricep Dip', 'Un esercizio per i tricipiti eseguito su una panca o parallele.'),
+('Yoga', 'Una pratica che combina posture fisiche, respirazione e meditazione per migliorare la flessibilità, la forza e il benessere mentale.');
 
 -- --------------------------------------------------------
 
@@ -168,6 +347,21 @@ CREATE TABLE `esercizio_in_tabella` (
   `Durata` varchar(100) NOT NULL,
   `NomeEsercizio` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `esercizio_in_tabella`
+--
+
+INSERT INTO `esercizio_in_tabella` (`CodiceScheda`, `CodTabAll`, `Posizione`, `FrequenzaSettimanale`, `Durata`, `NomeEsercizio`) VALUES
+(1, 1, 0, '3', '/', 'Nuoto'),
+(1, 1, 1, '2', '1 ora e mezza', 'Corsa Leggera'),
+(3, 3, 0, '6', '20 ripetizioni per 4 serie', 'Push-Up'),
+(3, 3, 1, '6', '10 ripetizioni per 4 serie', 'Bench Press'),
+(3, 3, 2, '6', '30 secondi per 4 serie', 'Plank'),
+(3, 3, 3, '6', '20 ripetizioni per 4 serie', 'Squat'),
+(5, 5, 0, '3', '2 ore', 'Ciclismo'),
+(5, 5, 1, '3', '3 ore', 'Corsa Leggera'),
+(5, 5, 2, '3', '2 ore', 'Nuoto');
 
 -- --------------------------------------------------------
 
@@ -245,8 +439,18 @@ CREATE TABLE `note` (
   `Nota` varchar(255) NOT NULL,
   `OrarioNota` varchar(10) NOT NULL,
   `OggettoNota` varchar(100) NOT NULL,
-  `IdNota` int(11) NOT NULL
+  `IdNota` int(11) NOT NULL,
+  `DataNota` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `note`
+--
+
+INSERT INTO `note` (`IDCliente`, `Data`, `Ora`, `CodDiario`, `Nota`, `OrarioNota`, `OggettoNota`, `IdNota`, `DataNota`) VALUES
+(1, '2024-06-05', '23:01:05', 0, 'Ho mangiato al mc oggi', '12:13:52', 'Pranzo', 0, '2024-06-07'),
+(2, '2024-06-06', '11:38:03', 4, 'Farò ritardo di 5 minuti', '19:09:20', 'Consulenza', 1, '2024-06-07'),
+(3, '2024-06-08', '00:14:53', 6, 'Farò ritardo di 5 minuti', '15:06:11', 'Consulenza', 2, '2024-06-10');
 
 -- --------------------------------------------------------
 
@@ -268,13 +472,13 @@ CREATE TABLE `nutrizionista` (
 --
 
 INSERT INTO `nutrizionista` (`Nome`, `Cognome`, `Email`, `IDNutrizionista`, `Password`, `MediaVoti`) VALUES
-('Erica', 'Bennardo', 'ericabennardo@gmail.com', 2, 'erica1', 0),
+('Erica', 'Bennardo', 'ericabennardo@gmail.com', 2, 'erica1', 5),
 ('Alessandra', 'Rossi', 'alessandra.rossi@example.com', 3, 'alessandra1', 0),
 ('Marco', 'Bianchi', 'marco.bianchi@example.com', 4, 'marco1', 0),
 ('Laura', 'Verdi', 'laura.verdi@example.com', 5, 'laura1', 0),
 ('Giovanni', 'Neri', 'giovanni.neri@example.com', 6, 'giovanni1', 0),
 ('Chiara', 'Ferrari', 'chiara.ferrari@example.com', 7, 'chiara1', 0),
-('Luca', 'Esposito', 'luca.esposito@example.com', 8, 'luca1', 0),
+('Luca', 'Esposito', 'luca.esposito@example.com', 8, 'luca1', 4),
 ('Francesca', 'Conti', 'francesca.conti@example.com', 9, 'francesca1', 0),
 ('Matteo', 'Ricci', 'matteo.ricci@example.com', 10, 'matteo1', 0),
 ('Elena', 'Colombo', 'elena.colombo@example.com', 11, 'elena1', 0),
@@ -291,6 +495,21 @@ CREATE TABLE `obiettivo` (
   `CodiceObiettivo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dump dei dati per la tabella `obiettivo`
+--
+
+INSERT INTO `obiettivo` (`Descrizione`, `CodiceObiettivo`) VALUES
+('Perdita di Peso', 1),
+('Aumento della Massa Muscolare', 2),
+('Miglioramento della Composizione Corporea', 3),
+('Gestione delle Intolleranze Alimentari', 4),
+('Aumento dell\'Energia e della Vitalità', 5),
+('Controllo del Diabete o dell\'Ipertensione', 6),
+('Miglioramento delle Prestazioni Sportive', 7),
+('Promozione di uno Stile di Vita Salutare', 8),
+('Obiettivo da definire', 9);
+
 -- --------------------------------------------------------
 
 --
@@ -300,6 +519,17 @@ CREATE TABLE `obiettivo` (
 CREATE TABLE `pasto` (
   `NomePasto` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `pasto`
+--
+
+INSERT INTO `pasto` (`NomePasto`) VALUES
+('Cena'),
+('Colazione'),
+('Merenda'),
+('Pranzo'),
+('Spuntino');
 
 -- --------------------------------------------------------
 
@@ -373,6 +603,14 @@ CREATE TABLE `recensione` (
   `Commento` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dump dei dati per la tabella `recensione`
+--
+
+INSERT INTO `recensione` (`IDCliente`, `IDNutrizionista`, `Voto`, `Commento`) VALUES
+(1, 2, 5, 'competente sempre puntuale nelle richieste'),
+(2, 8, 4, 'Mi sto trovando molto bene');
+
 -- --------------------------------------------------------
 
 --
@@ -385,6 +623,19 @@ CREATE TABLE `scelta` (
   `Ora` varchar(10) NOT NULL,
   `IDNutrizionista` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `scelta`
+--
+
+INSERT INTO `scelta` (`IDCliente`, `Data`, `Ora`, `IDNutrizionista`) VALUES
+(1, '2024-06-05', '23:01:05', 2),
+(2, '2024-06-05', '23:47:09', 2),
+(2, '2024-06-06', '11:37:42', 2),
+(3, '2024-06-08', '00:14:53', 2),
+(3, '2024-06-08', '00:14:43', 7),
+(2, '2024-06-06', '11:36:14', 8),
+(2, '2024-06-06', '11:38:03', 8);
 
 -- --------------------------------------------------------
 
@@ -400,6 +651,16 @@ CREATE TABLE `scheda` (
   `CodiceObiettivo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dump dei dati per la tabella `scheda`
+--
+
+INSERT INTO `scheda` (`CodiceScheda`, `dataInizioValidita`, `Durata`, `IDCliente`, `CodiceObiettivo`) VALUES
+(1, '2024-06-06', 4, 1, 1),
+(3, '2024-06-12', 2, 2, 3),
+(4, '2024-06-18', 4, 3, 2),
+(5, '2024-06-11', 4, 1, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -410,6 +671,15 @@ CREATE TABLE `tabella_allenamento` (
   `CodiceScheda` int(11) NOT NULL,
   `CodTabAll` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `tabella_allenamento`
+--
+
+INSERT INTO `tabella_allenamento` (`CodiceScheda`, `CodTabAll`) VALUES
+(1, 1),
+(3, 3),
+(5, 5);
 
 -- --------------------------------------------------------
 
@@ -422,6 +692,13 @@ CREATE TABLE `tabella_consiglo` (
   `CodTabCons` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dump dei dati per la tabella `tabella_consiglo`
+--
+
+INSERT INTO `tabella_consiglo` (`CodiceScheda`, `CodTabCons`) VALUES
+(1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -433,6 +710,14 @@ CREATE TABLE `tabella_pasto` (
   `CodTabPasti` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dump dei dati per la tabella `tabella_pasto`
+--
+
+INSERT INTO `tabella_pasto` (`CodiceScheda`, `CodTabPasti`) VALUES
+(1, 1),
+(4, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -443,6 +728,15 @@ CREATE TABLE `tipo_consulenza` (
   `Tariffa` int(11) NOT NULL,
   `Tipo` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `tipo_consulenza`
+--
+
+INSERT INTO `tipo_consulenza` (`Tariffa`, `Tipo`) VALUES
+(35, 'Alimentare'),
+(50, 'Completa'),
+(40, 'Fisica');
 
 --
 -- Indici per le tabelle scaricate
@@ -649,7 +943,7 @@ ALTER TABLE `tipo_consulenza`
 -- AUTO_INCREMENT per la tabella `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `IDCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `IDCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT per la tabella `nutrizionista`
@@ -661,13 +955,13 @@ ALTER TABLE `nutrizionista`
 -- AUTO_INCREMENT per la tabella `obiettivo`
 --
 ALTER TABLE `obiettivo`
-  MODIFY `CodiceObiettivo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `CodiceObiettivo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT per la tabella `scheda`
 --
 ALTER TABLE `scheda`
-  MODIFY `CodiceScheda` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `CodiceScheda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Limiti per le tabelle scaricate
