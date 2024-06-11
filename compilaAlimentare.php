@@ -38,20 +38,6 @@ if (isUserLoggedIn()) {
             }
         }
 
-        // Gestione degli esercizi
-        $exercises = $_POST['exercise'];
-        $frequencies = $_POST['frequency'];
-        $durations = $_POST['duration'];
-
-        $dbh->addTabellaAllenamento($idCliente, $idNutrizionista);
-
-        foreach ($exercises as $index => $exercise) {
-            $exerciseName = $exercise;
-            $frequency = $frequencies[$index];
-            $duration = $durations[$index];
-            $dbh->addExercice($idCliente, $idNutrizionista, $frequency, $duration, $exerciseName);
-        }
-
         // Gestione dei consigli
         $advices = $_POST['advice'];
 

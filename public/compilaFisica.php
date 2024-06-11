@@ -15,7 +15,7 @@
     require("../obiettivi.php"); ?>
     <main>
         <section>
-            <form id="dynamic-form" action="#" method="post">
+            <form id="dynamic-form" action="../compilaFisica.php" method="post">
             <label for="obiettivo">Obiettivo:</label>
                 <select name="obiettivo" id="obiettivo">
                     <?php foreach($templateparams["obiettivi"] as $obiettivo): ?>
@@ -48,7 +48,7 @@
 
                 <div class="advice-group" data-group-id="1">
                     <label for="advice1">Consiglio 1:</label>
-                    <textarea id="advice1" name="advice[]" required></textarea>
+                    <textarea id="advice1" name="advice[]"></textarea>
                     <button type="button" class="add-advice">Aggiungi Consiglio</button>
                 </div>
 

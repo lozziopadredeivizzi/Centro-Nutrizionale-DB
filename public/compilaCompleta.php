@@ -88,7 +88,7 @@
 
                 <div class="advice-group" data-group-id="1">
                     <label for="advice1">Consiglio 1:</label>
-                    <textarea id="advice1" name="advice[]" required></textarea>
+                    <textarea id="advice1" name="advice[]"></textarea>
                     <button type="button" class="add-advice">Aggiungi Consiglio</button>
                 </div>
 

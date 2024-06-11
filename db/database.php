@@ -239,7 +239,7 @@ VALUES (?,( SELECT codDiario
     }
 
     public function addTabellaConsigli($idCliente, $idNutrizionista){
-        $stmt = $this->db->prepare("INSERT INTO tabella_consiglio (CodiceScheda, CodTabCons) 
+        $stmt = $this->db->prepare("INSERT INTO tabella_consiglo (CodiceScheda, CodTabCons) 
                                     SELECT c.CodiceScheda, c.CodiceScheda  
                                     FROM consulenza c 
                                     WHERE c.IDCliente = ? AND Completa='n' AND c.IDNutrizionista = ?;");
@@ -287,6 +287,15 @@ VALUES (?,( SELECT codDiario
                                     FROM consulenza c 
                                     WHERE c.IDCliente = ? AND Completa='n' AND c.IDNutrizionista = ? ");
         $stmt->bind_param('iissii', $posizione, $frequenza, $durata, $nomeEsercizio, $idCliente, $idNutrizionista);
+        $stmt->execute();
+    }
+
+    public function addConsiglio($testo, $idCliente, $idNutrizionista){
+        $stmt = $this->db->prepare("INSERT INTO consiglio(CodiceScheda, CodTabCons, Descrizione)
+                                    SELECT c.CodiceScheda, c.CodiceScheda, ? 
+                                    FROM consulenza c 
+                                    WHERE c.IDCliente = ? AND Completa='n' AND c.IDNutrizionista = ?");
+        $stmt->bind_param('sii', $testo, $idCliente, $idNutrizionista);
         $stmt->execute();
     }
 
