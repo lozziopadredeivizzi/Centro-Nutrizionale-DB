@@ -70,6 +70,32 @@ class SchedaTable
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getStoricoSchede($idCliente)
+    {
+        $stmt = $this->db->prepare("SELECT s.Durata, s.DataInizioValidita, o.Descrizione AS Obiettivo, c.Tipo, s.CodiceScheda 
+                                    FROM scheda s
+                                    JOIN obiettivo o ON s.CodiceObiettivo = o.CodiceObiettivo
+                                    LEFT JOIN consulenza c ON s.CodiceScheda = c.CodiceScheda 
+                                    WHERE s.IDCliente=?
+                                    ORDER BY s.DataInizioValidita DESC");
+        $stmt->bind_param('i', $idCliente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getSchedaByCod($codScheda)
+    {
+        $stmt = $this->db->prepare("SELECT s.CodiceScheda, s.DataInizioValidita, s.Durata, o.Descrizione AS Obiettivo 
+                                    FROM scheda s 
+                                    JOIN obiettivo o ON s.CodiceObiettivo = o.CodiceObiettivo
+                                    WHERE s.CodiceScheda = ?");
+        $stmt->bind_param('i', $codScheda);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
 
 ?>

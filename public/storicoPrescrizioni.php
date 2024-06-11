@@ -10,42 +10,26 @@
 </head>
 
 <body>
-    <?php include ("../template/header/headerCliente.html") ?>
+    <?php include ("../template/header/headerCliente.html");
+    require("../storicoSchede.php"); ?>
     <main>
         <section>
             <h1>Storico Prescrizioni</h1>
-            <article>
-                <p>Data Emissione: dd/mm/yyyy</p>
+            <?php foreach($templateparams["storico"] as $scheda): ?>
+            <article data-codScheda="<?php echo $scheda["CodiceScheda"] ?>" class="schede">
+                <p>Data Emissione: <?php echo $scheda["DataInizioValidita"]; ?></p>
                 <div onclick="window.location.href='vecchiaPrescrizione.php'" class="result">
                     <ul>
-                        <li>Obiettivo</li>
-                        <li>Tipologia</li>
-                        <li>Durata</li>
+                        <li><?php echo $scheda["Obiettivo"]; ?></li>
+                        <li><?php echo $scheda["Tipo"]; ?></li>
+                        <li>Durata: <?php echo $scheda["Durata"]; ?></li>
                     </ul>
                 </div>
             </article>
-            <article>
-                <p>Data Emissione: dd/mm/yyyy</p>
-                <div onclick="window.location.href='vecchiaPrescrizione.php'" class="result">
-                    <ul>
-                        <li>Obiettivo</li>
-                        <li>Tipologia</li>
-                        <li>Durata</li>
-                    </ul>
-                </div>
-            </article>
-            <article>
-                <p>Data Emissione: dd/mm/yyyy</p>
-                <div onclick="window.location.href='vecchiaPrescrizione.php'" class="result">
-                    <ul>
-                        <li>Obiettivo</li>
-                        <li>Tipologia</li>
-                        <li>Durata</li>
-                    </ul>
-                </div>
-            </article>
+            <?php endforeach; ?>
         </section>
     </main>
+    <script src="../js/viewSchedaVecchia.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/exit.js" type="text/javascript"></script>
 </body>

@@ -10,197 +10,81 @@
 </head>
 
 <body>
-    <?php include ("../template/header/headerCliente.html") ?>
+    <?php include ("../template/header/headerCliente.html");
+    require("../schedaVecchia.php") ?>
     <div>
         <h2>Obiettivo</h2>
-        <p>Dimagrire/Mettere su massa muscolare/ecc</p>
+        <p><?php echo $templateparams["scheda"][0]["Obiettivo"]; ?></p>
         <h2>Durata</h2>
-        <p>X settimane</p>
+        <p><?php echo $templateparams["scheda"][0]["Durata"]; ?> Settimane</p>
 
+        <?php if(!empty($templateparams["tabAlimenti"])): ?>
         <h2>Piano Pasti</h2>
         <table border="1">
             <thead>
                 <tr>
                     <th>Pasto</th>
-                    <th>Quantità (gr.)</th>
+                    <th>Quantità (gr. o porzioni)</th>
                     <th>Alimento</th>
                     <th>Opzione</th>
+                    <th>Quantità (gr. o porzioni)</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Colazione</td>
-                    <td>100</td>
-                    <td>Alimento 1</td>
-                    <td>Alimento 1a, Alimento 1b</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>150</td>
-                    <td>Alimento 2</td>
-                    <td>Alimento 2a, Alimento 2b</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>80</td>
-                    <td>Alimento 3</td>
-                    <td>Alimento 3a, Alimento 3b</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>70</td>
-                    <td>Alimento 4</td>
-                    <td>Alimento 4a, Alimento 4b</td>
-                </tr>
-                <tr>
-                    <TD>Merenda</TD>
-                    <td>100</td>
-                    <td>Alimento 1</td>
-                    <td>Alimento 1a, Alimento 1b</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>150</td>
-                    <td>Alimento 2</td>
-                    <td>Alimento 2a, Alimento 2b</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>80</td>
-                    <td>Alimento 3</td>
-                    <td>Alimento 3a, Alimento 3b</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>70</td>
-                    <td>Alimento 4</td>
-                    <td>Alimento 4a, Alimento 4b</td>
-                </tr>
-                <tr>
-                    <td>Pranzo</td>
-                    <td>100</td>
-                    <td>Alimento 1</td>
-                    <td>Alimento 1a, Alimento 1b</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>150</td>
-                    <td>Alimento 2</td>
-                    <td>Alimento 2a, Alimento 2b</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>80</td>
-                    <td>Alimento 3</td>
-                    <td>Alimento 3a, Alimento 3b</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>70</td>
-                    <td>Alimento 4</td>
-                    <td>Alimento 4a, Alimento 4b</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>170</td>
-                    <td>Alimento 5</td>
-                    <td>Alimento 5a, Alimento 5b</td>
-                </tr>
-                <tr>
-                    <td>Merenda</td>
-                    <td>100</td>
-                    <td>Alimento 1</td>
-                    <td>Alimento 1a, Alimento 1b</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>150</td>
-                    <td>Alimento 2</td>
-                    <td>Alimento 2a, Alimento 2b</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>80</td>
-                    <td>Alimento 3</td>
-                    <td>Alimento 3a, Alimento 3b</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>70</td>
-                    <td>Alimento 4</td>
-                    <td>Alimento 4a, Alimento 4b</td>
-                </tr>
-                <tr>
-                    <td>Cena</td>
-                    <td>100</td>
-                    <td>Alimento 1</td>
-                    <td>Alimento 1a, Alimento 1b</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>150</td>
-                    <td>Alimento 2</td>
-                    <td>Alimento 2a, Alimento 2b</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>80</td>
-                    <td>Alimento 3</td>
-                    <td>Alimento 3a, Alimento 3b</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>70</td>
-                    <td>Alimento 4</td>
-                    <td>Alimento 4a, Alimento 4b</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>170</td>
-                    <td>Alimento 5</td>
-                    <td>Alimento 5a, Alimento 5b</td>
-                </tr>
+                <?php foreach ($templateparams["tabAlimenti"] as $alimento): ?>
+                    <tr>
+                        <td><?php echo $alimento["NomePasto"] ?></td>
+                        <td><?php if ($alimento["QuantitaPrescr"] !== 0) {
+                            echo $alimento["QuantitaPrescr"];
+                        } else {
+                            echo "/";
+                        } ?>
+                        </td>
+                        <td><?php echo $alimento["NomeAlimento"] ?></td>
+                        <td><?php echo $alimento["NomeAlimentoAlter"] ?></td>
+                        <td><?php if ($alimento["QuantitaAlter"] !== 0) {
+                            echo $alimento["QuantitaAlter"];
+                        } else {
+                            echo "/";
+                        } ?></td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
-
+        <?php endif; ?>
+        
+        <?php if(!empty($templateparams["tabEsercizi"])): ?>
         <h2>Piano Allenamento</h2>
         <table border="1">
             <thead>
                 <tr>
                     <th>Esercizio</th>
-                    <th>Durata (min.)</th>
+                    <th>Durata (min. o ripetizioni)</th>
                     <th>Frequenza (settimanale)</th>
                     <th>Descrizione</th>
                 </tr>
             </thead>
             <tbody>
+                <?php foreach($templateparams["tabEsercizi"] as $esercizio): ?>
                 <tr>
-                    <td>Camminata Veloce</td>
-                    <td>40</td>
-                    <td>2</td>
-                    <td></td>
+                    <td><?php echo $esercizio["NomeEsercizio"] ?></td>
+                    <td><?php echo $esercizio["Durata"] ?></td>
+                    <td><?php echo $esercizio["FrequenzaSettimanale"] ?></td>
+                    <td><?php echo $esercizio["Descrizione"] ?></td>
                 </tr>
-                <tr>
-                    <td>Corsa Leggera</td>
-                    <td>30</td>
-                    <td>2</td>
-                    <td>Fare 10 min di riscaldamento prima di correre</td>
-                </tr>
-                <tr>
-                    <td>Allenamento Funzionale</td>
-                    <td>60</td>
-                    <td>2</td>
-                    <td>Fare riscaldamento prima di allenarsi; include squat, addominali, flessioni e affondi</td>
-                </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
+        <?php endif; ?>
 
+        <?php if(!empty($templateparams["tabConsigli"])): ?>
         <h2>Note/Consigli</h2>
         <ul>
-            <li>Nella programmazione dei pasti, alternare gli alimenti con le corrispettive opzioni</li>
-            <li>Fare riscaldamento prima di iniziare ad allenarsi e fare stretching dopo essersi allenati</li>
-            <li>Prendere nota dei pasti e degli allenamenti nel diario</li>
+            <?php foreach($templateparams["tabConsigli"] as $consiglio): ?>
+            <li><?php echo $consiglio["Descrizione"]; ?></li>
+            <?php endforeach; ?>
         </ul>
+        <?php endif; ?>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/exit.js" type="text/javascript"></script>

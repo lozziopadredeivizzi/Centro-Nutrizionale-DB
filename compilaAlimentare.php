@@ -42,11 +42,15 @@ if (isUserLoggedIn()) {
         if (!empty($_POST['advice'])) {
             $advices = $_POST['advice'];
 
-            $dbh->addTabellaConsigli($idCliente, $idNutrizionista);
+            if (trim($advices[0]) !== "") {
+                $dbh->addTabellaConsigli($idCliente, $idNutrizionista);
+            }
 
             foreach ($advices as $index => $advice) {
                 $adviceText = $advice;
-                $dbh->addConsiglio($adviceText, $idCliente, $idNutrizionista);
+                if ($adviceText !== "") {
+                    $dbh->addConsiglio($adviceText, $idCliente, $idNutrizionista);
+                }
             }
         }
 
