@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 11, 2024 alle 21:23
+-- Creato il: Giu 13, 2024 alle 11:58
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -155,7 +155,11 @@ INSERT INTO `alimento_prescritto` (`CodiceScheda`, `CodTabPasti`, `NomeAlimento`
 (4, 4, 'Pasta', 100),
 (4, 4, 'Riso', 100),
 (4, 4, 'Salmone Affumicato', 50),
-(4, 4, 'Uova', 2);
+(4, 4, 'Uova', 2),
+(6, 6, 'Ananas', 0),
+(6, 6, 'Banana', 0),
+(6, 6, 'Burro di Arachidi', 0),
+(6, 6, 'Fetta Biscottata', 0);
 
 -- --------------------------------------------------------
 
@@ -184,6 +188,10 @@ INSERT INTO `appartiene` (`CodiceScheda`, `CodTabPasti`, `NomeAlimento`, `Quanti
 (1, 1, 'Latte', 0, 'Colazione'),
 (4, 4, 'Burro di Arachidi', 0, 'Colazione'),
 (4, 4, 'Uova', 2, 'Colazione'),
+(6, 6, 'Ananas', 0, 'Colazione'),
+(6, 6, 'Banana', 0, 'Colazione'),
+(6, 6, 'Burro di Arachidi', 0, 'Colazione'),
+(6, 6, 'Fetta Biscottata', 0, 'Colazione'),
 (1, 1, 'Yogurt Greco', 1, 'Merenda'),
 (4, 4, 'Fetta Biscottata', 3, 'Merenda'),
 (1, 1, 'Pasta Integrale', 40, 'Pranzo'),
@@ -260,6 +268,7 @@ CREATE TABLE `consulenza` (
 
 INSERT INTO `consulenza` (`IDNutrizionista`, `IDCliente`, `OraInizio`, `Giorno`, `CodiceScheda`, `OraFine`, `Completa`, `Presenza`, `Online`, `Tipo`) VALUES
 (2, 1, '15:00:00', '2024-06-06', 1, '16:00:00', 's', '1', '0', 'Completa'),
+(2, 1, '15:00:00', '2024-06-12', 6, '16:00:00', 's', '1', '0', 'Alimentare'),
 (2, 1, '19:30:00', '2024-06-11', 5, '20:30:00', 's', '1', '0', 'Fisica'),
 (8, 2, '16:00:00', '2024-06-12', 3, '17:00:00', 's', '1', '0', 'Fisica'),
 (2, 3, '10:00:00', '2024-06-18', 4, '11:00:00', 's', '1', '0', 'Alimentare');
@@ -284,12 +293,16 @@ CREATE TABLE `diario` (
 
 INSERT INTO `diario` (`IDCliente`, `Data`, `Ora`, `CodDiario`, `IDNutrizionista`) VALUES
 (1, '2024-06-05', '23:01:05', 0, 2),
+(1, '2024-06-12', '14:17:02', 8, 2),
 (2, '2024-06-05', '23:47:09', 1, 2),
 (2, '2024-06-06', '11:37:42', 3, 2),
+(2, '2024-06-12', '16:09:47', 9, 2),
 (3, '2024-06-08', '00:14:53', 6, 2),
 (3, '2024-06-08', '00:14:43', 5, 7),
 (2, '2024-06-06', '11:36:14', 2, 8),
-(2, '2024-06-06', '11:38:03', 4, 8);
+(2, '2024-06-06', '11:38:03', 4, 8),
+(2, '2024-06-12', '16:10:50', 10, 8),
+(1, '2024-06-12', '14:16:54', 7, 9);
 
 -- --------------------------------------------------------
 
@@ -449,6 +462,7 @@ CREATE TABLE `note` (
 
 INSERT INTO `note` (`IDCliente`, `Data`, `Ora`, `CodDiario`, `Nota`, `OrarioNota`, `OggettoNota`, `IdNota`, `DataNota`) VALUES
 (1, '2024-06-05', '23:01:05', 0, 'Ho mangiato al mc oggi', '12:13:52', 'Pranzo', 0, '2024-06-07'),
+(1, '2024-06-12', '14:17:02', 8, 'Ho mangiato al mc oggi', '14:18:09', 'Pranzo', 3, '2024-06-12'),
 (2, '2024-06-06', '11:38:03', 4, 'Farò ritardo di 5 minuti', '19:09:20', 'Consulenza', 1, '2024-06-07'),
 (3, '2024-06-08', '00:14:53', 6, 'Farò ritardo di 5 minuti', '15:06:11', 'Consulenza', 2, '2024-06-10');
 
@@ -630,12 +644,16 @@ CREATE TABLE `scelta` (
 
 INSERT INTO `scelta` (`IDCliente`, `Data`, `Ora`, `IDNutrizionista`) VALUES
 (1, '2024-06-05', '23:01:05', 2),
+(1, '2024-06-12', '14:17:02', 2),
 (2, '2024-06-05', '23:47:09', 2),
 (2, '2024-06-06', '11:37:42', 2),
+(2, '2024-06-12', '16:09:47', 2),
 (3, '2024-06-08', '00:14:53', 2),
 (3, '2024-06-08', '00:14:43', 7),
 (2, '2024-06-06', '11:36:14', 8),
-(2, '2024-06-06', '11:38:03', 8);
+(2, '2024-06-06', '11:38:03', 8),
+(2, '2024-06-12', '16:10:50', 8),
+(1, '2024-06-12', '14:16:54', 9);
 
 -- --------------------------------------------------------
 
@@ -659,7 +677,8 @@ INSERT INTO `scheda` (`CodiceScheda`, `dataInizioValidita`, `Durata`, `IDCliente
 (1, '2024-06-06', 4, 1, 1),
 (3, '2024-06-12', 2, 2, 3),
 (4, '2024-06-18', 4, 3, 2),
-(5, '2024-06-11', 4, 1, 5);
+(5, '2024-06-11', 4, 1, 5),
+(6, '2024-06-12', 2, 1, 8);
 
 -- --------------------------------------------------------
 
@@ -716,7 +735,8 @@ CREATE TABLE `tabella_pasto` (
 
 INSERT INTO `tabella_pasto` (`CodiceScheda`, `CodTabPasti`) VALUES
 (1, 1),
-(4, 4);
+(4, 4),
+(6, 6);
 
 -- --------------------------------------------------------
 
@@ -961,7 +981,7 @@ ALTER TABLE `obiettivo`
 -- AUTO_INCREMENT per la tabella `scheda`
 --
 ALTER TABLE `scheda`
-  MODIFY `CodiceScheda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `CodiceScheda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Limiti per le tabelle scaricate
