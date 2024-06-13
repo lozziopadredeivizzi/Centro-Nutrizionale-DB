@@ -22,8 +22,8 @@
                     <li>
                         <label for="svolgimento">Svolgimento:</label>
                         <select id="svolgimento" name="svolgimento">
-                            <option value="presenza">Presenza</option>
-                            <option value="online">Online</option>
+                            <option value="Presenza">Presenza</option>
+                            <option value="Online">Online</option>
                         </select>
                     </li>
                     <li>

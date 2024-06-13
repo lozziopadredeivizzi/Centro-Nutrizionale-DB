@@ -30,7 +30,7 @@
           endif;
         endfor; ?>
         <p><?php echo $mediaInt; ?></p>
-        <p>(<?php echo $templateparams["recensioniNutrizionista"]["numeroTotaleRecensioni"];?> recensioni)</p>
+        <p>(<?php echo $templateparams["recensioniNutrizionista"]["numeroTotaleRecensioni"]; ?> recensioni)</p>
         <?php
       }
       ?>
@@ -53,7 +53,12 @@
             <li>Qualifica: <?php echo $templateparams["nutrizionista"][0]["Titolo"] ?></li>
             <li>Specializzazione: <?php echo $templateparams["nutrizionista"][0]["Specializzazione"] ?></li>
             <li>Espereinza: <?php echo $templateparams["nutrizionista"][0]["Esperienza"] ?></li>
-            <li>Telefono: <?php echo $templateparams["nutrizionista"][0]["Telefono"] ?></li>
+            <li>Telefono: <?php echo $templateparams["nutrizionista"][0]["Telefono"] ?></li><br>
+            <li>Obiettivo più richiesto: <?php if (empty($templateparams["obiettivo"][0]["Descrizione"])) {
+              echo "/";
+            } else {
+              echo $templateparams["obiettivo"][0]["Descrizione"];
+            } ?></li>
           </ul>
         </div>
       </div>

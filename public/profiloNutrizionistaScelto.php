@@ -67,7 +67,12 @@
               <li>Qualifica: <?php echo $templateparams["nutrizionistaAttuale"][0]["Qualifica"] ?></li>
               <li>Specializzazione: <?php echo $templateparams["nutrizionistaAttuale"][0]["Specializzazione"] ?></li>
               <li>Esperienza: <?php echo $templateparams["nutrizionistaAttuale"][0]["Esperienza"] ?></li>
-              <li>Telefono: <?php echo $templateparams["nutrizionistaAttuale"][0]["Telefono"] ?></li>
+              <li>Telefono: <?php echo $templateparams["nutrizionistaAttuale"][0]["Telefono"] ?></li><br>
+              <li>Obiettivo più richiesto: <?php if (empty($templateparams["obiettivo"][0]["Descrizione"])) {
+              echo "/";
+            } else {
+              echo $templateparams["obiettivo"][0]["Descrizione"];
+            } ?></li>
             </ul>
           </div>
         </div>

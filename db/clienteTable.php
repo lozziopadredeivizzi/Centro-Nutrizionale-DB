@@ -462,6 +462,22 @@ WHERE
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getTrendCons($idCliente)
+    {
+        $stmt = $this->db->prepare("SELECT 
+    SUM(Presenza = '1') AS ConsulenzeInPresenza,
+    SUM(Online = '1') AS ConsulenzeOnline
+FROM 
+    CONSULENZA
+WHERE 
+    IDCliente = ?");
+        $stmt->bind_param('i', $idCliente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
+
 
 ?>

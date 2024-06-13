@@ -39,9 +39,9 @@
         <h3>Altre Informazioni</h3>
         <div class="info-details">
           <ul>
-            <li>Numero consulenze effettuate: <?php echo $templateparams["nConsulenze"][0]["count"]; ?></li>
-            <li>Percentuale consulenze online:</li>
-            <li>Percentuale consulenze in presenza:</li>
+            <li>Numero consulenze effettuate: <?php echo $templateparams["nConsulenze"][0]["count"]; ?></li><br>
+            <li>Consulenze richieste online: <?php echo $templateparams["trend"][0]["ConsulenzeInPresenza"]; ?></li>
+            <li>Consulenze richieste in presenza: <?php echo $templateparams["trend"][0]["ConsulenzeOnline"]; ?></li>
           </ul>
         </div>
       </div>

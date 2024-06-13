@@ -170,7 +170,8 @@ WHERE LOWER(i.Citta) LIKE LOWER(?)");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getNutrizionistaByCityAndCAP($citta, $cap){
+    public function getNutrizionistaByCityAndCAP($citta, $cap)
+    {
         $stmt = $this->db->prepare("SELECT DISTINCT n.IDNutrizionista, n.Nome, n.Cognome, i.Citta, i.CAP, pq.Titolo
 FROM nutrizionista n
 JOIN indirizzo_prof i ON n.IDNutrizionista = i.IDNutrizionista
@@ -178,6 +179,32 @@ JOIN possiede_q pq ON n.IDNutrizionista = pq.IDNutrizionista
 WHERE LOWER(i.Citta) LIKE LOWER(?) AND
 LOWER(i.CAP) LIKE LOWER(?)");
         $stmt->bind_param('si', $citta, $cap);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getObiettivoPiuRichiesto($idNutrizionista)
+    {
+        $stmt = $this->db->prepare("SELECT 
+    o.Descrizione, 
+    COUNT(s.CodiceObiettivo) AS NumRichieste
+FROM 
+    scheda s
+JOIN 
+    cliente c ON s.IDCliente = c.IDCliente
+JOIN 
+    consulenza cons ON cons.IDCliente = c.IDCliente
+JOIN 
+    obiettivo o ON s.CodiceObiettivo = o.CodiceObiettivo
+WHERE 
+    cons.IDNutrizionista = ?
+GROUP BY 
+    o.Descrizione
+ORDER BY 
+    NumRichieste DESC
+LIMIT 1;");
+        $stmt->bind_param('i', $idNutrizionista);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
