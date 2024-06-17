@@ -54,26 +54,17 @@ class ClienteTable
         s1.Data,
         s1.Ora
     FROM 
-        SCELTA s1
+        scelta s1
     INNER JOIN (
         SELECT 
             s2.IDCliente, 
-            MAX(s2.Data) AS MaxData
+            MAX(CONCAT(s2.Data, ' ', s2.Ora)) AS MaxDataOra
         FROM 
-            SCELTA s2
+            scelta s2
         GROUP BY 
             s2.IDCliente
-    ) MaxDate ON s1.IDCliente = MaxDate.IDCliente AND s1.Data = MaxDate.MaxData
-    INNER JOIN (
-        SELECT 
-            s3.IDCliente, 
-            s3.Data, 
-            MAX(s3.Ora) AS MaxOra
-        FROM 
-            SCELTA s3
-        GROUP BY 
-            s3.IDCliente, s3.Data
-    ) MaxTime ON s1.IDCliente = MaxTime.IDCliente AND s1.Data = MaxTime.Data AND s1.Ora = MaxTime.MaxOra
+    ) MaxDateOra ON s1.IDCliente = MaxDateOra.IDCliente 
+                AND CONCAT(s1.Data, ' ', s1.Ora) = MaxDateOra.MaxDataOra
 )
 SELECT 
     u.IDCliente,

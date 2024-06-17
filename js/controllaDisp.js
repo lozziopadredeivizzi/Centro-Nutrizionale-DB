@@ -14,6 +14,10 @@ document.getElementById('controllaDisp').addEventListener('click', function () {
             if (xhr.responseText === 'disponibile') {
                 availabilityMessage.innerHTML = 'La data e l\'ora scelta sono disponibili <button class="btn" type="submit" id="prenota" name="prenota">Prenota</button>';
 
+            } else if (xhr.responseText === 'La data di inizio non può essere minore della data attuale.') {
+                availabilityMessage.textContent = "La data inserita non è valida, riporva."
+            } else if (xhr.responseText === 'L\'orario di inizio non è valido, riporva.') {
+                availabilityMessage.textContent = "L'orario di inizio non è consentita, riprova."
             } else {
                 availabilityMessage.textContent = "La data e l'ora scelta non sono disponibili";
             }

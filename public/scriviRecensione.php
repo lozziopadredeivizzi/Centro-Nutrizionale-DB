@@ -35,7 +35,7 @@
         </div>
         <div class="text">
           <label for="review">Scrivi la recensione</label>
-          <textarea name="recensione" id="review" required></textarea>
+          <textarea name="recensione" id="review" ></textarea>
         </div>
         <button type="submit" class="btn">Pubblica</button>
       </form>
