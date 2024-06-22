@@ -46,8 +46,8 @@ if (isUserLoggedIn()) {
                 $dbh->addTabellaConsigli($idCliente, $idNutrizionista);
             }
 
-            foreach ($advices as $index => $advice) {
-                $adviceText = $advice;
+            foreach ($advices as $advice) {
+                $adviceText = trim($advice);
                 if ($adviceText !== "") {
                     $dbh->addConsiglio($adviceText, $idCliente, $idNutrizionista);
                 }
