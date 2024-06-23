@@ -27,12 +27,15 @@ if (isUserLoggedIn()) {
             // Gestione degli alimenti opzionali
             if (isset($optionals[$index + 1])) {
                 $optionalFoods = $optionals[$index + 1];
-                $optionalGramsAmount = $optionalGrams[$index + 1];
+                $optionalGramsAmount = $optionalGrams[$index + 1] ?? [];
+
                 foreach ($optionalFoods as $optionalIndex => $optionalFood) {
                     $optionalFoodName = $optionalFood;
-                    $optionalGramsAmount = $optionalGramsAmount[$optionalIndex];
+                    $optionalGramAmount = $optionalGramsAmount[$optionalIndex] ?? 0;
+
                     if ($optionalFoodName !== '/') {
-                        $dbh->addAlimentoOpzionale($prescribedFood, $gramsAmount, $mealName, $optionalFoodName, $optionalGramsAmount, $idCliente, $idNutrizionista);
+                        error_log($optionalGramAmount);
+                        $dbh->addAlimentoOpzionale($prescribedFood, $gramsAmount, $mealName, $optionalFoodName, $optionalGramAmount, $idCliente, $idNutrizionista);
                     }
                 }
             }
@@ -40,12 +43,25 @@ if (isUserLoggedIn()) {
 
         // Gestione dei consigli
         if (!empty($_POST['advice'])) {
-            $advices = $_POST['advice'];
-
+            // Funzione per appiattire un array multidimensionale
+            function flatten_array($array) {
+                $result = array();
+                foreach ($array as $element) {
+                    if (is_array($element)) {
+                        $result = array_merge($result, flatten_array($element));
+                    } else {
+                        $result[] = $element;
+                    }
+                }
+                return $result;
+            }
+        
+            $advices = flatten_array($_POST['advice']);
+        
             if (trim($advices[0]) !== "") {
                 $dbh->addTabellaConsigli($idCliente, $idNutrizionista);
             }
-
+        
             foreach ($advices as $advice) {
                 $adviceText = trim($advice);
                 if ($adviceText !== "") {
@@ -53,6 +69,7 @@ if (isUserLoggedIn()) {
                 }
             }
         }
+        
 
 
         $dbh->updateConsulenza($idCliente, $idNutrizionista);

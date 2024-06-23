@@ -119,7 +119,7 @@ create table NOTE (
      Nota varchar(255) not null,
      OrarioNota varchar(10) not null,
      OggettoNota varchar(100) not null,
-     DataNota char(1) not null,
+     DataNota date not null,
      IdNota int not null,
      constraint ID_NOTE_ID primary key (IDCliente, Data, Ora, CodDiario, IdNota));
 
