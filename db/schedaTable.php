@@ -27,16 +27,14 @@ class SchedaTable
 
     public function getAlimentiTableFromScheda($codScheda)
     {
-        $stmt = $this->db->prepare("SELECT ap.NomeAlimento, ap.QuantitaPrescr, app.NomePasto, aa.NomeAlimento AS NomeAlimentoAlter, aa.QuantitaAlter
+        $stmt = $this->db->prepare("SELECT ap.NomeAlimento, ap.QuantitaPrescr, ap.NomePasto, aa.NomeAlimento AS NomeAlimentoAlter, aa.QuantitaAlter
                                     FROM scheda s
                                     JOIN tabella_pasto t ON s.CodiceScheda = t.CodiceScheda
                                     LEFT JOIN alimento_prescritto ap ON t.CodTabPasti = ap.CodTabPasti
                                     LEFT JOIN alimento_alternativo aa ON t.CodTabPasti = aa.Pos_CodTabPasti 
                                                                       AND ap.NomeAlimento = aa.Pos_NomeAlimento
                                                                       AND ap.QuantitaPrescr = aa.Pos_QuantitaPrescr
-                                    LEFT JOIN appartiene app ON t.CodTabPasti = app.CodTabPasti
-                                                             AND ap.NomeAlimento = app.NomeAlimento
-                                                             AND ap.QuantitaPrescr = app.QuantitaPrescr
+                                                                      AND ap.NomePasto = aa.Pos_NomePasto
                                     WHERE s.CodiceScheda = ? ");
         $stmt->bind_param('i', $codScheda);
         $stmt->execute();

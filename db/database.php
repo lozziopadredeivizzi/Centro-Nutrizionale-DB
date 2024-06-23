@@ -255,29 +255,22 @@ VALUES (?,( SELECT codDiario
 
     public function addAlimentoPrescritto($alimento, $quantita, $idCliente, $idNutrizionista, $pasto)
     {
-        $stmt = $this->db->prepare("INSERT INTO alimento_prescritto(CodiceScheda, CodTabPasti, NomeAlimento, QuantitaPrescr) 
-                                    SELECT c.CodiceScheda, c.CodiceScheda, ?, ? 
-                                    FROM consulenza c 
-                                    WHERE c.IDCliente = ? AND Completa='n' AND c.IDNutrizionista = ?");
-        $stmt->bind_param('siii', $alimento, $quantita, $idCliente, $idNutrizionista);
-        $stmt->execute();
-        $stmt->close();
-
-        $stmt = $this->db->prepare("INSERT INTO appartiene(CodiceScheda, CodTabPasti, NomeAlimento, QuantitaPrescr, NomePasto)
+        $stmt = $this->db->prepare("INSERT INTO alimento_prescritto(CodiceScheda, CodTabPasti, NomeAlimento, QuantitaPrescr, NomePasto) 
                                     SELECT c.CodiceScheda, c.CodiceScheda, ?, ?, ? 
                                     FROM consulenza c 
                                     WHERE c.IDCliente = ? AND Completa='n' AND c.IDNutrizionista = ?");
         $stmt->bind_param('sisii', $alimento, $quantita, $pasto, $idCliente, $idNutrizionista);
         $stmt->execute();
+        $stmt->close();
     }
 
-    public function addAlimentoOpzionale($alimentoPrescr, $quantitaPrescr, $alimentoOpz, $quantitaOpz, $idCliente, $idNutrizionista)
+    public function addAlimentoOpzionale($alimentoPrescr, $quantitaPrescr, $pasto, $alimentoOpz, $quantitaOpz, $idCliente, $idNutrizionista)
     {
-        $stmt = $this->db->prepare("INSERT INTO alimento_alternativo(Pos_CodiceScheda, Pos_CodTabPasti, Pos_NomeAlimento, Pos_QuantitaPrescr, NomeAlimento, QuantitaAlter)
-                                    SELECT c.CodiceScheda, c.CodiceScheda, ?, ?, ?, ? 
+        $stmt = $this->db->prepare("INSERT INTO alimento_alternativo(Pos_CodiceScheda, Pos_CodTabPasti, Pos_NomeAlimento, Pos_QuantitaPrescr, Pos_NomePasto, NomeAlimento, QuantitaAlter)
+                                    SELECT c.CodiceScheda, c.CodiceScheda, ?, ?, ?, ?, ?
                                     FROM consulenza c 
                                     WHERE c.IDCliente = ? AND Completa='n' AND c.IDNutrizionista = ? ");
-        $stmt->bind_param('sisiii', $alimentoPrescr, $quantitaPrescr, $alimentoOpz, $quantitaOpz, $idCliente, $idNutrizionista);
+        $stmt->bind_param('sissiii', $alimentoPrescr, $quantitaPrescr, $pasto, $alimentoOpz, $quantitaOpz, $idCliente, $idNutrizionista);
         $stmt->execute();
     }
 

@@ -3,7 +3,7 @@
 -- *--------------------------------------------
 -- * DB-MAIN version: 11.0.2              
 -- * Generator date: Sep 14 2021              
--- * Generation date: Sat Jun  1 10:13:58 2024 
+-- * Generation date: Sat Jun 22 20:01:56 2024 
 -- * LUN file: C:\Users\Utente\Desktop\Uni\2 Anno\Data Base\elaborato\Centro Nutirzionale.lun 
 -- * Schema: centronutrizionale/1 
 -- ********************************************* 
@@ -12,8 +12,8 @@
 -- Database Section
 -- ________________ 
 
-create database centronutrizionale;
-use centronutrizionale;
+create database centronutrizionale1;
+use centronutrizionale1;
 
 
 -- Tables Section
@@ -25,28 +25,22 @@ create table ALIMENTO (
      constraint ID_ALIMENTO_ID primary key (NomeAlimento));
 
 create table ALIMENTO_ALTERNATIVO (
+     Pos_NomePasto varchar(50) not null,
      Pos_CodiceScheda int not null,
      Pos_CodTabPasti int not null,
      Pos_NomeAlimento varchar(255) not null,
      Pos_QuantitaPrescr int not null,
      NomeAlimento varchar(255) not null,
      QuantitaAlter int not null,
-     constraint ID_ALIMENTO_ALTERNATIVO_ID primary key (Pos_CodiceScheda, Pos_CodTabPasti, Pos_NomeAlimento, Pos_QuantitaPrescr, NomeAlimento, QuantitaAlter));
+     constraint ID_ALIMENTO_ALTERNATIVO_ID primary key (Pos_NomePasto, Pos_CodiceScheda, Pos_CodTabPasti, Pos_NomeAlimento, Pos_QuantitaPrescr, NomeAlimento, QuantitaAlter));
 
 create table ALIMENTO_PRESCRITTO (
      CodiceScheda int not null,
      CodTabPasti int not null,
-     NomeAlimento varchar(255) not null,
-     QuantitaPrescr int not null,
-     constraint ID_ALIMENTO_PRESCRITTO_ID primary key (CodiceScheda, CodTabPasti, NomeAlimento, QuantitaPrescr));
-
-create table appartiene (
-     CodiceScheda int not null,
-     CodTabPasti int not null,
-     NomeAlimento varchar(255) not null,
-     QuantitaPrescr int not null,
      NomePasto varchar(50) not null,
-     constraint ID_appartiene_ID primary key (NomePasto, CodiceScheda, CodTabPasti, NomeAlimento, QuantitaPrescr));
+     NomeAlimento varchar(255) not null,
+     QuantitaPrescr int not null,
+     constraint ID_ALIMENTO_PRESCRITTO_ID primary key (NomePasto, CodiceScheda, CodTabPasti, NomeAlimento, QuantitaPrescr));
 
 create table CLIENTE (
      CAP int not null,
@@ -125,7 +119,7 @@ create table NOTE (
      Nota varchar(255) not null,
      OrarioNota varchar(10) not null,
      OggettoNota varchar(100) not null,
-     DataNota date not null,
+     DataNota char(1) not null,
      IdNota int not null,
      constraint ID_NOTE_ID primary key (IDCliente, Data, Ora, CodDiario, IdNota));
 
@@ -210,29 +204,20 @@ alter table ALIMENTO_ALTERNATIVO add constraint FKtipologia_alt_FK
      references ALIMENTO (NomeAlimento);
 
 alter table ALIMENTO_ALTERNATIVO add constraint FKpossiede_alt
-     foreign key (Pos_CodiceScheda, Pos_CodTabPasti, Pos_NomeAlimento, Pos_QuantitaPrescr)
-     references ALIMENTO_PRESCRITTO (CodiceScheda, CodTabPasti, NomeAlimento, QuantitaPrescr);
-
--- Not implemented
--- alter table ALIMENTO_PRESCRITTO add constraint ID_ALIMENTO_PRESCRITTO_CHK
---     check(exists(select * from appartiene
---                  where appartiene.CodiceScheda = CodiceScheda and appartiene.CodTabPasti = CodTabPasti and appartiene.NomeAlimento = NomeAlimento and appartiene.QuantitaPrescr = QuantitaPrescr)); 
+     foreign key (Pos_NomePasto, Pos_CodiceScheda, Pos_CodTabPasti, Pos_NomeAlimento, Pos_QuantitaPrescr)
+     references ALIMENTO_PRESCRITTO (NomePasto, CodiceScheda, CodTabPasti, NomeAlimento, QuantitaPrescr);
 
 alter table ALIMENTO_PRESCRITTO add constraint FKtipologia_pres_FK
      foreign key (NomeAlimento)
      references ALIMENTO (NomeAlimento);
 
-alter table ALIMENTO_PRESCRITTO add constraint FKcontiene
-     foreign key (CodiceScheda, CodTabPasti)
-     references TABELLA_PASTO (CodiceScheda, CodTabPasti);
-
-alter table appartiene add constraint FKapp_PAS
+alter table ALIMENTO_PRESCRITTO add constraint FKappartiene
      foreign key (NomePasto)
      references PASTO (NomePasto);
 
-alter table appartiene add constraint FKapp_ALI_FK
-     foreign key (CodiceScheda, CodTabPasti, NomeAlimento, QuantitaPrescr)
-     references ALIMENTO_PRESCRITTO (CodiceScheda, CodTabPasti, NomeAlimento, QuantitaPrescr);
+alter table ALIMENTO_PRESCRITTO add constraint FKcontiene_FK
+     foreign key (CodiceScheda, CodTabPasti)
+     references TABELLA_PASTO (CodiceScheda, CodTabPasti);
 
 alter table CONSIGLIO add constraint FKraggruppa
      foreign key (CodiceScheda, CodTabCons)
@@ -364,22 +349,19 @@ create unique index ID_ALIMENTO_IND
      on ALIMENTO (NomeAlimento);
 
 create unique index ID_ALIMENTO_ALTERNATIVO_IND
-     on ALIMENTO_ALTERNATIVO (Pos_CodiceScheda, Pos_CodTabPasti, Pos_NomeAlimento, Pos_QuantitaPrescr, NomeAlimento, QuantitaAlter);
+     on ALIMENTO_ALTERNATIVO (Pos_NomePasto, Pos_CodiceScheda, Pos_CodTabPasti, Pos_NomeAlimento, Pos_QuantitaPrescr, NomeAlimento, QuantitaAlter);
 
 create index FKtipologia_alt_IND
      on ALIMENTO_ALTERNATIVO (NomeAlimento);
 
 create unique index ID_ALIMENTO_PRESCRITTO_IND
-     on ALIMENTO_PRESCRITTO (CodiceScheda, CodTabPasti, NomeAlimento, QuantitaPrescr);
+     on ALIMENTO_PRESCRITTO (NomePasto, CodiceScheda, CodTabPasti, NomeAlimento, QuantitaPrescr);
 
 create index FKtipologia_pres_IND
      on ALIMENTO_PRESCRITTO (NomeAlimento);
 
-create unique index ID_appartiene_IND
-     on appartiene (NomePasto, CodiceScheda, CodTabPasti, NomeAlimento, QuantitaPrescr);
-
-create index FKapp_ALI_IND
-     on appartiene (CodiceScheda, CodTabPasti, NomeAlimento, QuantitaPrescr);
+create index FKcontiene_IND
+     on ALIMENTO_PRESCRITTO (CodiceScheda, CodTabPasti);
 
 create unique index ID_CLIENTE_IND
      on CLIENTE (IDCliente);

@@ -32,7 +32,7 @@ if (isUserLoggedIn()) {
                     $optionalFoodName = $optionalFood;
                     $optionalGramsAmount = $optionalGramsAmount[$optionalIndex];
                     if ($optionalFoodName !== '/') {
-                        $dbh->addAlimentoOpzionale($prescribedFood, $gramsAmount, $optionalFoodName, $optionalGramsAmount, $idCliente, $idNutrizionista);
+                        $dbh->addAlimentoOpzionale($prescribedFood, $gramsAmount, $mealName, $optionalFoodName, $optionalGramsAmount, $idCliente, $idNutrizionista);
                     }
                 }
             }
