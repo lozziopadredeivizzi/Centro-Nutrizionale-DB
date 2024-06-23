@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 23, 2024 alle 16:41
+-- Creato il: Giu 23, 2024 alle 16:56
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -18,11 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `centronutrizionale1`
+-- Database: `centronutrizionale`
 --
-
-create database centronutrizionale1;
-use centronutrizionale1;
+create database centronutrizionale;
+use centronutrizionale;
 -- --------------------------------------------------------
 
 --
@@ -345,7 +344,8 @@ INSERT INTO `cliente` (`CAP`, `Citta`, `Nome`, `Cognome`, `Email`, `Password`, `
 (20097, 'Milano', 'Hamza', 'Manouar', 'hamzamenu@gmail.com', 'hamza1', 2),
 (80122, 'Napoli', 'Beatrice', 'di Gregorio', 'bea@gmail.com', 'beatrice1', 3),
 (186, 'Roma', 'Sofia', 'Ceccaroli', 'sofiacecca@gmail.com', 'sofia1', 4),
-(47921, 'Rimini', 'Susanna', 'Mini', 'susannamini@gmail.com', 'susanna1', 5);
+(47921, 'Rimini', 'Susanna', 'Mini', 'susannamini@gmail.com', 'susanna1', 5),
+(40100, 'Bologna', 'Alessia', 'Tordi', 'alessia@gmail.com', 'alessia1', 6);
 
 -- --------------------------------------------------------
 
@@ -413,7 +413,8 @@ INSERT INTO `consulenza` (`IDNutrizionista`, `IDCliente`, `OraInizio`, `Giorno`,
 (4, 4, '11:00:00', '2024-04-08', 12, '12:00:00', 's', '0', '1', 'Alimentare'),
 (4, 4, '14:00:00', '2024-06-18', 9, '15:00:00', 's', '1', '0', 'Alimentare'),
 (13, 5, '11:00:00', '2024-01-17', 10, '12:00:00', 's', '1', '0', 'Alimentare'),
-(13, 5, '15:00:00', '2024-03-07', 11, '16:00:00', 's', '1', '0', 'Alimentare');
+(13, 5, '15:00:00', '2024-03-07', 11, '16:00:00', 's', '1', '0', 'Alimentare'),
+(8, 6, '14:00:00', '2024-06-26', 14, '15:00:00', 'n', '1', '0', 'Alimentare');
 
 -- --------------------------------------------------------
 
@@ -445,6 +446,7 @@ INSERT INTO `diario` (`IDCliente`, `Data`, `Ora`, `CodDiario`, `IDNutrizionista`
 (2, '2024-06-06', '11:36:14', 2, 8),
 (2, '2024-06-06', '11:38:03', 4, 8),
 (2, '2024-06-12', '16:10:50', 10, 8),
+(6, '2024-06-23', '16:54:22', 13, 8),
 (1, '2024-06-12', '14:16:54', 7, 9),
 (5, '2024-01-09', '18:16:27', 12, 13);
 
@@ -815,6 +817,7 @@ INSERT INTO `scelta` (`IDCliente`, `Data`, `Ora`, `IDNutrizionista`) VALUES
 (2, '2024-06-06', '11:36:14', 8),
 (2, '2024-06-06', '11:38:03', 8),
 (2, '2024-06-12', '16:10:50', 8),
+(6, '2024-06-23', '16:54:22', 8),
 (1, '2024-06-12', '14:16:54', 9),
 (4, '2023-11-07', '12:00:00', 11),
 (5, '2024-01-09', '18:16:27', 13);
@@ -848,7 +851,8 @@ INSERT INTO `scheda` (`CodiceScheda`, `dataInizioValidita`, `Durata`, `IDCliente
 (10, '2024-01-17', 4, 5, 1),
 (11, '2024-03-07', 4, 5, 3),
 (12, '2024-04-08', 5, 4, 2),
-(13, '2024-06-26', 0, 2, 9);
+(13, '2024-06-26', 0, 2, 9),
+(14, '2024-06-26', 0, 6, 9);
 
 -- --------------------------------------------------------
 
@@ -1136,7 +1140,7 @@ ALTER TABLE `tipo_consulenza`
 -- AUTO_INCREMENT per la tabella `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `IDCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `IDCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT per la tabella `nutrizionista`
@@ -1154,7 +1158,7 @@ ALTER TABLE `obiettivo`
 -- AUTO_INCREMENT per la tabella `scheda`
 --
 ALTER TABLE `scheda`
-  MODIFY `CodiceScheda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `CodiceScheda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Limiti per le tabelle scaricate
